@@ -1,0 +1,92 @@
+### Starting build.
+# Target: Compilo.ml.depends, tags: { extension:ml, file:Compilo.ml, ocaml, ocamldep, quiet, traverse, use_menhir }
+/home/tp-home008/agallot/.opam/4.06.0/bin/ocamldep.opt -modules Compilo.ml > Compilo.ml.depends # cached
+# Target: GotoToMips.ml.depends, tags: { extension:ml, file:GotoToMips.ml, ocaml, ocamldep, quiet, traverse, use_menhir }
+/home/tp-home008/agallot/.opam/4.06.0/bin/ocamldep.opt -modules GotoToMips.ml > GotoToMips.ml.depends
+# Target: CommonAST.ml.depends, tags: { extension:ml, file:CommonAST.ml, ocaml, ocamldep, quiet, traverse, use_menhir }
+/home/tp-home008/agallot/.opam/4.06.0/bin/ocamldep.opt -modules CommonAST.ml > CommonAST.ml.depends # cached
+# Target: CommonAST.cmo, tags: { byte, compile, extension:cmo, extension:ml, file:CommonAST.cmo, file:CommonAST.ml, implem, ocaml, quiet, traverse, use_menhir }
+/home/tp-home008/agallot/.opam/4.06.0/bin/ocamlc.opt -c -o CommonAST.cmo CommonAST.ml # cached
+# Target: GotoAST.ml.depends, tags: { extension:ml, file:GotoAST.ml, ocaml, ocamldep, quiet, traverse, use_menhir }
+/home/tp-home008/agallot/.opam/4.06.0/bin/ocamldep.opt -modules GotoAST.ml > GotoAST.ml.depends # cached
+# Target: GotoAST.cmo, tags: { byte, compile, extension:cmo, extension:ml, file:GotoAST.cmo, file:GotoAST.ml, implem, ocaml, quiet, traverse, use_menhir }
+/home/tp-home008/agallot/.opam/4.06.0/bin/ocamlc.opt -c -o GotoAST.cmo GotoAST.ml # cached
+# Target: Mips.ml.depends, tags: { extension:ml, file:Mips.ml, ocaml, ocamldep, quiet, traverse, use_menhir }
+/home/tp-home008/agallot/.opam/4.06.0/bin/ocamldep.opt -modules Mips.ml > Mips.ml.depends # cached
+# Target: Mips.cmo, tags: { byte, compile, extension:cmo, extension:ml, file:Mips.cmo, file:Mips.ml, implem, ocaml, quiet, traverse, use_menhir }
+/home/tp-home008/agallot/.opam/4.06.0/bin/ocamlc.opt -c -o Mips.cmo Mips.ml # cached
+# Target: ImpToGoto.ml.depends, tags: { extension:ml, file:ImpToGoto.ml, ocaml, ocamldep, quiet, traverse, use_menhir }
+/home/tp-home008/agallot/.opam/4.06.0/bin/ocamldep.opt -modules ImpToGoto.ml > ImpToGoto.ml.depends # cached
+# Target: ImpAST.ml.depends, tags: { extension:ml, file:ImpAST.ml, ocaml, ocamldep, quiet, traverse, use_menhir }
+/home/tp-home008/agallot/.opam/4.06.0/bin/ocamldep.opt -modules ImpAST.ml > ImpAST.ml.depends # cached
+# Target: ImpAST.cmo, tags: { byte, compile, extension:cmo, extension:ml, file:ImpAST.cmo, file:ImpAST.ml, implem, ocaml, quiet, traverse, use_menhir }
+/home/tp-home008/agallot/.opam/4.06.0/bin/ocamlc.opt -c -o ImpAST.cmo ImpAST.ml # cached
+# Target: ImpToGoto.cmo, tags: { byte, compile, extension:cmo, extension:ml, file:ImpToGoto.cmo, file:ImpToGoto.ml, implem, ocaml, quiet, traverse, use_menhir }
+/home/tp-home008/agallot/.opam/4.06.0/bin/ocamlc.opt -c -o ImpToGoto.cmo ImpToGoto.ml # cached
+# Target: preprocessor.mll, tags: { extension:mll, file:preprocessor.mll, lexer, ocaml, ocamllex, quiet, traverse, use_menhir }
+/home/tp-home008/agallot/.opam/4.06.0/bin/ocamllex.opt -q preprocessor.mll # cached
+# Target: preprocessor.ml.depends, tags: { extension:ml, file:preprocessor.ml, ocaml, ocamldep, quiet, traverse, use_menhir }
+/home/tp-home008/agallot/.opam/4.06.0/bin/ocamldep.opt -modules preprocessor.ml > preprocessor.ml.depends # cached
+# Target: preprocessor.cmo, tags: { byte, compile, extension:cmo, extension:ml, file:preprocessor.cmo, file:preprocessor.ml, implem, ocaml, quiet, traverse, use_menhir }
+/home/tp-home008/agallot/.opam/4.06.0/bin/ocamlc.opt -c -o preprocessor.cmo preprocessor.ml # cached
+# Target: SourceLexer.mll, tags: { extension:mll, file:SourceLexer.mll, lexer, ocaml, ocamllex, quiet, traverse, use_menhir }
+/home/tp-home008/agallot/.opam/4.06.0/bin/ocamllex.opt -q SourceLexer.mll # cached
+# Target: SourceLexer.ml.depends, tags: { extension:ml, file:SourceLexer.ml, ocaml, ocamldep, quiet, traverse, use_menhir }
+/home/tp-home008/agallot/.opam/4.06.0/bin/ocamldep.opt -modules SourceLexer.ml > SourceLexer.ml.depends # cached
+# Target: SourceParser.mly.depends, tags: { extension:mly, file:SourceParser.mly, infer, menhir_ocamldep, ocaml, ocamldep, quiet, traverse, use_menhir }
+menhir --raw-depend --ocamldep '/home/tp-home008/agallot/.opam/4.06.0/bin/ocamldep.opt -modules' SourceParser.mly > SourceParser.mly.depends # cached
+# Target: SourceLocalisedAST.ml.depends, tags: { extension:ml, file:SourceLocalisedAST.ml, ocaml, ocamldep, quiet, traverse, use_menhir }
+/home/tp-home008/agallot/.opam/4.06.0/bin/ocamldep.opt -modules SourceLocalisedAST.ml > SourceLocalisedAST.ml.depends # cached
+# Target: SourceLocalisedAST.cmo, tags: { byte, compile, extension:cmo, extension:ml, file:SourceLocalisedAST.cmo, file:SourceLocalisedAST.ml, implem, ocaml, quiet, traverse, use_menhir }
+/home/tp-home008/agallot/.opam/4.06.0/bin/ocamlc.opt -c -o SourceLocalisedAST.cmo SourceLocalisedAST.ml # cached
+# Target: SourceParser.mly, tags: { byte, compile, extension:ml, extension:mly, file:SourceParser.ml, file:SourceParser.mly, infer, menhir, ocaml, parser, quiet, traverse, use_menhir }
+menhir --ocamlc /home/tp-home008/agallot/.opam/4.06.0/bin/ocamlc.opt --infer SourceParser.mly # cached
+# Target: SourceParser.mli.depends, tags: { extension:mli, file:SourceParser.mli, ocaml, ocamldep, quiet, traverse, use_menhir }
+/home/tp-home008/agallot/.opam/4.06.0/bin/ocamldep.opt -modules SourceParser.mli > SourceParser.mli.depends # cached
+# Target: SourceParser.cmi, tags: { byte, compile, extension:mli, file:SourceParser.mli, interf, ocaml, quiet, traverse, use_menhir }
+/home/tp-home008/agallot/.opam/4.06.0/bin/ocamlc.opt -c -o SourceParser.cmi SourceParser.mli # cached
+# Target: SourceLexer.cmo, tags: { byte, compile, extension:cmo, extension:ml, file:SourceLexer.cmo, file:SourceLexer.ml, implem, ocaml, quiet, traverse, use_menhir }
+/home/tp-home008/agallot/.opam/4.06.0/bin/ocamlc.opt -c -o SourceLexer.cmo SourceLexer.ml # cached
+# Target: SourceToImp.ml.depends, tags: { extension:ml, file:SourceToImp.ml, ocaml, ocamldep, quiet, traverse, use_menhir }
+/home/tp-home008/agallot/.opam/4.06.0/bin/ocamldep.opt -modules SourceToImp.ml > SourceToImp.ml.depends # cached
+# Target: SourceTypeChecker.ml.depends, tags: { extension:ml, file:SourceTypeChecker.ml, ocaml, ocamldep, quiet, traverse, use_menhir }
+/home/tp-home008/agallot/.opam/4.06.0/bin/ocamldep.opt -modules SourceTypeChecker.ml > SourceTypeChecker.ml.depends # cached
+# Target: SourceTypeChecker.cmo, tags: { byte, compile, extension:cmo, extension:ml, file:SourceTypeChecker.cmo, file:SourceTypeChecker.ml, implem, ocaml, quiet, traverse, use_menhir }
+/home/tp-home008/agallot/.opam/4.06.0/bin/ocamlc.opt -c -o SourceTypeChecker.cmo SourceTypeChecker.ml # cached
+# Target: SourceToImp.cmo, tags: { byte, compile, extension:cmo, extension:ml, file:SourceToImp.cmo, file:SourceToImp.ml, implem, ocaml, quiet, traverse, use_menhir }
+/home/tp-home008/agallot/.opam/4.06.0/bin/ocamlc.opt -c -o SourceToImp.cmo SourceToImp.ml # cached
+# Target: GotoToMips.cmo, tags: { byte, compile, extension:cmo, extension:ml, file:GotoToMips.cmo, file:GotoToMips.ml, implem, ocaml, quiet, traverse, use_menhir }
+/home/tp-home008/agallot/.opam/4.06.0/bin/ocamlc.opt -c -o GotoToMips.cmo GotoToMips.ml
+# Target: Compilo.cmo, tags: { byte, compile, extension:cmo, extension:ml, file:Compilo.cmo, file:Compilo.ml, implem, ocaml, quiet, traverse, use_menhir }
+/home/tp-home008/agallot/.opam/4.06.0/bin/ocamlc.opt -c -o Compilo.cmo Compilo.ml
+# Target: CommonAST.cmx, tags: { compile, extension:cmx, extension:ml, file:CommonAST.cmx, file:CommonAST.ml, implem, native, ocaml, quiet, traverse, use_menhir }
+/home/tp-home008/agallot/.opam/4.06.0/bin/ocamlopt.opt -c -o CommonAST.cmx CommonAST.ml # cached
+# Target: GotoAST.cmx, tags: { compile, extension:cmx, extension:ml, file:GotoAST.cmx, file:GotoAST.ml, implem, native, ocaml, quiet, traverse, use_menhir }
+/home/tp-home008/agallot/.opam/4.06.0/bin/ocamlopt.opt -c -o GotoAST.cmx GotoAST.ml # cached
+# Target: Mips.cmx, tags: { compile, extension:cmx, extension:ml, file:Mips.cmx, file:Mips.ml, implem, native, ocaml, quiet, traverse, use_menhir }
+/home/tp-home008/agallot/.opam/4.06.0/bin/ocamlopt.opt -c -o Mips.cmx Mips.ml # cached
+# Target: ImpAST.cmx, tags: { compile, extension:cmx, extension:ml, file:ImpAST.cmx, file:ImpAST.ml, implem, native, ocaml, quiet, traverse, use_menhir }
+/home/tp-home008/agallot/.opam/4.06.0/bin/ocamlopt.opt -c -o ImpAST.cmx ImpAST.ml # cached
+# Target: ImpToGoto.cmx, tags: { compile, extension:cmx, extension:ml, file:ImpToGoto.cmx, file:ImpToGoto.ml, implem, native, ocaml, quiet, traverse, use_menhir }
+/home/tp-home008/agallot/.opam/4.06.0/bin/ocamlopt.opt -c -o ImpToGoto.cmx ImpToGoto.ml # cached
+# Target: preprocessor.cmx, tags: { compile, extension:cmx, extension:ml, file:preprocessor.cmx, file:preprocessor.ml, implem, native, ocaml, quiet, traverse, use_menhir }
+/home/tp-home008/agallot/.opam/4.06.0/bin/ocamlopt.opt -c -o preprocessor.cmx preprocessor.ml # cached
+# Target: SourceParser.ml.depends, tags: { extension:ml, file:SourceParser.ml, ocaml, ocamldep, quiet, traverse, use_menhir }
+/home/tp-home008/agallot/.opam/4.06.0/bin/ocamldep.opt -modules SourceParser.ml > SourceParser.ml.depends # cached
+# Target: SourceLocalisedAST.cmx, tags: { compile, extension:cmx, extension:ml, file:SourceLocalisedAST.cmx, file:SourceLocalisedAST.ml, implem, native, ocaml, quiet, traverse, use_menhir }
+/home/tp-home008/agallot/.opam/4.06.0/bin/ocamlopt.opt -c -o SourceLocalisedAST.cmx SourceLocalisedAST.ml # cached
+# Target: SourceParser.cmx, tags: { compile, extension:cmx, extension:ml, file:SourceParser.cmx, file:SourceParser.ml, implem, native, ocaml, quiet, traverse, use_menhir }
+/home/tp-home008/agallot/.opam/4.06.0/bin/ocamlopt.opt -c -o SourceParser.cmx SourceParser.ml # cached
+# Target: SourceLexer.cmx, tags: { compile, extension:cmx, extension:ml, file:SourceLexer.cmx, file:SourceLexer.ml, implem, native, ocaml, quiet, traverse, use_menhir }
+/home/tp-home008/agallot/.opam/4.06.0/bin/ocamlopt.opt -c -o SourceLexer.cmx SourceLexer.ml # cached
+# Target: SourceTypeChecker.cmx, tags: { compile, extension:cmx, extension:ml, file:SourceTypeChecker.cmx, file:SourceTypeChecker.ml, implem, native, ocaml, quiet, traverse, use_menhir }
+/home/tp-home008/agallot/.opam/4.06.0/bin/ocamlopt.opt -c -o SourceTypeChecker.cmx SourceTypeChecker.ml # cached
+# Target: SourceToImp.cmx, tags: { compile, extension:cmx, extension:ml, file:SourceToImp.cmx, file:SourceToImp.ml, implem, native, ocaml, quiet, traverse, use_menhir }
+/home/tp-home008/agallot/.opam/4.06.0/bin/ocamlopt.opt -c -o SourceToImp.cmx SourceToImp.ml # cached
+# Target: GotoToMips.cmx, tags: { compile, extension:cmx, extension:ml, file:GotoToMips.cmx, file:GotoToMips.ml, implem, native, ocaml, quiet, traverse, use_menhir }
+/home/tp-home008/agallot/.opam/4.06.0/bin/ocamlopt.opt -c -o GotoToMips.cmx GotoToMips.ml
+# Target: Compilo.cmx, tags: { compile, extension:cmx, extension:ml, file:Compilo.cmx, file:Compilo.ml, implem, native, ocaml, quiet, traverse, use_menhir }
+/home/tp-home008/agallot/.opam/4.06.0/bin/ocamlopt.opt -c -o Compilo.cmx Compilo.ml
+# Target: Compilo.native, tags: { dont_link_with, extension:native, file:Compilo.native, link, native, ocaml, program, quiet, traverse, use_menhir }
+/home/tp-home008/agallot/.opam/4.06.0/bin/ocamlopt.opt CommonAST.cmx GotoAST.cmx Mips.cmx GotoToMips.cmx ImpAST.cmx ImpToGoto.cmx SourceLocalisedAST.cmx SourceParser.cmx SourceLexer.cmx SourceTypeChecker.cmx SourceToImp.cmx preprocessor.cmx Compilo.cmx -o Compilo.native
+# Compilation successful.
