@@ -57,6 +57,7 @@ and strip_location type_context = function
 let strip_program p type_context =
   let main = strip_instruction type_context (Src.(p.main)) in
   let globals = Src.(p.globals) in
+  let main_locals = Src.(p.main_locals) in
   let functions = Symb_Tbl.fold (
     fun key value acc ->
       Symb_Tbl.add key Imp.({signature = Src.(value.signature);
@@ -66,5 +67,5 @@ let strip_program p type_context =
     Src.(p.functions)
     Symb_Tbl.empty
   in
-  Imp.({ main; globals; functions;})
+  Imp.({ main; globals; main_locals; functions;})
     

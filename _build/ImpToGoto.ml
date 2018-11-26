@@ -123,6 +123,7 @@ let rec translate_instruction = function
 let translate_program p = Gto.({
   main = translate_instruction Imp.(p.main);
   globals = Imp.(p.globals);
+  main_locals = Imp.(p.main_locals);
   functions = Symb_Tbl.fold (
     fun key value acc ->
       Symb_Tbl.add key {signature = Imp.(value.signature);

@@ -108,7 +108,11 @@ prog:
   (* Les déclarations de variables donnent une table des symboles, à laquelle
      est ajoutée la variable spéciale [arg] (avec le type entier). *)
   { (* Symb_Tbl.iter print_map vars; *)
-    { main = main; globals = Symb_Tbl.add "arg" TypInt (fst vars_structs); structs = snd vars_structs; functions = fun_decl} }  
+    { main = snd main;
+      globals = Symb_Tbl.add "arg" TypInt (fst vars_structs);
+      main_locals = fst main;
+      structs = snd vars_structs;
+      functions = fun_decl} }  
   
 (* Aide : ajout d'une règle pour récupérer grossièrement les erreurs se 
    propageant jusqu'à la racine. *)
@@ -276,8 +280,8 @@ ident_bool:
 (* Bloc de code principal, formé du mot-clé [main] suivi par le bloc
    proprement dit. *)
 main:
-| MAIN; i=block { i }
-;
+| MAIN; BEGIN; loc_vars_decl=var_decl; i=localised_instruction; END { (loc_vars_decl, i) }
+  ;
 
 (* Un bloc est une instruction ou séquence d'instructions entre accolades. *)
 block:

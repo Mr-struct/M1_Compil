@@ -1,0 +1,14 @@
+integer test(integer n) {
+    var integer n;
+    n := 92;
+    print(n);
+    n := 47;
+    print(n);
+    return (n);
+}
+
+main {
+    var integer t;
+    t := test(5);
+    print(t);
+}

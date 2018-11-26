@@ -83,14 +83,17 @@ let rec type_expression func_name context e = match e.expr with
 and type_location func_name context = function
   | Identifier(Id id) ->
      begin
-     try begin
-       let formals = (Symb_Tbl.find func_name context.function_signatures).formals in 
-       let type_loc = find_arg formals id in
-       if type_loc = NotFunc then
-	 Symb_Tbl.find id context.identifier_types
-       else type_loc
-     end
-     with Not_found -> Symb_Tbl.find id context.identifier_types
+       try begin
+	 let formals = (Symb_Tbl.find func_name context.function_signatures).formals in 
+	 let type_loc = find_arg formals id in
+	 if type_loc = NotFunc then
+	   try Symb_Tbl.find id context.locals_types
+	   with Not_found -> Symb_Tbl.find id context.identifier_types
+	 else type_loc
+       end
+       with Not_found ->
+	 try Symb_Tbl.find id context.locals_types
+	 with Not_found -> Symb_Tbl.find id context.identifier_types
      end
   | ArrayAccess(e1, e2) -> let type_e1 = type_expression func_name context e1 in
 			   let type_e2 = type_expression func_name context e2 in
@@ -117,23 +120,24 @@ let rec typecheck_instruction func_name context i = match i.instr with
   | Set(loc, e) ->
      begin
      match loc with
-     | FieldAccess(struc ,f) -> begin
-	let typ = type_expression func_name context struc in
-	match typ with
-	| TypStruct name ->
-	   begin
-	     let name_type = Symb_Tbl.find name context.struct_types in
-	     let bool = find_locked name_type.fields f in
-	     match bool with
-	     | true -> failwith "Ce champ est protégé"
-	     | false ->
-		let type_e = type_expression func_name context e in
-		let loc_type = type_location func_name context loc in
-		if loc_type = type_e then ()
-		else raise (Type_error(loc_type, type_e, i.i_pos))
-	   end
-	| _ -> failwith "Cette structure n'est pas définie"
-     end
+     | FieldAccess(struc ,f) ->
+	begin
+	  let typ = type_expression func_name context struc in
+	  match typ with
+	  | TypStruct name ->
+	     begin
+	       let name_type = Symb_Tbl.find name context.struct_types in
+	       let bool = find_locked name_type.fields f in
+	       match bool with
+	       | true -> failwith "Ce champ est protégé"
+	       | false ->
+		  let type_e = type_expression func_name context e in
+		  let loc_type = type_location func_name context loc in
+		  if loc_type = type_e then ()
+		  else raise (Type_error(loc_type, type_e, i.i_pos))
+	     end
+	  | _ -> failwith "Cette structure n'est pas définie"
+	end
      |_ -> 
 	let loc_type = type_location func_name context loc in
 	let type_e = type_expression func_name context e in
@@ -168,6 +172,7 @@ let extract_context p =
     let functions = Symb_Tbl.fold (fun key value acc -> Symb_Tbl.add key value.signature acc) p.functions Symb_Tbl.empty in
     Symb_Tbl.add "print_int" print_int (Symb_Tbl.add "power" power functions) in
   { identifier_types = p.globals;
+    locals_types = p.main_locals;
     struct_types = p.structs;
     function_signatures = predefined_signatures;
     return_type = NotFunc;
@@ -176,5 +181,7 @@ let extract_context p =
 let typecheck_program p =
   let type_context = extract_context p in
   typecheck_instruction "" type_context p.main;
-  Symb_Tbl.iter (fun key value -> typecheck_instruction key {type_context with identifier_types = value.locals; return_type = value.signature.return} value.code) p.functions;
+  Symb_Tbl.iter (fun key value ->
+    typecheck_instruction key {type_context with locals_types = value.locals; return_type = value.signature.return} value.code)
+    p.functions;
   type_context;

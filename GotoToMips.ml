@@ -359,7 +359,10 @@ let translate_program program =
   in
   
   (* Construction du texte du programme *)
-  let main_code = translate_instruction {params=Symb_Tbl.empty; local_vars=Symb_Tbl.empty} program.main in
+  let main_code = translate_instruction
+    {params=Symb_Tbl.empty;
+     local_vars=build_context_locals (Symb_Tbl.bindings program.main_locals)}
+    program.main in
   let functions = Symb_Tbl.fold translate_function program.functions nop in
   let text = init @@ main_code @@ close @@ built_ins @@ functions in
 

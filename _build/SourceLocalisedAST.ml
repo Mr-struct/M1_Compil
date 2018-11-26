@@ -49,6 +49,7 @@ type function_info = {
 type program = {
   main:    localised_instruction;
   globals: typ Symb_Tbl.t;
+  main_locals: typ Symb_Tbl.t;
   structs: struct_type Symb_Tbl.t;
   functions: function_info Symb_Tbl.t;
 }
