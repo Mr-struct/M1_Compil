@@ -1,0 +1,13 @@
+struct message { locked integer a; integer b; }
+var message t;
+var integer x;
+
+
+  main {
+    t := new message;
+    t.a := x;
+    t.b := 1;
+    print(x);    
+    print(t.a);
+    print(t.b);    
+  }

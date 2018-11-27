@@ -1,0 +1,9 @@
+var integer i;
+var integer j;
+
+main {
+  i := 3;
+  if (i == 0) { print(i) };
+  j := 5;  
+  print(j);
+}

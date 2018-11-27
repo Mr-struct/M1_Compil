@@ -1,0 +1,19 @@
+var integer i, j;
+var boolean continuer;
+
+main {
+    i := 2;
+    j := 3;    
+    if( i == j) {
+        print(i+j);
+    }
+    elif (i < j){
+        print (j-i);
+    }
+    elif(i > j){
+        print(i);
+    }
+    else {
+        print(j);
+    }
+}

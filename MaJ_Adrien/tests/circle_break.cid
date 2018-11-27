@@ -1,0 +1,17 @@
+var integer i;
+var integer j;
+var boolean continuer;
+
+main {
+  continuer := true;
+  i := 0;
+
+  while (continuer) {
+    if (i > 10) {
+        break
+    } else {
+        print(i);
+        i := i+1
+      }
+  }
+}
