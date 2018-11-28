@@ -44,7 +44,6 @@ and strip_expression type_context e = match Src.(e.expr) with
      begin
        let params_types = List.rev (List.fold_left (fun acc arg -> (type_expression type_context arg)::acc) [] params) in
        let new_name = change_func_name id params_types in
-       Printf.printf "STI:Func name = %s\n" new_name;
        Imp.FunCall((Id new_name), List.map (strip_expression type_context) params)
      end
 and strip_location type_context = function
@@ -57,7 +56,6 @@ and strip_location type_context = function
 	begin
 	  let name_type = Symb_Tbl.find name type_context.struct_types in
 	  let rank = get_rank name_type.fields f in
-	  (*Printf.printf "Field = %s, Rank = %d\n" f rank;*)
 	  Imp.BlockAccess(strip_expression type_context e, Imp.Literal(Int rank))
 	end
      | _ -> failwith "Cette structure n'est pas définie"
@@ -67,7 +65,6 @@ let strip_program p type_context =
   let globals = Src.(p.globals) in
   let functions = Symb_Tbl.fold (
     fun key value acc ->
-      Printf.printf "STI:SymTbl fold %s\n" key;
       let new_identifiers = List.fold_left (fun acc arg -> Symb_Tbl.add (fst arg) (snd arg) acc) type_context.identifier_types Src.(value.signature.formals) in
       let new_identifiers = Symb_Tbl.fold (fun key value acc -> Symb_Tbl.add key value acc) value.locals new_identifiers in
       Symb_Tbl.add key Imp.({signature = Src.(value.signature);
@@ -77,6 +74,5 @@ let strip_program p type_context =
     Src.(p.functions)
     Symb_Tbl.empty
   in
-  Printf.printf "Trad src->imp finie\n";
   Imp.({ main; globals; functions;})
     
