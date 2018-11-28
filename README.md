@@ -29,3 +29,13 @@ Les deux parties obligatoires
 TP 1 : - Sureté : borne des tableaux (arret du programme si on tente d'accéder à une case de tableau supérieure à sa taille)
 TP 2 : - entrelacer les déclarations de variables et de structures
        - Sureté : champs immuables, message d'erreur si on tente de modifier un champ protégé
+
+#######                             MODULE 4                       #######
+Travail réalisé :
+Toutes les parties obligatoires
+Partie fonction : 
+- extension appel de procédure
+- extension uniformisation, transformer print et main en procédure
+- surcharge statique, gestion des fonctions avec memes noms mais paramètre différents
+Partie variables locales :
+- extension sur les variables locales du main faite indirectement avec la transformation du main en procédure
