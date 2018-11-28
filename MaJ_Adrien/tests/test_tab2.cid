@@ -1,9 +1,0 @@
-var integer[] tab;
-var integer i;
-
-main {
-    tab := new integer[5];
-    tab[0] := 1;
-    print(tab[0]);
-    
-}

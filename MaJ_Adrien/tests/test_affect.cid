@@ -1,9 +1,0 @@
-var boolean continuer := false;
-var integer i := 5,j := 10;
-
-main {
-    if(continuer){
-        print(i);
-    }
-    else { print(i+j) };
-}
