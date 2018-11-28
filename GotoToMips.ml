@@ -183,15 +183,7 @@ let rec translate_expression context (e: GotoAST.expression) = match e with
      end
   | FunCall(Id f, params) ->
      (List.fold_left (fun code p -> (translate_expression context p) @@ push t0 @@ code) nop params)
-     @@ push fp
-     @@ push ra
-     @@ move fp sp
-     @@ addi fp fp 8
-     @@ subi sp sp (4* (Symb_Tbl.cardinal context.local_vars)) (* n fois pop zero, n=nombre de variables locales *)
      @@ jal f
-     @@ addi sp sp (4* (Symb_Tbl.cardinal context.local_vars)) (* n fois pop zero, n=nombre de variables locales *)
-     @@ pop ra
-     @@ pop fp
      @@ addi sp sp (4* (List.length params)) (* n fois pop zero *)       
   | NewBlock(e) ->
      translate_expression context e
@@ -231,11 +223,6 @@ let rec translate_instruction context (i: GotoAST.instruction) = match i with
   | Sequence(i1,i2) ->
      translate_instruction context i1 
      @@ translate_instruction context i2
-  | Print(e) ->
-     translate_expression context e
-     @@ move a0 t0
-     @@ li v0 11
-     @@ syscall
   | Set(l,e) ->
      translate_expression context e
      @@ push t0
@@ -251,14 +238,30 @@ let rec translate_instruction context (i: GotoAST.instruction) = match i with
      @@ bne zero t0 l
   | Return(e) ->
      translate_expression context e
+     @@ addi sp sp (4* (Symb_Tbl.cardinal context.local_vars)) (* n fois pop zero, n=nombre de variables locales *)
+     @@ pop ra
+     @@ pop fp
      @@ jr ra
+  | ProCall(Id f, params) ->
+     (List.fold_left (fun code p -> (translate_expression context p) @@ push t0 @@ code) nop params)
+     @@ jal f
+     @@ addi sp sp (4* (List.length params)) (* n fois pop zero *)       
   | Nop -> nop
 
 let translate_function key value acc = 
   let context = {params = build_context_params value.signature.formals;
 		 local_vars = build_context_locals (Symb_Tbl.bindings value.locals)} in
   label key
+  @@ push fp
+  @@ push ra
+  @@ move fp sp
+  @@ addi fp fp 8
+  @@ subi sp sp (4* (Symb_Tbl.cardinal context.local_vars)) (* n fois pop zero, n=nombre de variables locales *)
   @@ translate_instruction context value.code
+  @@ addi sp sp (4* (Symb_Tbl.cardinal context.local_vars)) (* n fois pop zero, n=nombre de variables locales *)
+  @@ pop ra
+  @@ pop fp
+  @@ jr ra
   @@ acc
  
 
@@ -330,22 +333,45 @@ let translate_program program =
     @@ move v0 t1
     @@ jr   ra
 
+    (* Code de la fonction print *)
+    @@ comment "print"
+    @@ label "print"
+    @@ push fp
+    @@ push ra
+    @@ move fp sp
+    @@ addi fp fp 8
+    @@ lw a0 4 fp
+    @@ li v0 11
+    @@ syscall
+    @@ pop ra
+    @@ pop fp
+    @@ jr ra
+      
     (* Code de la fonction print_int *)  
     @@ comment "print_int"
     @@ label "print_int"
-    @@ lw a0 4 sp
+    @@ push fp
+    @@ push ra
+    @@ move fp sp
+    @@ addi fp fp 8
+    @@ lw a0 4 fp
     @@ li v0 1
     @@ syscall
     (* @@ sw a0 0 sp *)
     (* @@ subi sp sp 4 *)
-    @@ move t0 a0
+    @@ pop ra
+    @@ pop fp
     @@ jr ra
 
     (* Code de la fonction power *)
     @@ comment "power"
     @@ label "power"
-    @@ lw s0 8 sp
-    @@ lw s1 4 sp
+    @@ push fp
+    @@ push ra
+    @@ move fp sp
+    @@ addi fp fp 8
+    @@ lw s0 8 fp
+    @@ lw s1 4 fp
     @@ li t0 1
     @@ b "power_loop_guard"
     @@ label "power_loop_code"
@@ -355,13 +381,15 @@ let translate_program program =
     @@ bgtz s0 "power_loop_code"
     (* @@ sw t0 0 sp *)
     (* @@ subi sp sp 4 *)
+    @@ pop ra
+    @@ pop fp
     @@ jr ra
   in
   
   (* Construction du texte du programme *)
   let main_code = translate_instruction
     {params=Symb_Tbl.empty;
-     local_vars=build_context_locals (Symb_Tbl.bindings program.main_locals)}
+     local_vars=Symb_Tbl.empty}
     program.main in
   let functions = Symb_Tbl.fold translate_function program.functions nop in
   let text = init @@ main_code @@ close @@ built_ins @@ functions in

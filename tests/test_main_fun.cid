@@ -1,0 +1,6 @@
+var integer t;
+
+main {
+    t := 92;
+    print(t);
+}

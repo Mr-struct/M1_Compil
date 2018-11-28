@@ -5,22 +5,12 @@
 	la $t0, arg
 	sw $v0, 0($t0)
 init_end:
-	li $t0, 5
+	jal odd
+	addi $sp, $sp, 0
+	li $t0, 91
 	sw $t0, 0($sp)
 	subi $sp, $sp, 4
-	jal test
-	addi $sp, $sp, 4
-	sw $t0, 0($sp)
-	subi $sp, $sp, 4
-	la $t0, t
-	addi $sp, $sp, 4
-	lw $t1, 0($sp)
-	sw $t1, 0($t0)
-	la $t0, t
-	lw $t0, 0($t0)
-	sw $t0, 0($sp)
-	subi $sp, $sp, 4
-	jal print
+	jal suivant
 	addi $sp, $sp, 4
 	li $v0, 10
 	syscall
@@ -100,68 +90,45 @@ power_loop_guard:
 	addi $sp, $sp, 4
 	lw $fp, 0($sp)
 	jr $ra
-test:
+suivant:
 	sw $fp, 0($sp)
 	subi $sp, $sp, 4
 	sw $ra, 0($sp)
 	subi $sp, $sp, 4
 	move $fp, $sp
 	addi $fp, $fp, 8
-	subi $sp, $sp, 12
-	li $t0, 92
-	sw $t0, 0($sp)
-	subi $sp, $sp, 4
-	move $t0, $fp
-	addi $t0, $t0, -8
-	addi $sp, $sp, 4
-	lw $t1, 0($sp)
-	sw $t1, 0($t0)
-	lw $t0, -8($fp)
+	subi $sp, $sp, 0
+	lw $t0, 4($fp)
+	addi $t0, $t0, 1
 	sw $t0, 0($sp)
 	subi $sp, $sp, 4
 	jal print
 	addi $sp, $sp, 4
-	li $t0, 47
-	sw $t0, 0($sp)
-	subi $sp, $sp, 4
-	move $t0, $fp
-	addi $t0, $t0, -12
-	addi $sp, $sp, 4
-	lw $t1, 0($sp)
-	sw $t1, 0($t0)
-	lw $t0, -12($fp)
-	sw $t0, 0($sp)
-	subi $sp, $sp, 4
-	jal print
-	addi $sp, $sp, 4
-	li $t0, 10
-	sw $t0, 0($sp)
-	subi $sp, $sp, 4
-	move $t0, $fp
-	addi $t0, $t0, -16
-	addi $sp, $sp, 4
-	lw $t1, 0($sp)
-	sw $t1, 0($t0)
-	lw $t0, -16($fp)
-	sw $t0, 0($sp)
-	subi $sp, $sp, 4
-	jal print
-	addi $sp, $sp, 4
-	lw $t0, -8($fp)
-	addi $sp, $sp, 12
+	addi $sp, $sp, 0
 	addi $sp, $sp, 4
 	lw $ra, 0($sp)
 	addi $sp, $sp, 4
 	lw $fp, 0($sp)
 	jr $ra
-	addi $sp, $sp, 12
+odd:
+	sw $fp, 0($sp)
+	subi $sp, $sp, 4
+	sw $ra, 0($sp)
+	subi $sp, $sp, 4
+	move $fp, $sp
+	addi $fp, $fp, 8
+	subi $sp, $sp, 0
+	li $t0, 47
+	sw $t0, 0($sp)
+	subi $sp, $sp, 4
+	jal print
+	addi $sp, $sp, 4
+	addi $sp, $sp, 0
 	addi $sp, $sp, 4
 	lw $ra, 0($sp)
 	addi $sp, $sp, 4
 	lw $fp, 0($sp)
 	jr $ra
 .data
-t:
-	.word 0
 arg:
 	.word 0

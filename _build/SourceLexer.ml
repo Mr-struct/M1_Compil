@@ -10,14 +10,14 @@
     (* Définition d'une table des mots-clés et des lexèmes associés *)
     let h = Hashtbl.create 17 in
     List.iter (fun (s, k) -> Hashtbl.add h s k)
-      [	"main", MAIN;
+      [ "main", MAIN;
 	"var", VAR;
 	"integer", INTEGER;
 	"boolean", BOOLEAN;
+	"void", VOID;
 	"if", IF;
 	"else", ELSE;
 	"while", WHILE;
-	"print", PRINT;
 	"true", CONST_BOOL(true);
 	"false", CONST_BOOL(false);
 	"for", FOR;

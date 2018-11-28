@@ -3,6 +3,7 @@
 
 type token = 
   | WHILE
+  | VOID
   | VAR
   | STRUCT
   | STAR
@@ -11,7 +12,6 @@ type token =
   | RP
   | RETURN
   | RB
-  | PRINT
   | PLUS
   | OR
   | NOT

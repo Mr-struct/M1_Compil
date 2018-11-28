@@ -1,0 +1,12 @@
+void odd (){
+    print(47);
+}
+
+void suivant(integer n) {
+    print(n+1);
+}
+
+main {
+    odd();
+    suivant(91);
+}

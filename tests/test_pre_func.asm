@@ -8,25 +8,12 @@ init_end:
 	li $t0, 3
 	sw $t0, 0($sp)
 	subi $sp, $sp, 4
-	sw $fp, 0($sp)
-	subi $sp, $sp, 4
-	sw $ra, 0($sp)
-	subi $sp, $sp, 4
-	move $fp, $sp
-	addi $fp, $fp, 8
-	jal print_int
-	addi $sp, $sp, 4
-	lw $ra, 0($sp)
-	addi $sp, $sp, 4
-	lw $fp, 0($sp)
-	addi $sp, $sp, 4
-	sw $t0, 0($sp)
-	subi $sp, $sp, 4
 	la $t0, x
 	addi $sp, $sp, 4
 	lw $t1, 0($sp)
 	sw $t1, 0($t0)
-	li $t0, 4
+	la $t0, x
+	lw $t0, 0($t0)
 	sw $t0, 0($sp)
 	subi $sp, $sp, 4
 	sw $fp, 0($sp)
@@ -35,12 +22,15 @@ init_end:
 	subi $sp, $sp, 4
 	move $fp, $sp
 	addi $fp, $fp, 8
+	subi $sp, $sp, 0
 	jal print_int
+	addi $sp, $sp, 0
 	addi $sp, $sp, 4
 	lw $ra, 0($sp)
 	addi $sp, $sp, 4
 	lw $fp, 0($sp)
 	addi $sp, $sp, 4
+	li $t0, 4
 	sw $t0, 0($sp)
 	subi $sp, $sp, 4
 	la $t0, x
@@ -53,7 +43,9 @@ init_end:
 	subi $sp, $sp, 4
 	move $fp, $sp
 	addi $fp, $fp, 8
+	subi $sp, $sp, 0
 	jal power
+	addi $sp, $sp, 0
 	addi $sp, $sp, 4
 	lw $ra, 0($sp)
 	addi $sp, $sp, 4
@@ -75,26 +67,48 @@ init_end:
 	subi $sp, $sp, 4
 	move $fp, $sp
 	addi $fp, $fp, 8
+	subi $sp, $sp, 0
 	jal print_int
+	addi $sp, $sp, 0
 	addi $sp, $sp, 4
 	lw $ra, 0($sp)
 	addi $sp, $sp, 4
 	lw $fp, 0($sp)
 	addi $sp, $sp, 4
+	li $t0, 10
 	sw $t0, 0($sp)
 	subi $sp, $sp, 4
-	la $t0, x
+	sw $fp, 0($sp)
+	subi $sp, $sp, 4
+	sw $ra, 0($sp)
+	subi $sp, $sp, 4
+	move $fp, $sp
+	addi $fp, $fp, 8
+	subi $sp, $sp, 0
+	jal print
+	addi $sp, $sp, 0
 	addi $sp, $sp, 4
-	lw $t1, 0($sp)
-	sw $t1, 0($t0)
-	li $t0, 10
-	move $a0, $t0
-	li $v0, 11
-	syscall
+	lw $ra, 0($sp)
+	addi $sp, $sp, 4
+	lw $fp, 0($sp)
+	addi $sp, $sp, 4
 	li $t0, 65
-	move $a0, $t0
-	li $v0, 11
-	syscall
+	sw $t0, 0($sp)
+	subi $sp, $sp, 4
+	sw $fp, 0($sp)
+	subi $sp, $sp, 4
+	sw $ra, 0($sp)
+	subi $sp, $sp, 4
+	move $fp, $sp
+	addi $fp, $fp, 8
+	subi $sp, $sp, 0
+	jal print
+	addi $sp, $sp, 0
+	addi $sp, $sp, 4
+	lw $ra, 0($sp)
+	addi $sp, $sp, 4
+	lw $fp, 0($sp)
+	addi $sp, $sp, 4
 	li $v0, 10
 	syscall
 atoi:
@@ -119,17 +133,22 @@ atoi_error:
 atoi_end:
 	move $v0, $t1
 	jr $ra
+#print
+print:
+	lw $a0, 4($fp)
+	li $v0, 11
+	syscall
+	jr $ra
 #print_int
 print_int:
-	lw $a0, 4($sp)
+	lw $a0, 4($fp)
 	li $v0, 1
 	syscall
-	move $t0, $a0
 	jr $ra
 #power
 power:
-	lw $s0, 8($sp)
-	lw $s1, 4($sp)
+	lw $s0, 8($fp)
+	lw $s1, 4($fp)
 	li $t0, 1
 	b power_loop_guard
 power_loop_code:

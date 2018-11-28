@@ -17,6 +17,7 @@ let rec translate_expression = function
   | Imp.NewBlock e -> Gto.NewBlock(translate_expression e)
   | Imp.FunCall(id, params) -> Gto.FunCall(id, List.map translate_expression params)
      
+     
 and strip_location = function
   | Imp.Identifier id -> Gto.Identifier id
   | Imp.BlockAccess(e1, e2) -> Gto.BlockAccess(translate_expression e1, translate_expression e2)
@@ -34,7 +35,6 @@ let rec translate_instruction_loop i begin_label end_label =
      ++ Gto.Label(then_label) (*Bloc then*)
      ++ translate_instruction_loop i1 begin_label end_label
      ++ Gto.Label(new_end_label)
-  | Imp.Print(e) -> Gto.Print(translate_expression e)
   | Imp.Sequence(i1, i2) -> Gto.Sequence(translate_instruction_loop i1 begin_label end_label,
 					 translate_instruction_loop i2 begin_label end_label) 
   | Imp.Set(l, e) -> Gto.Set(strip_location l, translate_expression e)
@@ -66,6 +66,7 @@ let rec translate_instruction_loop i begin_label end_label =
      ++Gto.Goto(new_begin_label)
      ++Gto.Label(new_end_label)
 
+  | Imp.ProCall(id, params) -> Gto.ProCall(id, List.map translate_expression params)
   | Imp.Break -> Gto.Goto(end_label)
   | Imp.Continue -> Gto.Goto(begin_label)
   | Imp.Return(e) -> Gto.Return(translate_expression e)
@@ -84,7 +85,6 @@ let rec translate_instruction = function
      ++ translate_instruction i1
      ++ Gto.Label(end_label)
 
-  |Imp.Print (e) -> Gto.Print (translate_expression e)
   |Imp.Sequence (i1,i2) -> Gto.Sequence(translate_instruction i1, translate_instruction i2)
   |Imp.Set(l,e) -> Gto.Set(strip_location l,translate_expression e)
   |Imp.Loop(e,i) ->
@@ -114,7 +114,8 @@ let rec translate_instruction = function
      ++translate_instruction s2
      ++Gto.Goto(begin_label)
      ++Gto.Label(end_label)
-       
+
+  | Imp.ProCall(id, params) -> Gto.ProCall(id, List.map translate_expression params)
   | Imp.Nop -> Gto.Nop
   | Imp.Return(e) -> Gto.Return(translate_expression e) 
   | Imp.Break -> failwith "Not in loop"
@@ -123,7 +124,6 @@ let rec translate_instruction = function
 let translate_program p = Gto.({
   main = translate_instruction Imp.(p.main);
   globals = Imp.(p.globals);
-  main_locals = Imp.(p.main_locals);
   functions = Symb_Tbl.fold (
     fun key value acc ->
       Symb_Tbl.add key {signature = Imp.(value.signature);

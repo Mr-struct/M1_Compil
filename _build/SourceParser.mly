@@ -49,13 +49,13 @@
 %token AND OR NOT
 %token LP RP LB RB
 
-%token VAR NEW
-%token INTEGER BOOLEAN STRUCT LOCK
-
 %token MAIN
+%token VAR NEW
+%token INTEGER BOOLEAN VOID STRUCT LOCK
+
 %token IF ELSE ELIF WHILE FOR CONTINUE BREAK
 %token SEMI COMMA DOT
-%token SET PRINT
+%token SET
 %token BEGIN END RETURN
 %token EOF
 
@@ -104,13 +104,15 @@ prog:
   prog:
 (* Règles : un programme est formé d'une séquence de déclarations de variables
    suivie du bloc de code principal. *)
-| vars_structs=var_structs_decls; fun_decl=fun_decls; main=main; EOF
+| vars_structs=var_structs_decls; fun_decl=fun_decls; EOF
   (* Les déclarations de variables donnent une table des symboles, à laquelle
      est ajoutée la variable spéciale [arg] (avec le type entier). *)
   { (* Symb_Tbl.iter print_map vars; *)
-    { main = snd main;
+    let l = $startpos.pos_lnum in
+    let c = $startpos.pos_cnum - $startpos.pos_bol in
+    let expr = mk_expr (Location(Identifier(Id "arg"))) l c in
+    { main = mk_instr (ProCall(Id "main", [expr])) l c;
       globals = Symb_Tbl.add "arg" TypInt (fst vars_structs);
-      main_locals = fst main;
       structs = snd vars_structs;
       functions = fun_decl} }  
   
@@ -169,9 +171,15 @@ var_decl:
 ;
 
 fun_decls:
-| { Symb_Tbl.empty }
+| (* empty *) { Symb_Tbl.empty }
 | t=typ; id=IDENT; LP; params=formal_params; RP; BEGIN; vars=var_decl; i=localised_instruction; END; fd = fun_decls
-  { Symb_Tbl.add id {signature = { return = t; formals = params }; code=i; locals=vars} fd }
+   { Symb_Tbl.add id {signature = { return = t; formals = params }; code=i; locals=vars} fd }
+| id=IDENT; LP; params=formal_params; RP; BEGIN; vars=var_decl; i=localised_instruction; END; fd = fun_decls
+   { Symb_Tbl.add id {signature = { return = TypVoid; formals = params }; code=i; locals=vars} fd }
+| MAIN; LP; params=formal_params; RP; BEGIN; vars=var_decl; i=localised_instruction; END; fd = fun_decls
+   { Symb_Tbl.add "main" {signature = { return = TypInt; formals = params }; code=i; locals=vars} fd }
+| MAIN; BEGIN; vars=var_decl; i=localised_instruction; END; fd=fun_decls
+   { Symb_Tbl.add "main" {signature = { return = TypInt; formals = [("arg", TypInt)]}; code=i; locals=vars} fd }
 ;
 
 formal_params:
@@ -183,6 +191,7 @@ formal_params:
 typ:
 | INTEGER { TypInt }
 | BOOLEAN { TypBool }
+| VOID { TypVoid }
 | t=typ; LB; RB { TypArray t }
 | id=IDENT { TypStruct id }
 ;
@@ -275,13 +284,12 @@ ident_bool:
 (* MAIN *)
 
 
-
-
 (* Bloc de code principal, formé du mot-clé [main] suivi par le bloc
    proprement dit. *)
-main:
-| MAIN; BEGIN; loc_vars_decl=var_decl; i=localised_instruction; END { (loc_vars_decl, i) }
-  ;
+(*main:
+(* | MAIN; i=block { i } *)
+| MAIN; i=block { }
+  ;*)
 
 (* Un bloc est une instruction ou séquence d'instructions entre accolades. *)
 block:
@@ -302,8 +310,6 @@ localised_instruction:
 instruction:
 (* Si pas d'instruction, on renvoie l'instruction neutre. *)
 | (* empty *)  { Nop }
-| PRINT; LP; e=localised_expression; RP
-  { Print(e) }
 | l=location; SET; e=localised_expression
   { Set(l, e) }
 | IF; LP; e=localised_expression; RP; i1=block; ELSE; i2=block
@@ -323,6 +329,7 @@ instruction:
 | i1=localised_instruction; SEMI; i2=localised_instruction
    { Sequence(i1, i2) }
 | RETURN; LP; e=localised_expression; RP { Return(e) }
+| id=IDENT; LP; a=arguments; RP { ProCall(Id id, a) }
 ;
 
 (* Règle pour la gestion des blocs elif *)

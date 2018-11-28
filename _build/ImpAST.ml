@@ -14,12 +14,12 @@ and location =
 
 
 type instruction =
-  | Print       of expression
   | Set         of location   * expression
   | Conditional of expression * instruction * instruction
   | Loop        of expression * instruction
   | LoopFor     of instruction * expression * instruction * instruction
   | Sequence    of instruction * instruction
+  | ProCall     of identifier * expression list
   | Break
   | Continue
   | Return of expression
@@ -34,6 +34,5 @@ type function_info = {
 type program = {
   main: instruction;
   globals: typ Symb_Tbl.t;
-  main_locals: typ Symb_Tbl.t;
   functions: function_info Symb_Tbl.t
 }

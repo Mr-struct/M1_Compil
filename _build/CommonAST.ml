@@ -7,6 +7,7 @@ type typ =
   | NotFunc
   | TypInt
   | TypBool
+  | TypVoid
   | TypArray of typ
   | TypStruct of string
       
@@ -21,7 +22,7 @@ type function_signature = {
   
 type type_context = {
   identifier_types: typ Symb_Tbl.t;
-  locals_types: typ Symb_Tbl.t;
+  local_vars: typ Symb_Tbl.t;
   struct_types: struct_type Symb_Tbl.t;
   function_signatures : function_signature Symb_Tbl.t;
   return_type : typ

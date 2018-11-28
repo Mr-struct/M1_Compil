@@ -1,0 +1,15 @@
+var integer x;
+
+integer test_fun () {
+    print(92);
+    return (92);
+}
+
+void test_proc(){
+    print(92);
+}
+
+main {
+    x := test_fun();
+    test_proc();
+}

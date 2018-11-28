@@ -26,13 +26,13 @@ type localised_instruction = {
 }
 
 and instruction =
-  | Print       of localised_expression
   | Set         of location * localised_expression
   | Conditional of localised_expression * localised_instruction
                                         * localised_instruction
   | Loop        of localised_expression * localised_instruction
   | LoopFor     of localised_instruction * localised_expression * localised_instruction * localised_instruction
   | Sequence    of localised_instruction * localised_instruction
+  | ProCall of identifier * localised_expression list
   | Break
   | Continue
   | Return of localised_expression
@@ -49,7 +49,6 @@ type function_info = {
 type program = {
   main:    localised_instruction;
   globals: typ Symb_Tbl.t;
-  main_locals: typ Symb_Tbl.t;
   structs: struct_type Symb_Tbl.t;
   functions: function_info Symb_Tbl.t;
 }

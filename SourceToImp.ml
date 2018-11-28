@@ -14,7 +14,6 @@ let get_rank l f =
   in aux l 0
             
 let rec strip_instruction type_context i = match Src.(i.instr) with
-  | Src.Print(e) -> Imp.Print(strip_expression type_context e)
   | Src.Set(l, e) -> Imp.Set(strip_location type_context l, strip_expression type_context e)
   | Src.Conditional(e, i1, i2) ->
      Imp.Conditional(strip_expression type_context e, strip_instruction type_context i1, strip_instruction type_context i2)
@@ -25,6 +24,7 @@ let rec strip_instruction type_context i = match Src.(i.instr) with
   | Src.Continue -> Imp.Continue
   | Src.Sequence(i1, i2) -> Imp.Sequence(strip_instruction type_context i1, strip_instruction type_context i2)
   | Src.Return(e) -> Imp.Return(strip_expression type_context e)
+  | Src.ProCall(id, params) -> Imp.ProCall(id, List.map (strip_expression type_context) params)
   | Src.Nop -> Imp.Nop
 
 and strip_expression type_context e = match Src.(e.expr) with
@@ -57,7 +57,6 @@ and strip_location type_context = function
 let strip_program p type_context =
   let main = strip_instruction type_context (Src.(p.main)) in
   let globals = Src.(p.globals) in
-  let main_locals = Src.(p.main_locals) in
   let functions = Symb_Tbl.fold (
     fun key value acc ->
       Symb_Tbl.add key Imp.({signature = Src.(value.signature);
@@ -67,5 +66,5 @@ let strip_program p type_context =
     Src.(p.functions)
     Symb_Tbl.empty
   in
-  Imp.({ main; globals; main_locals; functions;})
+  Imp.({ main; globals; functions;})
     

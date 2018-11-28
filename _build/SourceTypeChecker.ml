@@ -64,35 +64,25 @@ let rec type_expression func_name context e = match e.expr with
        (fun expr arg -> let type_e = type_expression func_name context expr in if type_e != snd arg then raise (Type_error(type_e, snd arg, expr.e_pos)) )
        l
        func_sig.formals;
-     (* check_args l context.function_signatures.formals context; *)
      (Symb_Tbl.find id context.function_signatures).return
   | NewRecord(s) ->
      try let _ = Symb_Tbl.find s context.struct_types in
 	 TypStruct s
      with Not_found -> failwith "Cette structure n'est pas définie"
-
-(* and check_args list_expr formals context =
-  match list_expr, formals with
-  | [], [] -> ()
-  | [], _ -> failwith "Pas assez d'arguments" 
-  | _, [] -> failwith "Trop d'arguments"
-  | e::t1, arg::t2 -> let type_e = type_expression context e in
-		      if type_e = snd arg then check_args t1 t2 context
-   else raise (Type_error(type_e, snd arg, e1.e_pos)) *)
 			
 and type_location func_name context = function
   | Identifier(Id id) ->
      begin
-       try begin
-	 let formals = (Symb_Tbl.find func_name context.function_signatures).formals in 
-	 let type_loc = find_arg formals id in
-	 if type_loc = NotFunc then
-	   try Symb_Tbl.find id context.locals_types
-	   with Not_found -> Symb_Tbl.find id context.identifier_types
-	 else type_loc
-       end
-       with Not_found ->
-	 try Symb_Tbl.find id context.locals_types
+       try let type_loc = Symb_Tbl.find id context.local_vars in
+	   type_loc
+       with Not_found -> 
+	 try begin
+	   let formals = (Symb_Tbl.find func_name context.function_signatures).formals in 
+	   let type_loc = find_arg formals id in
+	   if type_loc = NotFunc then
+	     Symb_Tbl.find id context.identifier_types
+	   else type_loc
+	 end
 	 with Not_found -> Symb_Tbl.find id context.identifier_types
      end
   | ArrayAccess(e1, e2) -> let type_e1 = type_expression func_name context e1 in
@@ -113,10 +103,6 @@ and type_location func_name context = function
 			 | _ -> raise (Type_error(TypStruct "error", type_e, e.e_pos))
 			       
 let rec typecheck_instruction func_name context i = match i.instr with
-  | Print(e) ->
-     if type_expression func_name context e = TypInt
-     then ()
-     else raise (Type_error(TypInt, type_expression func_name context e, i.i_pos))
   | Set(loc, e) ->
      begin
      match loc with
@@ -158,21 +144,32 @@ let rec typecheck_instruction func_name context i = match i.instr with
      begin
        match context.return_type with
        | NotFunc -> failwith "Return en dehors d'une fonction"
+       | TypVoid -> failwith "Pas de return dans une procedure"
        | t -> if type_expression func_name context e = t then ()
 	 else raise (Type_error(type_expression func_name context e, t, i.i_pos))
+     end
+  | ProCall(Id id, l) ->
+     begin
+       let func_sig = Symb_Tbl.find id context.function_signatures in
+       List.iter2
+	 (fun expr arg -> let type_e = type_expression func_name context expr in if type_e != snd arg then raise (Type_error(type_e, snd arg, expr.e_pos)) )
+	 l
+	 func_sig.formals;
      end
   | Break -> ()
   | Continue -> ()
   | Nop -> ()
     
 let extract_context p =
-  let predefined_signatures = 
-    let print_int = { return=TypInt; formals=[("i", TypInt)] } in
+  let predefined_signatures =
+    let print = { return=TypVoid; formals=[("i", TypInt)]} in
+    let print_int = { return=TypVoid; formals=[("i", TypInt)] } in
     let power = { return=TypInt; formals=[("x", TypInt); ("n", TypInt)] } in
-    let functions = Symb_Tbl.fold (fun key value acc -> Symb_Tbl.add key value.signature acc) p.functions Symb_Tbl.empty in
-    Symb_Tbl.add "print_int" print_int (Symb_Tbl.add "power" power functions) in
+    let functions = Symb_Tbl.fold (fun key value acc ->
+      Symb_Tbl.add key value.signature acc) p.functions Symb_Tbl.empty in
+    Symb_Tbl.add "print" print (Symb_Tbl.add "print_int" print_int (Symb_Tbl.add "power" power functions)) in
   { identifier_types = p.globals;
-    locals_types = p.main_locals;
+    local_vars = Symb_Tbl.empty;
     struct_types = p.structs;
     function_signatures = predefined_signatures;
     return_type = NotFunc;
@@ -182,6 +179,6 @@ let typecheck_program p =
   let type_context = extract_context p in
   typecheck_instruction "" type_context p.main;
   Symb_Tbl.iter (fun key value ->
-    typecheck_instruction key {type_context with locals_types = value.locals; return_type = value.signature.return} value.code)
+    typecheck_instruction key {type_context with local_vars = value.locals; return_type = value.signature.return} value.code)
     p.functions;
   type_context;
