@@ -335,7 +335,7 @@ let translate_program program =
 
     (* Code de la fonction print *)
     @@ comment "print"
-    @@ label "print"
+    @@ label "print_int"
     @@ push fp
     @@ push ra
     @@ move fp sp
@@ -349,7 +349,7 @@ let translate_program program =
       
     (* Code de la fonction print_int *)  
     @@ comment "print_int"
-    @@ label "print_int"
+    @@ label "print_int_int"
     @@ push fp
     @@ push ra
     @@ move fp sp
@@ -365,7 +365,7 @@ let translate_program program =
 
     (* Code de la fonction power *)
     @@ comment "power"
-    @@ label "power"
+    @@ label "power_int_int"
     @@ push fp
     @@ push ra
     @@ move fp sp

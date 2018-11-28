@@ -1,0 +1,22 @@
+integer incr (integer n){
+    return (n+1);
+}
+
+integer incr (integer n, boolean b){
+    if (b){
+        return(n+1);
+    };
+    return(n);
+
+}
+
+main {
+    var integer n;
+    var integer m;  
+    n := 91;
+    m := 92;
+    n := incr(n);
+    print(n);
+    m := incr(m, false);
+    print(m);
+}

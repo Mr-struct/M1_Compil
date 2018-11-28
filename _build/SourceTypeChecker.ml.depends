@@ -1,1 +1,1 @@
-SourceTypeChecker.ml: CommonAST List SourceLocalisedAST Symb_Tbl
+SourceTypeChecker.ml: CommonAST List Printf SourceLocalisedAST Symb_Tbl

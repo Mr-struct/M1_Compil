@@ -1,1 +1,1 @@
-SourceToImp.ml: CommonAST ImpAST List SourceLocalisedAST SourceTypeChecker Symb_Tbl
+SourceToImp.ml: CommonAST ImpAST List Printf SourceLocalisedAST SourceTypeChecker Symb_Tbl

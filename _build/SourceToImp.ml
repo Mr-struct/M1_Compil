@@ -24,7 +24,10 @@ let rec strip_instruction type_context i = match Src.(i.instr) with
   | Src.Continue -> Imp.Continue
   | Src.Sequence(i1, i2) -> Imp.Sequence(strip_instruction type_context i1, strip_instruction type_context i2)
   | Src.Return(e) -> Imp.Return(strip_expression type_context e)
-  | Src.ProCall(id, params) -> Imp.ProCall(id, List.map (strip_expression type_context) params)
+  | Src.ProCall(Id id, params) ->
+     let params_types = List.rev (List.fold_left (fun acc arg -> (type_expression type_context arg)::acc) [] params) in
+     let new_name = change_func_name id params_types in
+     Imp.ProCall((Id new_name), List.map (strip_expression type_context) params)
   | Src.Nop -> Imp.Nop
 
 and strip_expression type_context e = match Src.(e.expr) with
@@ -37,13 +40,18 @@ and strip_expression type_context e = match Src.(e.expr) with
      let name_type = Symb_Tbl.find name type_context.struct_types in
      let size = List.length name_type.fields in
      Imp.NewBlock(Imp.Literal(Int size))
-  | Src.FunCall(id, params) -> Imp.FunCall(id, List.map (strip_expression type_context) params)
-       
+  | Src.FunCall(Id id, params) ->
+     begin
+       let params_types = List.rev (List.fold_left (fun acc arg -> (type_expression type_context arg)::acc) [] params) in
+       let new_name = change_func_name id params_types in
+       Printf.printf "STI:Func name = %s\n" new_name;
+       Imp.FunCall((Id new_name), List.map (strip_expression type_context) params)
+     end
 and strip_location type_context = function
   | Src.Identifier id -> Imp.Identifier id
   | Src.ArrayAccess(e1, e2) -> Imp.BlockAccess(strip_expression type_context e1, strip_expression type_context e2)
   | Src.FieldAccess(e, f) ->
-     let typ = type_expression "" type_context e in
+     let typ = type_expression type_context e in
      match typ with
      | TypStruct name ->
 	begin
@@ -59,12 +67,16 @@ let strip_program p type_context =
   let globals = Src.(p.globals) in
   let functions = Symb_Tbl.fold (
     fun key value acc ->
+      Printf.printf "STI:SymTbl fold %s\n" key;
+      let new_identifiers = List.fold_left (fun acc arg -> Symb_Tbl.add (fst arg) (snd arg) acc) type_context.identifier_types Src.(value.signature.formals) in
+      let new_identifiers = Symb_Tbl.fold (fun key value acc -> Symb_Tbl.add key value acc) value.locals new_identifiers in
       Symb_Tbl.add key Imp.({signature = Src.(value.signature);
-			     code = strip_instruction type_context Src.(value.code);
+			     code = strip_instruction {type_context with identifier_types = new_identifiers; return_type = value.signature.return} Src.(value.code);
 			     locals = Src.(value.locals)}) acc
   )
     Src.(p.functions)
     Symb_Tbl.empty
   in
+  Printf.printf "Trad src->imp finie\n";
   Imp.({ main; globals; functions;})
     

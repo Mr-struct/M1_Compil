@@ -173,13 +173,17 @@ var_decl:
 fun_decls:
 | (* empty *) { Symb_Tbl.empty }
 | t=typ; id=IDENT; LP; params=formal_params; RP; BEGIN; vars=var_decl; i=localised_instruction; END; fd = fun_decls
-   { Symb_Tbl.add id {signature = { return = t; formals = params }; code=i; locals=vars} fd }
+   { Symb_Tbl.add
+     (change_func_name id (List.rev (List.fold_left (fun acc (arg,typ) -> typ::acc) [] params)))
+     {signature = { return = t; formals = params }; code=i; locals=vars} fd }
 | id=IDENT; LP; params=formal_params; RP; BEGIN; vars=var_decl; i=localised_instruction; END; fd = fun_decls
-   { Symb_Tbl.add id {signature = { return = TypVoid; formals = params }; code=i; locals=vars} fd }
+   { Symb_Tbl.add
+     (change_func_name id (List.rev (List.fold_left (fun acc (arg,typ) -> typ::acc) [] params)))
+     {signature = { return = TypVoid; formals = params }; code=i; locals=vars} fd }
 | MAIN; LP; params=formal_params; RP; BEGIN; vars=var_decl; i=localised_instruction; END; fd = fun_decls
-   { Symb_Tbl.add "main" {signature = { return = TypInt; formals = params }; code=i; locals=vars} fd }
+   { Symb_Tbl.add "main_int" {signature = { return = TypInt; formals = params }; code=i; locals=vars} fd }
 | MAIN; BEGIN; vars=var_decl; i=localised_instruction; END; fd=fun_decls
-   { Symb_Tbl.add "main" {signature = { return = TypInt; formals = [("arg", TypInt)]}; code=i; locals=vars} fd }
+   { Symb_Tbl.add "main_int" {signature = { return = TypInt; formals = [("arg", TypInt)]}; code=i; locals=vars} fd }
 ;
 
 formal_params:

@@ -1819,7 +1819,9 @@ and _menhir_goto_fun_decls : _menhir_env -> 'ttv_tail -> _menhir_state -> (Sourc
         let _6 = () in
         let _5 = () in
         let _3 = () in
-        let _v : (SourceLocalisedAST.function_info CommonAST.Symb_Tbl.t) =    ( Symb_Tbl.add id {signature = { return = t; formals = params }; code=i; locals=vars} fd ) in
+        let _v : (SourceLocalisedAST.function_info CommonAST.Symb_Tbl.t) =    ( Symb_Tbl.add
+     (change_func_name id (List.rev (List.fold_left (fun acc (arg,typ) -> typ::acc) [] params)))
+     {signature = { return = t; formals = params }; code=i; locals=vars} fd ) in
         _menhir_goto_fun_decls _menhir_env _menhir_stack _menhir_s _v
     | MenhirState161 ->
         let _menhir_stack = Obj.magic _menhir_stack in
@@ -1829,7 +1831,9 @@ and _menhir_goto_fun_decls : _menhir_env -> 'ttv_tail -> _menhir_state -> (Sourc
         let _5 = () in
         let _4 = () in
         let _2 = () in
-        let _v : (SourceLocalisedAST.function_info CommonAST.Symb_Tbl.t) =    ( Symb_Tbl.add id {signature = { return = TypVoid; formals = params }; code=i; locals=vars} fd ) in
+        let _v : (SourceLocalisedAST.function_info CommonAST.Symb_Tbl.t) =    ( Symb_Tbl.add
+     (change_func_name id (List.rev (List.fold_left (fun acc (arg,typ) -> typ::acc) [] params)))
+     {signature = { return = TypVoid; formals = params }; code=i; locals=vars} fd ) in
         _menhir_goto_fun_decls _menhir_env _menhir_stack _menhir_s _v
     | MenhirState153 ->
         let _menhir_stack = Obj.magic _menhir_stack in
@@ -1840,7 +1844,7 @@ and _menhir_goto_fun_decls : _menhir_env -> 'ttv_tail -> _menhir_state -> (Sourc
         let _4 = () in
         let _2 = () in
         let _1 = () in
-        let _v : (SourceLocalisedAST.function_info CommonAST.Symb_Tbl.t) =    ( Symb_Tbl.add "main" {signature = { return = TypInt; formals = params }; code=i; locals=vars} fd ) in
+        let _v : (SourceLocalisedAST.function_info CommonAST.Symb_Tbl.t) =    ( Symb_Tbl.add "main_int" {signature = { return = TypInt; formals = params }; code=i; locals=vars} fd ) in
         _menhir_goto_fun_decls _menhir_env _menhir_stack _menhir_s _v
     | MenhirState177 ->
         let _menhir_stack = Obj.magic _menhir_stack in
@@ -1849,7 +1853,7 @@ and _menhir_goto_fun_decls : _menhir_env -> 'ttv_tail -> _menhir_state -> (Sourc
         let _5 = () in
         let _2 = () in
         let _1 = () in
-        let _v : (SourceLocalisedAST.function_info CommonAST.Symb_Tbl.t) =    ( Symb_Tbl.add "main" {signature = { return = TypInt; formals = [("arg", TypInt)]}; code=i; locals=vars} fd ) in
+        let _v : (SourceLocalisedAST.function_info CommonAST.Symb_Tbl.t) =    ( Symb_Tbl.add "main_int" {signature = { return = TypInt; formals = [("arg", TypInt)]}; code=i; locals=vars} fd ) in
         _menhir_goto_fun_decls _menhir_env _menhir_stack _menhir_s _v
     | MenhirState31 ->
         let _menhir_stack = Obj.magic _menhir_stack in

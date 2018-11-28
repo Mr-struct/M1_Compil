@@ -1,2 +1,2 @@
-SourceParser.ml: CommonAST Lexing Printf SourceLocalisedAST Symb_Tbl
+SourceParser.ml: CommonAST Lexing List Printf SourceLocalisedAST Symb_Tbl
 SourceParser.mli: Lexing SourceLocalisedAST
