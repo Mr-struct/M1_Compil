@@ -1,0 +1,7 @@
+void suivant(integer n) {
+    print(n+1);
+}
+
+main {
+    suivant(91);
+}

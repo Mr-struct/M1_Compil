@@ -1,0 +1,1991 @@
+State 0:
+prog' -> . prog [ # ]
+-- On error shift to state 1
+-- On STRUCT shift to state 2
+-- On struct_decls shift to state 20
+-- On prog shift to state 128
+-- On VAR reduce production struct_decls -> 
+-- On MAIN reduce production struct_decls -> 
+
+State 1:
+prog -> error . [ # ]
+-- On # reduce production prog -> error 
+
+State 2:
+struct_decls -> STRUCT . IDENT LB field_decl RB struct_decls [ VAR MAIN ]
+-- On IDENT shift to state 3
+
+State 3:
+struct_decls -> STRUCT IDENT . LB field_decl RB struct_decls [ VAR MAIN ]
+-- On LB shift to state 4
+
+State 4:
+struct_decls -> STRUCT IDENT LB . field_decl RB struct_decls [ VAR MAIN ]
+-- On INTEGER shift to state 5
+-- On IDENT shift to state 6
+-- On BOOLEAN shift to state 7
+-- On typ shift to state 8
+-- On field_decl shift to state 17
+
+State 5:
+typ -> INTEGER . [ STAR SEMI RP RB PLUS OR NEQ MOD MINUS LT LE LB IDENT GT GE EQUAL END DOT DIV COMMA AND ]
+-- On STAR reduce production typ -> INTEGER 
+-- On SEMI reduce production typ -> INTEGER 
+-- On RP reduce production typ -> INTEGER 
+-- On RB reduce production typ -> INTEGER 
+-- On PLUS reduce production typ -> INTEGER 
+-- On OR reduce production typ -> INTEGER 
+-- On NEQ reduce production typ -> INTEGER 
+-- On MOD reduce production typ -> INTEGER 
+-- On MINUS reduce production typ -> INTEGER 
+-- On LT reduce production typ -> INTEGER 
+-- On LE reduce production typ -> INTEGER 
+-- On LB reduce production typ -> INTEGER 
+-- On IDENT reduce production typ -> INTEGER 
+-- On GT reduce production typ -> INTEGER 
+-- On GE reduce production typ -> INTEGER 
+-- On EQUAL reduce production typ -> INTEGER 
+-- On END reduce production typ -> INTEGER 
+-- On DOT reduce production typ -> INTEGER 
+-- On DIV reduce production typ -> INTEGER 
+-- On COMMA reduce production typ -> INTEGER 
+-- On AND reduce production typ -> INTEGER 
+
+State 6:
+typ -> IDENT . [ STAR SEMI RP RB PLUS OR NEQ MOD MINUS LT LE LB IDENT GT GE EQUAL END DOT DIV COMMA AND ]
+-- On STAR reduce production typ -> IDENT 
+-- On SEMI reduce production typ -> IDENT 
+-- On RP reduce production typ -> IDENT 
+-- On RB reduce production typ -> IDENT 
+-- On PLUS reduce production typ -> IDENT 
+-- On OR reduce production typ -> IDENT 
+-- On NEQ reduce production typ -> IDENT 
+-- On MOD reduce production typ -> IDENT 
+-- On MINUS reduce production typ -> IDENT 
+-- On LT reduce production typ -> IDENT 
+-- On LE reduce production typ -> IDENT 
+-- On LB reduce production typ -> IDENT 
+-- On IDENT reduce production typ -> IDENT 
+-- On GT reduce production typ -> IDENT 
+-- On GE reduce production typ -> IDENT 
+-- On EQUAL reduce production typ -> IDENT 
+-- On END reduce production typ -> IDENT 
+-- On DOT reduce production typ -> IDENT 
+-- On DIV reduce production typ -> IDENT 
+-- On COMMA reduce production typ -> IDENT 
+-- On AND reduce production typ -> IDENT 
+
+State 7:
+typ -> BOOLEAN . [ STAR SEMI RP RB PLUS OR NEQ MOD MINUS LT LE LB IDENT GT GE EQUAL END DOT DIV COMMA AND ]
+-- On STAR reduce production typ -> BOOLEAN 
+-- On SEMI reduce production typ -> BOOLEAN 
+-- On RP reduce production typ -> BOOLEAN 
+-- On RB reduce production typ -> BOOLEAN 
+-- On PLUS reduce production typ -> BOOLEAN 
+-- On OR reduce production typ -> BOOLEAN 
+-- On NEQ reduce production typ -> BOOLEAN 
+-- On MOD reduce production typ -> BOOLEAN 
+-- On MINUS reduce production typ -> BOOLEAN 
+-- On LT reduce production typ -> BOOLEAN 
+-- On LE reduce production typ -> BOOLEAN 
+-- On LB reduce production typ -> BOOLEAN 
+-- On IDENT reduce production typ -> BOOLEAN 
+-- On GT reduce production typ -> BOOLEAN 
+-- On GE reduce production typ -> BOOLEAN 
+-- On EQUAL reduce production typ -> BOOLEAN 
+-- On END reduce production typ -> BOOLEAN 
+-- On DOT reduce production typ -> BOOLEAN 
+-- On DIV reduce production typ -> BOOLEAN 
+-- On COMMA reduce production typ -> BOOLEAN 
+-- On AND reduce production typ -> BOOLEAN 
+
+State 8:
+field_decl -> typ . ident SEMI [ RB ]
+field_decl -> typ . ident SEMI field_decl [ RB ]
+typ -> typ . LB RB [ LB IDENT ]
+-- On LB shift to state 9
+-- On IDENT shift to state 11
+-- On ident shift to state 14
+
+State 9:
+typ -> typ LB . RB [ LB IDENT ]
+-- On RB shift to state 10
+
+State 10:
+typ -> typ LB RB . [ STAR SEMI RP RB PLUS OR NEQ MOD MINUS LT LE LB IDENT GT GE EQUAL END DOT DIV COMMA AND ]
+-- On STAR reduce production typ -> typ LB RB 
+-- On SEMI reduce production typ -> typ LB RB 
+-- On RP reduce production typ -> typ LB RB 
+-- On RB reduce production typ -> typ LB RB 
+-- On PLUS reduce production typ -> typ LB RB 
+-- On OR reduce production typ -> typ LB RB 
+-- On NEQ reduce production typ -> typ LB RB 
+-- On MOD reduce production typ -> typ LB RB 
+-- On MINUS reduce production typ -> typ LB RB 
+-- On LT reduce production typ -> typ LB RB 
+-- On LE reduce production typ -> typ LB RB 
+-- On LB reduce production typ -> typ LB RB 
+-- On IDENT reduce production typ -> typ LB RB 
+-- On GT reduce production typ -> typ LB RB 
+-- On GE reduce production typ -> typ LB RB 
+-- On EQUAL reduce production typ -> typ LB RB 
+-- On END reduce production typ -> typ LB RB 
+-- On DOT reduce production typ -> typ LB RB 
+-- On DIV reduce production typ -> typ LB RB 
+-- On COMMA reduce production typ -> typ LB RB 
+-- On AND reduce production typ -> typ LB RB 
+
+State 11:
+ident -> IDENT . COMMA ident [ SEMI ]
+ident -> IDENT . [ SEMI ]
+-- On COMMA shift to state 12
+-- On SEMI reduce production ident -> IDENT 
+
+State 12:
+ident -> IDENT COMMA . ident [ SEMI ]
+-- On IDENT shift to state 11
+-- On ident shift to state 13
+
+State 13:
+ident -> IDENT COMMA ident . [ SEMI ]
+-- On SEMI reduce production ident -> IDENT COMMA ident 
+
+State 14:
+field_decl -> typ ident . SEMI [ RB ]
+field_decl -> typ ident . SEMI field_decl [ RB ]
+-- On SEMI shift to state 15
+
+State 15:
+field_decl -> typ ident SEMI . [ RB ]
+field_decl -> typ ident SEMI . field_decl [ RB ]
+-- On INTEGER shift to state 5
+-- On IDENT shift to state 6
+-- On BOOLEAN shift to state 7
+-- On typ shift to state 8
+-- On field_decl shift to state 16
+-- On RB reduce production field_decl -> typ ident SEMI 
+
+State 16:
+field_decl -> typ ident SEMI field_decl . [ RB ]
+-- On RB reduce production field_decl -> typ ident SEMI field_decl 
+
+State 17:
+struct_decls -> STRUCT IDENT LB field_decl . RB struct_decls [ VAR MAIN ]
+-- On RB shift to state 18
+
+State 18:
+struct_decls -> STRUCT IDENT LB field_decl RB . struct_decls [ VAR MAIN ]
+-- On STRUCT shift to state 2
+-- On struct_decls shift to state 19
+-- On VAR reduce production struct_decls -> 
+-- On MAIN reduce production struct_decls -> 
+
+State 19:
+struct_decls -> STRUCT IDENT LB field_decl RB struct_decls . [ VAR MAIN ]
+-- On VAR reduce production struct_decls -> STRUCT IDENT LB field_decl RB struct_decls 
+-- On MAIN reduce production struct_decls -> STRUCT IDENT LB field_decl RB struct_decls 
+
+State 20:
+prog -> struct_decls . var_decls main EOF [ # ]
+-- On VAR shift to state 21
+-- On var_decls shift to state 26
+-- On MAIN reduce production var_decls -> 
+
+State 21:
+var_decls -> VAR . typ ident SEMI var_decls [ MAIN ]
+-- On INTEGER shift to state 5
+-- On IDENT shift to state 6
+-- On BOOLEAN shift to state 7
+-- On typ shift to state 22
+
+State 22:
+typ -> typ . LB RB [ LB IDENT ]
+var_decls -> VAR typ . ident SEMI var_decls [ MAIN ]
+-- On LB shift to state 9
+-- On IDENT shift to state 11
+-- On ident shift to state 23
+
+State 23:
+var_decls -> VAR typ ident . SEMI var_decls [ MAIN ]
+-- On SEMI shift to state 24
+
+State 24:
+var_decls -> VAR typ ident SEMI . var_decls [ MAIN ]
+-- On VAR shift to state 21
+-- On var_decls shift to state 25
+-- On MAIN reduce production var_decls -> 
+
+State 25:
+var_decls -> VAR typ ident SEMI var_decls . [ MAIN ]
+-- On MAIN reduce production var_decls -> VAR typ ident SEMI var_decls 
+
+State 26:
+prog -> struct_decls var_decls . main EOF [ # ]
+-- On MAIN shift to state 27
+-- On main shift to state 126
+
+State 27:
+main -> MAIN . block [ EOF ]
+-- On BEGIN shift to state 28
+-- On block shift to state 125
+
+State 28:
+block -> BEGIN . localised_instruction END [ SEMI RP LP EOF END ELSE ELIF COMMA ]
+-- On WHILE shift to state 29
+-- On PRINT shift to state 79
+-- On NOT shift to state 31
+-- On NEW shift to state 32
+-- On MINUS shift to state 35
+-- On LP shift to state 36
+-- On IF shift to state 83
+-- On IDENT shift to state 99
+-- On FOR shift to state 100
+-- On CONTINUE shift to state 102
+-- On CONST_INT shift to state 38
+-- On CONST_BOOL shift to state 39
+-- On BREAK shift to state 103
+-- On location shift to state 104
+-- On localised_instruction shift to state 123
+-- On localised_expression shift to state 110
+-- On instruction shift to state 116
+-- On expression shift to state 50
+-- On SEMI reduce production instruction -> 
+-- On END reduce production instruction -> 
+
+State 29:
+instruction -> WHILE . LP localised_expression RP block [ SEMI RP END COMMA ]
+-- On LP shift to state 30
+
+State 30:
+instruction -> WHILE LP . localised_expression RP block [ SEMI RP END COMMA ]
+-- On NOT shift to state 31
+-- On NEW shift to state 32
+-- On MINUS shift to state 35
+-- On LP shift to state 36
+-- On IDENT shift to state 37
+-- On CONST_INT shift to state 38
+-- On CONST_BOOL shift to state 39
+-- On localised_expression shift to state 76
+-- On expression shift to state 50
+
+State 31:
+expression -> NOT . localised_expression [ STAR SEMI RP RB PLUS OR NEQ MOD MINUS LT LE LB GT GE EQUAL END DOT DIV COMMA AND ]
+-- On NOT shift to state 31
+-- On NEW shift to state 32
+-- On MINUS shift to state 35
+-- On LP shift to state 36
+-- On IDENT shift to state 37
+-- On CONST_INT shift to state 38
+-- On CONST_BOOL shift to state 39
+-- On localised_expression shift to state 75
+-- On expression shift to state 50
+
+State 32:
+expression -> NEW . typ LB localised_expression RB [ STAR SEMI RP RB PLUS OR NEQ MOD MINUS LT LE LB GT GE EQUAL END DOT DIV COMMA AND ]
+expression -> NEW . typ [ STAR SEMI RP RB PLUS OR NEQ MOD MINUS LT LE LB GT GE EQUAL END DOT DIV COMMA AND ]
+-- On INTEGER shift to state 5
+-- On IDENT shift to state 6
+-- On BOOLEAN shift to state 7
+-- On typ shift to state 33
+
+State 33:
+expression -> NEW typ . LB localised_expression RB [ STAR SEMI RP RB PLUS OR NEQ MOD MINUS LT LE LB GT GE EQUAL END DOT DIV COMMA AND ]
+expression -> NEW typ . [ STAR SEMI RP RB PLUS OR NEQ MOD MINUS LT LE LB GT GE EQUAL END DOT DIV COMMA AND ]
+typ -> typ . LB RB [ STAR SEMI RP RB PLUS OR NEQ MOD MINUS LT LE LB GT GE EQUAL END DOT DIV COMMA AND ]
+-- On LB shift to state 34
+-- On STAR reduce production expression -> NEW typ 
+-- On SEMI reduce production expression -> NEW typ 
+-- On RP reduce production expression -> NEW typ 
+-- On RB reduce production expression -> NEW typ 
+-- On PLUS reduce production expression -> NEW typ 
+-- On OR reduce production expression -> NEW typ 
+-- On NEQ reduce production expression -> NEW typ 
+-- On MOD reduce production expression -> NEW typ 
+-- On MINUS reduce production expression -> NEW typ 
+-- On LT reduce production expression -> NEW typ 
+-- On LE reduce production expression -> NEW typ 
+-- On LB reduce production expression -> NEW typ 
+-- On GT reduce production expression -> NEW typ 
+-- On GE reduce production expression -> NEW typ 
+-- On EQUAL reduce production expression -> NEW typ 
+-- On END reduce production expression -> NEW typ 
+-- On DOT reduce production expression -> NEW typ 
+-- On DIV reduce production expression -> NEW typ 
+-- On COMMA reduce production expression -> NEW typ 
+-- On AND reduce production expression -> NEW typ 
+** Conflict on LB
+
+State 34:
+expression -> NEW typ LB . localised_expression RB [ STAR SEMI RP RB PLUS OR NEQ MOD MINUS LT LE LB GT GE EQUAL END DOT DIV COMMA AND ]
+typ -> typ LB . RB [ STAR SEMI RP RB PLUS OR NEQ MOD MINUS LT LE LB GT GE EQUAL END DOT DIV COMMA AND ]
+-- On RB shift to state 10
+-- On NOT shift to state 31
+-- On NEW shift to state 32
+-- On MINUS shift to state 35
+-- On LP shift to state 36
+-- On IDENT shift to state 37
+-- On CONST_INT shift to state 38
+-- On CONST_BOOL shift to state 39
+-- On localised_expression shift to state 73
+-- On expression shift to state 50
+
+State 35:
+expression -> MINUS . localised_expression [ STAR SEMI RP RB PLUS OR NEQ MOD MINUS LT LE LB GT GE EQUAL END DOT DIV COMMA AND ]
+-- On NOT shift to state 31
+-- On NEW shift to state 32
+-- On MINUS shift to state 35
+-- On LP shift to state 36
+-- On IDENT shift to state 37
+-- On CONST_INT shift to state 38
+-- On CONST_BOOL shift to state 39
+-- On localised_expression shift to state 72
+-- On expression shift to state 50
+
+State 36:
+expression -> LP . localised_expression RP [ STAR SEMI RP RB PLUS OR NEQ MOD MINUS LT LE LB GT GE EQUAL END DOT DIV COMMA AND ]
+-- On NOT shift to state 31
+-- On NEW shift to state 32
+-- On MINUS shift to state 35
+-- On LP shift to state 36
+-- On IDENT shift to state 37
+-- On CONST_INT shift to state 38
+-- On CONST_BOOL shift to state 39
+-- On localised_expression shift to state 40
+-- On expression shift to state 50
+
+State 37:
+expression -> IDENT . [ STAR SEMI RP RB PLUS OR NEQ MOD MINUS LT LE LB GT GE EQUAL END DOT DIV COMMA AND ]
+-- On STAR reduce production expression -> IDENT 
+-- On SEMI reduce production expression -> IDENT 
+-- On RP reduce production expression -> IDENT 
+-- On RB reduce production expression -> IDENT 
+-- On PLUS reduce production expression -> IDENT 
+-- On OR reduce production expression -> IDENT 
+-- On NEQ reduce production expression -> IDENT 
+-- On MOD reduce production expression -> IDENT 
+-- On MINUS reduce production expression -> IDENT 
+-- On LT reduce production expression -> IDENT 
+-- On LE reduce production expression -> IDENT 
+-- On LB reduce production expression -> IDENT 
+-- On GT reduce production expression -> IDENT 
+-- On GE reduce production expression -> IDENT 
+-- On EQUAL reduce production expression -> IDENT 
+-- On END reduce production expression -> IDENT 
+-- On DOT reduce production expression -> IDENT 
+-- On DIV reduce production expression -> IDENT 
+-- On COMMA reduce production expression -> IDENT 
+-- On AND reduce production expression -> IDENT 
+
+State 38:
+expression -> CONST_INT . [ STAR SEMI RP RB PLUS OR NEQ MOD MINUS LT LE LB GT GE EQUAL END DOT DIV COMMA AND ]
+-- On STAR reduce production expression -> CONST_INT 
+-- On SEMI reduce production expression -> CONST_INT 
+-- On RP reduce production expression -> CONST_INT 
+-- On RB reduce production expression -> CONST_INT 
+-- On PLUS reduce production expression -> CONST_INT 
+-- On OR reduce production expression -> CONST_INT 
+-- On NEQ reduce production expression -> CONST_INT 
+-- On MOD reduce production expression -> CONST_INT 
+-- On MINUS reduce production expression -> CONST_INT 
+-- On LT reduce production expression -> CONST_INT 
+-- On LE reduce production expression -> CONST_INT 
+-- On LB reduce production expression -> CONST_INT 
+-- On GT reduce production expression -> CONST_INT 
+-- On GE reduce production expression -> CONST_INT 
+-- On EQUAL reduce production expression -> CONST_INT 
+-- On END reduce production expression -> CONST_INT 
+-- On DOT reduce production expression -> CONST_INT 
+-- On DIV reduce production expression -> CONST_INT 
+-- On COMMA reduce production expression -> CONST_INT 
+-- On AND reduce production expression -> CONST_INT 
+
+State 39:
+expression -> CONST_BOOL . [ STAR SEMI RP RB PLUS OR NEQ MOD MINUS LT LE LB GT GE EQUAL END DOT DIV COMMA AND ]
+-- On STAR reduce production expression -> CONST_BOOL 
+-- On SEMI reduce production expression -> CONST_BOOL 
+-- On RP reduce production expression -> CONST_BOOL 
+-- On RB reduce production expression -> CONST_BOOL 
+-- On PLUS reduce production expression -> CONST_BOOL 
+-- On OR reduce production expression -> CONST_BOOL 
+-- On NEQ reduce production expression -> CONST_BOOL 
+-- On MOD reduce production expression -> CONST_BOOL 
+-- On MINUS reduce production expression -> CONST_BOOL 
+-- On LT reduce production expression -> CONST_BOOL 
+-- On LE reduce production expression -> CONST_BOOL 
+-- On LB reduce production expression -> CONST_BOOL 
+-- On GT reduce production expression -> CONST_BOOL 
+-- On GE reduce production expression -> CONST_BOOL 
+-- On EQUAL reduce production expression -> CONST_BOOL 
+-- On END reduce production expression -> CONST_BOOL 
+-- On DOT reduce production expression -> CONST_BOOL 
+-- On DIV reduce production expression -> CONST_BOOL 
+-- On COMMA reduce production expression -> CONST_BOOL 
+-- On AND reduce production expression -> CONST_BOOL 
+
+State 40:
+expression -> localised_expression . LB localised_expression RB [ STAR RP PLUS OR NEQ MOD MINUS LT LE LB GT GE EQUAL DIV AND ]
+expression -> LP localised_expression . RP [ STAR SEMI RP RB PLUS OR NEQ MOD MINUS LT LE LB GT GE EQUAL END DOT DIV COMMA AND ]
+expression -> localised_expression . PLUS localised_expression [ STAR RP PLUS OR NEQ MOD MINUS LT LE LB GT GE EQUAL DIV AND ]
+expression -> localised_expression . MINUS localised_expression [ STAR RP PLUS OR NEQ MOD MINUS LT LE LB GT GE EQUAL DIV AND ]
+expression -> localised_expression . STAR localised_expression [ STAR RP PLUS OR NEQ MOD MINUS LT LE LB GT GE EQUAL DIV AND ]
+expression -> localised_expression . DIV localised_expression [ STAR RP PLUS OR NEQ MOD MINUS LT LE LB GT GE EQUAL DIV AND ]
+expression -> localised_expression . MOD localised_expression [ STAR RP PLUS OR NEQ MOD MINUS LT LE LB GT GE EQUAL DIV AND ]
+expression -> localised_expression . EQUAL localised_expression [ STAR RP PLUS OR NEQ MOD MINUS LT LE LB GT GE EQUAL DIV AND ]
+expression -> localised_expression . NEQ localised_expression [ STAR RP PLUS OR NEQ MOD MINUS LT LE LB GT GE EQUAL DIV AND ]
+expression -> localised_expression . LT localised_expression [ STAR RP PLUS OR NEQ MOD MINUS LT LE LB GT GE EQUAL DIV AND ]
+expression -> localised_expression . LE localised_expression [ STAR RP PLUS OR NEQ MOD MINUS LT LE LB GT GE EQUAL DIV AND ]
+expression -> localised_expression . GT localised_expression [ STAR RP PLUS OR NEQ MOD MINUS LT LE LB GT GE EQUAL DIV AND ]
+expression -> localised_expression . GE localised_expression [ STAR RP PLUS OR NEQ MOD MINUS LT LE LB GT GE EQUAL DIV AND ]
+expression -> localised_expression . AND localised_expression [ STAR RP PLUS OR NEQ MOD MINUS LT LE LB GT GE EQUAL DIV AND ]
+expression -> localised_expression . OR localised_expression [ STAR RP PLUS OR NEQ MOD MINUS LT LE LB GT GE EQUAL DIV AND ]
+-- On STAR shift to state 41
+-- On RP shift to state 71
+-- On PLUS shift to state 46
+-- On OR shift to state 53
+-- On NEQ shift to state 55
+-- On MOD shift to state 48
+-- On MINUS shift to state 57
+-- On LT shift to state 59
+-- On LE shift to state 61
+-- On LB shift to state 43
+-- On GT shift to state 63
+-- On GE shift to state 65
+-- On EQUAL shift to state 67
+-- On DIV shift to state 51
+-- On AND shift to state 69
+
+State 41:
+expression -> localised_expression STAR . localised_expression [ STAR SEMI RP RB PLUS OR NEQ MOD MINUS LT LE LB GT GE EQUAL END DOT DIV COMMA AND ]
+-- On NOT shift to state 31
+-- On NEW shift to state 32
+-- On MINUS shift to state 35
+-- On LP shift to state 36
+-- On IDENT shift to state 37
+-- On CONST_INT shift to state 38
+-- On CONST_BOOL shift to state 39
+-- On localised_expression shift to state 42
+-- On expression shift to state 50
+
+State 42:
+expression -> localised_expression . LB localised_expression RB [ STAR SEMI RP RB PLUS OR NEQ MOD MINUS LT LE LB GT GE EQUAL END DOT DIV COMMA AND ]
+expression -> localised_expression . PLUS localised_expression [ STAR SEMI RP RB PLUS OR NEQ MOD MINUS LT LE LB GT GE EQUAL END DOT DIV COMMA AND ]
+expression -> localised_expression . MINUS localised_expression [ STAR SEMI RP RB PLUS OR NEQ MOD MINUS LT LE LB GT GE EQUAL END DOT DIV COMMA AND ]
+expression -> localised_expression . STAR localised_expression [ STAR SEMI RP RB PLUS OR NEQ MOD MINUS LT LE LB GT GE EQUAL END DOT DIV COMMA AND ]
+expression -> localised_expression STAR localised_expression . [ STAR SEMI RP RB PLUS OR NEQ MOD MINUS LT LE LB GT GE EQUAL END DOT DIV COMMA AND ]
+expression -> localised_expression . DIV localised_expression [ STAR SEMI RP RB PLUS OR NEQ MOD MINUS LT LE LB GT GE EQUAL END DOT DIV COMMA AND ]
+expression -> localised_expression . MOD localised_expression [ STAR SEMI RP RB PLUS OR NEQ MOD MINUS LT LE LB GT GE EQUAL END DOT DIV COMMA AND ]
+expression -> localised_expression . EQUAL localised_expression [ STAR SEMI RP RB PLUS OR NEQ MOD MINUS LT LE LB GT GE EQUAL END DOT DIV COMMA AND ]
+expression -> localised_expression . NEQ localised_expression [ STAR SEMI RP RB PLUS OR NEQ MOD MINUS LT LE LB GT GE EQUAL END DOT DIV COMMA AND ]
+expression -> localised_expression . LT localised_expression [ STAR SEMI RP RB PLUS OR NEQ MOD MINUS LT LE LB GT GE EQUAL END DOT DIV COMMA AND ]
+expression -> localised_expression . LE localised_expression [ STAR SEMI RP RB PLUS OR NEQ MOD MINUS LT LE LB GT GE EQUAL END DOT DIV COMMA AND ]
+expression -> localised_expression . GT localised_expression [ STAR SEMI RP RB PLUS OR NEQ MOD MINUS LT LE LB GT GE EQUAL END DOT DIV COMMA AND ]
+expression -> localised_expression . GE localised_expression [ STAR SEMI RP RB PLUS OR NEQ MOD MINUS LT LE LB GT GE EQUAL END DOT DIV COMMA AND ]
+expression -> localised_expression . AND localised_expression [ STAR SEMI RP RB PLUS OR NEQ MOD MINUS LT LE LB GT GE EQUAL END DOT DIV COMMA AND ]
+expression -> localised_expression . OR localised_expression [ STAR SEMI RP RB PLUS OR NEQ MOD MINUS LT LE LB GT GE EQUAL END DOT DIV COMMA AND ]
+-- On LB shift to state 43
+-- On STAR reduce production expression -> localised_expression STAR localised_expression 
+-- On SEMI reduce production expression -> localised_expression STAR localised_expression 
+-- On RP reduce production expression -> localised_expression STAR localised_expression 
+-- On RB reduce production expression -> localised_expression STAR localised_expression 
+-- On PLUS reduce production expression -> localised_expression STAR localised_expression 
+-- On OR reduce production expression -> localised_expression STAR localised_expression 
+-- On NEQ reduce production expression -> localised_expression STAR localised_expression 
+-- On MOD reduce production expression -> localised_expression STAR localised_expression 
+-- On MINUS reduce production expression -> localised_expression STAR localised_expression 
+-- On LT reduce production expression -> localised_expression STAR localised_expression 
+-- On LE reduce production expression -> localised_expression STAR localised_expression 
+-- On GT reduce production expression -> localised_expression STAR localised_expression 
+-- On GE reduce production expression -> localised_expression STAR localised_expression 
+-- On EQUAL reduce production expression -> localised_expression STAR localised_expression 
+-- On END reduce production expression -> localised_expression STAR localised_expression 
+-- On DOT reduce production expression -> localised_expression STAR localised_expression 
+-- On DIV reduce production expression -> localised_expression STAR localised_expression 
+-- On COMMA reduce production expression -> localised_expression STAR localised_expression 
+-- On AND reduce production expression -> localised_expression STAR localised_expression 
+
+State 43:
+expression -> localised_expression LB . localised_expression RB [ STAR SEMI RP RB PLUS OR NEQ MOD MINUS LT LE LB GT GE EQUAL END DOT DIV COMMA AND ]
+-- On NOT shift to state 31
+-- On NEW shift to state 32
+-- On MINUS shift to state 35
+-- On LP shift to state 36
+-- On IDENT shift to state 37
+-- On CONST_INT shift to state 38
+-- On CONST_BOOL shift to state 39
+-- On localised_expression shift to state 44
+-- On expression shift to state 50
+
+State 44:
+expression -> localised_expression . LB localised_expression RB [ STAR RB PLUS OR NEQ MOD MINUS LT LE LB GT GE EQUAL DIV AND ]
+expression -> localised_expression LB localised_expression . RB [ STAR SEMI RP RB PLUS OR NEQ MOD MINUS LT LE LB GT GE EQUAL END DOT DIV COMMA AND ]
+expression -> localised_expression . PLUS localised_expression [ STAR RB PLUS OR NEQ MOD MINUS LT LE LB GT GE EQUAL DIV AND ]
+expression -> localised_expression . MINUS localised_expression [ STAR RB PLUS OR NEQ MOD MINUS LT LE LB GT GE EQUAL DIV AND ]
+expression -> localised_expression . STAR localised_expression [ STAR RB PLUS OR NEQ MOD MINUS LT LE LB GT GE EQUAL DIV AND ]
+expression -> localised_expression . DIV localised_expression [ STAR RB PLUS OR NEQ MOD MINUS LT LE LB GT GE EQUAL DIV AND ]
+expression -> localised_expression . MOD localised_expression [ STAR RB PLUS OR NEQ MOD MINUS LT LE LB GT GE EQUAL DIV AND ]
+expression -> localised_expression . EQUAL localised_expression [ STAR RB PLUS OR NEQ MOD MINUS LT LE LB GT GE EQUAL DIV AND ]
+expression -> localised_expression . NEQ localised_expression [ STAR RB PLUS OR NEQ MOD MINUS LT LE LB GT GE EQUAL DIV AND ]
+expression -> localised_expression . LT localised_expression [ STAR RB PLUS OR NEQ MOD MINUS LT LE LB GT GE EQUAL DIV AND ]
+expression -> localised_expression . LE localised_expression [ STAR RB PLUS OR NEQ MOD MINUS LT LE LB GT GE EQUAL DIV AND ]
+expression -> localised_expression . GT localised_expression [ STAR RB PLUS OR NEQ MOD MINUS LT LE LB GT GE EQUAL DIV AND ]
+expression -> localised_expression . GE localised_expression [ STAR RB PLUS OR NEQ MOD MINUS LT LE LB GT GE EQUAL DIV AND ]
+expression -> localised_expression . AND localised_expression [ STAR RB PLUS OR NEQ MOD MINUS LT LE LB GT GE EQUAL DIV AND ]
+expression -> localised_expression . OR localised_expression [ STAR RB PLUS OR NEQ MOD MINUS LT LE LB GT GE EQUAL DIV AND ]
+-- On STAR shift to state 41
+-- On RB shift to state 45
+-- On PLUS shift to state 46
+-- On OR shift to state 53
+-- On NEQ shift to state 55
+-- On MOD shift to state 48
+-- On MINUS shift to state 57
+-- On LT shift to state 59
+-- On LE shift to state 61
+-- On LB shift to state 43
+-- On GT shift to state 63
+-- On GE shift to state 65
+-- On EQUAL shift to state 67
+-- On DIV shift to state 51
+-- On AND shift to state 69
+
+State 45:
+expression -> localised_expression LB localised_expression RB . [ STAR SEMI RP RB PLUS OR NEQ MOD MINUS LT LE LB GT GE EQUAL END DOT DIV COMMA AND ]
+-- On STAR reduce production expression -> localised_expression LB localised_expression RB 
+-- On SEMI reduce production expression -> localised_expression LB localised_expression RB 
+-- On RP reduce production expression -> localised_expression LB localised_expression RB 
+-- On RB reduce production expression -> localised_expression LB localised_expression RB 
+-- On PLUS reduce production expression -> localised_expression LB localised_expression RB 
+-- On OR reduce production expression -> localised_expression LB localised_expression RB 
+-- On NEQ reduce production expression -> localised_expression LB localised_expression RB 
+-- On MOD reduce production expression -> localised_expression LB localised_expression RB 
+-- On MINUS reduce production expression -> localised_expression LB localised_expression RB 
+-- On LT reduce production expression -> localised_expression LB localised_expression RB 
+-- On LE reduce production expression -> localised_expression LB localised_expression RB 
+-- On LB reduce production expression -> localised_expression LB localised_expression RB 
+-- On GT reduce production expression -> localised_expression LB localised_expression RB 
+-- On GE reduce production expression -> localised_expression LB localised_expression RB 
+-- On EQUAL reduce production expression -> localised_expression LB localised_expression RB 
+-- On END reduce production expression -> localised_expression LB localised_expression RB 
+-- On DOT reduce production expression -> localised_expression LB localised_expression RB 
+-- On DIV reduce production expression -> localised_expression LB localised_expression RB 
+-- On COMMA reduce production expression -> localised_expression LB localised_expression RB 
+-- On AND reduce production expression -> localised_expression LB localised_expression RB 
+
+State 46:
+expression -> localised_expression PLUS . localised_expression [ STAR SEMI RP RB PLUS OR NEQ MOD MINUS LT LE LB GT GE EQUAL END DOT DIV COMMA AND ]
+-- On NOT shift to state 31
+-- On NEW shift to state 32
+-- On MINUS shift to state 35
+-- On LP shift to state 36
+-- On IDENT shift to state 37
+-- On CONST_INT shift to state 38
+-- On CONST_BOOL shift to state 39
+-- On localised_expression shift to state 47
+-- On expression shift to state 50
+
+State 47:
+expression -> localised_expression . LB localised_expression RB [ STAR SEMI RP RB PLUS OR NEQ MOD MINUS LT LE LB GT GE EQUAL END DOT DIV COMMA AND ]
+expression -> localised_expression . PLUS localised_expression [ STAR SEMI RP RB PLUS OR NEQ MOD MINUS LT LE LB GT GE EQUAL END DOT DIV COMMA AND ]
+expression -> localised_expression PLUS localised_expression . [ STAR SEMI RP RB PLUS OR NEQ MOD MINUS LT LE LB GT GE EQUAL END DOT DIV COMMA AND ]
+expression -> localised_expression . MINUS localised_expression [ STAR SEMI RP RB PLUS OR NEQ MOD MINUS LT LE LB GT GE EQUAL END DOT DIV COMMA AND ]
+expression -> localised_expression . STAR localised_expression [ STAR SEMI RP RB PLUS OR NEQ MOD MINUS LT LE LB GT GE EQUAL END DOT DIV COMMA AND ]
+expression -> localised_expression . DIV localised_expression [ STAR SEMI RP RB PLUS OR NEQ MOD MINUS LT LE LB GT GE EQUAL END DOT DIV COMMA AND ]
+expression -> localised_expression . MOD localised_expression [ STAR SEMI RP RB PLUS OR NEQ MOD MINUS LT LE LB GT GE EQUAL END DOT DIV COMMA AND ]
+expression -> localised_expression . EQUAL localised_expression [ STAR SEMI RP RB PLUS OR NEQ MOD MINUS LT LE LB GT GE EQUAL END DOT DIV COMMA AND ]
+expression -> localised_expression . NEQ localised_expression [ STAR SEMI RP RB PLUS OR NEQ MOD MINUS LT LE LB GT GE EQUAL END DOT DIV COMMA AND ]
+expression -> localised_expression . LT localised_expression [ STAR SEMI RP RB PLUS OR NEQ MOD MINUS LT LE LB GT GE EQUAL END DOT DIV COMMA AND ]
+expression -> localised_expression . LE localised_expression [ STAR SEMI RP RB PLUS OR NEQ MOD MINUS LT LE LB GT GE EQUAL END DOT DIV COMMA AND ]
+expression -> localised_expression . GT localised_expression [ STAR SEMI RP RB PLUS OR NEQ MOD MINUS LT LE LB GT GE EQUAL END DOT DIV COMMA AND ]
+expression -> localised_expression . GE localised_expression [ STAR SEMI RP RB PLUS OR NEQ MOD MINUS LT LE LB GT GE EQUAL END DOT DIV COMMA AND ]
+expression -> localised_expression . AND localised_expression [ STAR SEMI RP RB PLUS OR NEQ MOD MINUS LT LE LB GT GE EQUAL END DOT DIV COMMA AND ]
+expression -> localised_expression . OR localised_expression [ STAR SEMI RP RB PLUS OR NEQ MOD MINUS LT LE LB GT GE EQUAL END DOT DIV COMMA AND ]
+-- On STAR shift to state 41
+-- On MOD shift to state 48
+-- On LB shift to state 43
+-- On DIV shift to state 51
+-- On SEMI reduce production expression -> localised_expression PLUS localised_expression 
+-- On RP reduce production expression -> localised_expression PLUS localised_expression 
+-- On RB reduce production expression -> localised_expression PLUS localised_expression 
+-- On PLUS reduce production expression -> localised_expression PLUS localised_expression 
+-- On OR reduce production expression -> localised_expression PLUS localised_expression 
+-- On NEQ reduce production expression -> localised_expression PLUS localised_expression 
+-- On MINUS reduce production expression -> localised_expression PLUS localised_expression 
+-- On LT reduce production expression -> localised_expression PLUS localised_expression 
+-- On LE reduce production expression -> localised_expression PLUS localised_expression 
+-- On GT reduce production expression -> localised_expression PLUS localised_expression 
+-- On GE reduce production expression -> localised_expression PLUS localised_expression 
+-- On EQUAL reduce production expression -> localised_expression PLUS localised_expression 
+-- On END reduce production expression -> localised_expression PLUS localised_expression 
+-- On DOT reduce production expression -> localised_expression PLUS localised_expression 
+-- On COMMA reduce production expression -> localised_expression PLUS localised_expression 
+-- On AND reduce production expression -> localised_expression PLUS localised_expression 
+
+State 48:
+expression -> localised_expression MOD . localised_expression [ STAR SEMI RP RB PLUS OR NEQ MOD MINUS LT LE LB GT GE EQUAL END DOT DIV COMMA AND ]
+-- On NOT shift to state 31
+-- On NEW shift to state 32
+-- On MINUS shift to state 35
+-- On LP shift to state 36
+-- On IDENT shift to state 37
+-- On CONST_INT shift to state 38
+-- On CONST_BOOL shift to state 39
+-- On localised_expression shift to state 49
+-- On expression shift to state 50
+
+State 49:
+expression -> localised_expression . LB localised_expression RB [ STAR SEMI RP RB PLUS OR NEQ MOD MINUS LT LE LB GT GE EQUAL END DOT DIV COMMA AND ]
+expression -> localised_expression . PLUS localised_expression [ STAR SEMI RP RB PLUS OR NEQ MOD MINUS LT LE LB GT GE EQUAL END DOT DIV COMMA AND ]
+expression -> localised_expression . MINUS localised_expression [ STAR SEMI RP RB PLUS OR NEQ MOD MINUS LT LE LB GT GE EQUAL END DOT DIV COMMA AND ]
+expression -> localised_expression . STAR localised_expression [ STAR SEMI RP RB PLUS OR NEQ MOD MINUS LT LE LB GT GE EQUAL END DOT DIV COMMA AND ]
+expression -> localised_expression . DIV localised_expression [ STAR SEMI RP RB PLUS OR NEQ MOD MINUS LT LE LB GT GE EQUAL END DOT DIV COMMA AND ]
+expression -> localised_expression . MOD localised_expression [ STAR SEMI RP RB PLUS OR NEQ MOD MINUS LT LE LB GT GE EQUAL END DOT DIV COMMA AND ]
+expression -> localised_expression MOD localised_expression . [ STAR SEMI RP RB PLUS OR NEQ MOD MINUS LT LE LB GT GE EQUAL END DOT DIV COMMA AND ]
+expression -> localised_expression . EQUAL localised_expression [ STAR SEMI RP RB PLUS OR NEQ MOD MINUS LT LE LB GT GE EQUAL END DOT DIV COMMA AND ]
+expression -> localised_expression . NEQ localised_expression [ STAR SEMI RP RB PLUS OR NEQ MOD MINUS LT LE LB GT GE EQUAL END DOT DIV COMMA AND ]
+expression -> localised_expression . LT localised_expression [ STAR SEMI RP RB PLUS OR NEQ MOD MINUS LT LE LB GT GE EQUAL END DOT DIV COMMA AND ]
+expression -> localised_expression . LE localised_expression [ STAR SEMI RP RB PLUS OR NEQ MOD MINUS LT LE LB GT GE EQUAL END DOT DIV COMMA AND ]
+expression -> localised_expression . GT localised_expression [ STAR SEMI RP RB PLUS OR NEQ MOD MINUS LT LE LB GT GE EQUAL END DOT DIV COMMA AND ]
+expression -> localised_expression . GE localised_expression [ STAR SEMI RP RB PLUS OR NEQ MOD MINUS LT LE LB GT GE EQUAL END DOT DIV COMMA AND ]
+expression -> localised_expression . AND localised_expression [ STAR SEMI RP RB PLUS OR NEQ MOD MINUS LT LE LB GT GE EQUAL END DOT DIV COMMA AND ]
+expression -> localised_expression . OR localised_expression [ STAR SEMI RP RB PLUS OR NEQ MOD MINUS LT LE LB GT GE EQUAL END DOT DIV COMMA AND ]
+-- On LB shift to state 43
+-- On STAR reduce production expression -> localised_expression MOD localised_expression 
+-- On SEMI reduce production expression -> localised_expression MOD localised_expression 
+-- On RP reduce production expression -> localised_expression MOD localised_expression 
+-- On RB reduce production expression -> localised_expression MOD localised_expression 
+-- On PLUS reduce production expression -> localised_expression MOD localised_expression 
+-- On OR reduce production expression -> localised_expression MOD localised_expression 
+-- On NEQ reduce production expression -> localised_expression MOD localised_expression 
+-- On MOD reduce production expression -> localised_expression MOD localised_expression 
+-- On MINUS reduce production expression -> localised_expression MOD localised_expression 
+-- On LT reduce production expression -> localised_expression MOD localised_expression 
+-- On LE reduce production expression -> localised_expression MOD localised_expression 
+-- On GT reduce production expression -> localised_expression MOD localised_expression 
+-- On GE reduce production expression -> localised_expression MOD localised_expression 
+-- On EQUAL reduce production expression -> localised_expression MOD localised_expression 
+-- On END reduce production expression -> localised_expression MOD localised_expression 
+-- On DOT reduce production expression -> localised_expression MOD localised_expression 
+-- On DIV reduce production expression -> localised_expression MOD localised_expression 
+-- On COMMA reduce production expression -> localised_expression MOD localised_expression 
+-- On AND reduce production expression -> localised_expression MOD localised_expression 
+
+State 50:
+localised_expression -> expression . [ STAR SEMI RP RB PLUS OR NEQ MOD MINUS LT LE LB GT GE EQUAL END DOT DIV COMMA AND ]
+-- On STAR reduce production localised_expression -> expression 
+-- On SEMI reduce production localised_expression -> expression 
+-- On RP reduce production localised_expression -> expression 
+-- On RB reduce production localised_expression -> expression 
+-- On PLUS reduce production localised_expression -> expression 
+-- On OR reduce production localised_expression -> expression 
+-- On NEQ reduce production localised_expression -> expression 
+-- On MOD reduce production localised_expression -> expression 
+-- On MINUS reduce production localised_expression -> expression 
+-- On LT reduce production localised_expression -> expression 
+-- On LE reduce production localised_expression -> expression 
+-- On LB reduce production localised_expression -> expression 
+-- On GT reduce production localised_expression -> expression 
+-- On GE reduce production localised_expression -> expression 
+-- On EQUAL reduce production localised_expression -> expression 
+-- On END reduce production localised_expression -> expression 
+-- On DOT reduce production localised_expression -> expression 
+-- On DIV reduce production localised_expression -> expression 
+-- On COMMA reduce production localised_expression -> expression 
+-- On AND reduce production localised_expression -> expression 
+
+State 51:
+expression -> localised_expression DIV . localised_expression [ STAR SEMI RP RB PLUS OR NEQ MOD MINUS LT LE LB GT GE EQUAL END DOT DIV COMMA AND ]
+-- On NOT shift to state 31
+-- On NEW shift to state 32
+-- On MINUS shift to state 35
+-- On LP shift to state 36
+-- On IDENT shift to state 37
+-- On CONST_INT shift to state 38
+-- On CONST_BOOL shift to state 39
+-- On localised_expression shift to state 52
+-- On expression shift to state 50
+
+State 52:
+expression -> localised_expression . LB localised_expression RB [ STAR SEMI RP RB PLUS OR NEQ MOD MINUS LT LE LB GT GE EQUAL END DOT DIV COMMA AND ]
+expression -> localised_expression . PLUS localised_expression [ STAR SEMI RP RB PLUS OR NEQ MOD MINUS LT LE LB GT GE EQUAL END DOT DIV COMMA AND ]
+expression -> localised_expression . MINUS localised_expression [ STAR SEMI RP RB PLUS OR NEQ MOD MINUS LT LE LB GT GE EQUAL END DOT DIV COMMA AND ]
+expression -> localised_expression . STAR localised_expression [ STAR SEMI RP RB PLUS OR NEQ MOD MINUS LT LE LB GT GE EQUAL END DOT DIV COMMA AND ]
+expression -> localised_expression . DIV localised_expression [ STAR SEMI RP RB PLUS OR NEQ MOD MINUS LT LE LB GT GE EQUAL END DOT DIV COMMA AND ]
+expression -> localised_expression DIV localised_expression . [ STAR SEMI RP RB PLUS OR NEQ MOD MINUS LT LE LB GT GE EQUAL END DOT DIV COMMA AND ]
+expression -> localised_expression . MOD localised_expression [ STAR SEMI RP RB PLUS OR NEQ MOD MINUS LT LE LB GT GE EQUAL END DOT DIV COMMA AND ]
+expression -> localised_expression . EQUAL localised_expression [ STAR SEMI RP RB PLUS OR NEQ MOD MINUS LT LE LB GT GE EQUAL END DOT DIV COMMA AND ]
+expression -> localised_expression . NEQ localised_expression [ STAR SEMI RP RB PLUS OR NEQ MOD MINUS LT LE LB GT GE EQUAL END DOT DIV COMMA AND ]
+expression -> localised_expression . LT localised_expression [ STAR SEMI RP RB PLUS OR NEQ MOD MINUS LT LE LB GT GE EQUAL END DOT DIV COMMA AND ]
+expression -> localised_expression . LE localised_expression [ STAR SEMI RP RB PLUS OR NEQ MOD MINUS LT LE LB GT GE EQUAL END DOT DIV COMMA AND ]
+expression -> localised_expression . GT localised_expression [ STAR SEMI RP RB PLUS OR NEQ MOD MINUS LT LE LB GT GE EQUAL END DOT DIV COMMA AND ]
+expression -> localised_expression . GE localised_expression [ STAR SEMI RP RB PLUS OR NEQ MOD MINUS LT LE LB GT GE EQUAL END DOT DIV COMMA AND ]
+expression -> localised_expression . AND localised_expression [ STAR SEMI RP RB PLUS OR NEQ MOD MINUS LT LE LB GT GE EQUAL END DOT DIV COMMA AND ]
+expression -> localised_expression . OR localised_expression [ STAR SEMI RP RB PLUS OR NEQ MOD MINUS LT LE LB GT GE EQUAL END DOT DIV COMMA AND ]
+-- On LB shift to state 43
+-- On STAR reduce production expression -> localised_expression DIV localised_expression 
+-- On SEMI reduce production expression -> localised_expression DIV localised_expression 
+-- On RP reduce production expression -> localised_expression DIV localised_expression 
+-- On RB reduce production expression -> localised_expression DIV localised_expression 
+-- On PLUS reduce production expression -> localised_expression DIV localised_expression 
+-- On OR reduce production expression -> localised_expression DIV localised_expression 
+-- On NEQ reduce production expression -> localised_expression DIV localised_expression 
+-- On MOD reduce production expression -> localised_expression DIV localised_expression 
+-- On MINUS reduce production expression -> localised_expression DIV localised_expression 
+-- On LT reduce production expression -> localised_expression DIV localised_expression 
+-- On LE reduce production expression -> localised_expression DIV localised_expression 
+-- On GT reduce production expression -> localised_expression DIV localised_expression 
+-- On GE reduce production expression -> localised_expression DIV localised_expression 
+-- On EQUAL reduce production expression -> localised_expression DIV localised_expression 
+-- On END reduce production expression -> localised_expression DIV localised_expression 
+-- On DOT reduce production expression -> localised_expression DIV localised_expression 
+-- On DIV reduce production expression -> localised_expression DIV localised_expression 
+-- On COMMA reduce production expression -> localised_expression DIV localised_expression 
+-- On AND reduce production expression -> localised_expression DIV localised_expression 
+
+State 53:
+expression -> localised_expression OR . localised_expression [ STAR SEMI RP RB PLUS OR NEQ MOD MINUS LT LE LB GT GE EQUAL END DOT DIV COMMA AND ]
+-- On NOT shift to state 31
+-- On NEW shift to state 32
+-- On MINUS shift to state 35
+-- On LP shift to state 36
+-- On IDENT shift to state 37
+-- On CONST_INT shift to state 38
+-- On CONST_BOOL shift to state 39
+-- On localised_expression shift to state 54
+-- On expression shift to state 50
+
+State 54:
+expression -> localised_expression . LB localised_expression RB [ STAR SEMI RP RB PLUS OR NEQ MOD MINUS LT LE LB GT GE EQUAL END DOT DIV COMMA AND ]
+expression -> localised_expression . PLUS localised_expression [ STAR SEMI RP RB PLUS OR NEQ MOD MINUS LT LE LB GT GE EQUAL END DOT DIV COMMA AND ]
+expression -> localised_expression . MINUS localised_expression [ STAR SEMI RP RB PLUS OR NEQ MOD MINUS LT LE LB GT GE EQUAL END DOT DIV COMMA AND ]
+expression -> localised_expression . STAR localised_expression [ STAR SEMI RP RB PLUS OR NEQ MOD MINUS LT LE LB GT GE EQUAL END DOT DIV COMMA AND ]
+expression -> localised_expression . DIV localised_expression [ STAR SEMI RP RB PLUS OR NEQ MOD MINUS LT LE LB GT GE EQUAL END DOT DIV COMMA AND ]
+expression -> localised_expression . MOD localised_expression [ STAR SEMI RP RB PLUS OR NEQ MOD MINUS LT LE LB GT GE EQUAL END DOT DIV COMMA AND ]
+expression -> localised_expression . EQUAL localised_expression [ STAR SEMI RP RB PLUS OR NEQ MOD MINUS LT LE LB GT GE EQUAL END DOT DIV COMMA AND ]
+expression -> localised_expression . NEQ localised_expression [ STAR SEMI RP RB PLUS OR NEQ MOD MINUS LT LE LB GT GE EQUAL END DOT DIV COMMA AND ]
+expression -> localised_expression . LT localised_expression [ STAR SEMI RP RB PLUS OR NEQ MOD MINUS LT LE LB GT GE EQUAL END DOT DIV COMMA AND ]
+expression -> localised_expression . LE localised_expression [ STAR SEMI RP RB PLUS OR NEQ MOD MINUS LT LE LB GT GE EQUAL END DOT DIV COMMA AND ]
+expression -> localised_expression . GT localised_expression [ STAR SEMI RP RB PLUS OR NEQ MOD MINUS LT LE LB GT GE EQUAL END DOT DIV COMMA AND ]
+expression -> localised_expression . GE localised_expression [ STAR SEMI RP RB PLUS OR NEQ MOD MINUS LT LE LB GT GE EQUAL END DOT DIV COMMA AND ]
+expression -> localised_expression . AND localised_expression [ STAR SEMI RP RB PLUS OR NEQ MOD MINUS LT LE LB GT GE EQUAL END DOT DIV COMMA AND ]
+expression -> localised_expression . OR localised_expression [ STAR SEMI RP RB PLUS OR NEQ MOD MINUS LT LE LB GT GE EQUAL END DOT DIV COMMA AND ]
+expression -> localised_expression OR localised_expression . [ STAR SEMI RP RB PLUS OR NEQ MOD MINUS LT LE LB GT GE EQUAL END DOT DIV COMMA AND ]
+-- On STAR shift to state 41
+-- On PLUS shift to state 46
+-- On NEQ shift to state 55
+-- On MOD shift to state 48
+-- On MINUS shift to state 57
+-- On LT shift to state 59
+-- On LE shift to state 61
+-- On LB shift to state 43
+-- On GT shift to state 63
+-- On GE shift to state 65
+-- On EQUAL shift to state 67
+-- On DIV shift to state 51
+-- On AND shift to state 69
+-- On SEMI reduce production expression -> localised_expression OR localised_expression 
+-- On RP reduce production expression -> localised_expression OR localised_expression 
+-- On RB reduce production expression -> localised_expression OR localised_expression 
+-- On OR reduce production expression -> localised_expression OR localised_expression 
+-- On END reduce production expression -> localised_expression OR localised_expression 
+-- On DOT reduce production expression -> localised_expression OR localised_expression 
+-- On COMMA reduce production expression -> localised_expression OR localised_expression 
+
+State 55:
+expression -> localised_expression NEQ . localised_expression [ STAR SEMI RP RB PLUS OR NEQ MOD MINUS LT LE LB GT GE EQUAL END DOT DIV COMMA AND ]
+-- On NOT shift to state 31
+-- On NEW shift to state 32
+-- On MINUS shift to state 35
+-- On LP shift to state 36
+-- On IDENT shift to state 37
+-- On CONST_INT shift to state 38
+-- On CONST_BOOL shift to state 39
+-- On localised_expression shift to state 56
+-- On expression shift to state 50
+
+State 56:
+expression -> localised_expression . LB localised_expression RB [ STAR SEMI RP RB PLUS OR NEQ MOD MINUS LT LE LB GT GE EQUAL END DOT DIV COMMA AND ]
+expression -> localised_expression . PLUS localised_expression [ STAR SEMI RP RB PLUS OR NEQ MOD MINUS LT LE LB GT GE EQUAL END DOT DIV COMMA AND ]
+expression -> localised_expression . MINUS localised_expression [ STAR SEMI RP RB PLUS OR NEQ MOD MINUS LT LE LB GT GE EQUAL END DOT DIV COMMA AND ]
+expression -> localised_expression . STAR localised_expression [ STAR SEMI RP RB PLUS OR NEQ MOD MINUS LT LE LB GT GE EQUAL END DOT DIV COMMA AND ]
+expression -> localised_expression . DIV localised_expression [ STAR SEMI RP RB PLUS OR NEQ MOD MINUS LT LE LB GT GE EQUAL END DOT DIV COMMA AND ]
+expression -> localised_expression . MOD localised_expression [ STAR SEMI RP RB PLUS OR NEQ MOD MINUS LT LE LB GT GE EQUAL END DOT DIV COMMA AND ]
+expression -> localised_expression . EQUAL localised_expression [ STAR SEMI RP RB PLUS OR NEQ MOD MINUS LT LE LB GT GE EQUAL END DOT DIV COMMA AND ]
+expression -> localised_expression . NEQ localised_expression [ STAR SEMI RP RB PLUS OR NEQ MOD MINUS LT LE LB GT GE EQUAL END DOT DIV COMMA AND ]
+expression -> localised_expression NEQ localised_expression . [ STAR SEMI RP RB PLUS OR NEQ MOD MINUS LT LE LB GT GE EQUAL END DOT DIV COMMA AND ]
+expression -> localised_expression . LT localised_expression [ STAR SEMI RP RB PLUS OR NEQ MOD MINUS LT LE LB GT GE EQUAL END DOT DIV COMMA AND ]
+expression -> localised_expression . LE localised_expression [ STAR SEMI RP RB PLUS OR NEQ MOD MINUS LT LE LB GT GE EQUAL END DOT DIV COMMA AND ]
+expression -> localised_expression . GT localised_expression [ STAR SEMI RP RB PLUS OR NEQ MOD MINUS LT LE LB GT GE EQUAL END DOT DIV COMMA AND ]
+expression -> localised_expression . GE localised_expression [ STAR SEMI RP RB PLUS OR NEQ MOD MINUS LT LE LB GT GE EQUAL END DOT DIV COMMA AND ]
+expression -> localised_expression . AND localised_expression [ STAR SEMI RP RB PLUS OR NEQ MOD MINUS LT LE LB GT GE EQUAL END DOT DIV COMMA AND ]
+expression -> localised_expression . OR localised_expression [ STAR SEMI RP RB PLUS OR NEQ MOD MINUS LT LE LB GT GE EQUAL END DOT DIV COMMA AND ]
+-- On STAR shift to state 41
+-- On PLUS shift to state 46
+-- On MOD shift to state 48
+-- On MINUS shift to state 57
+-- On LT shift to state 59
+-- On LE shift to state 61
+-- On LB shift to state 43
+-- On GT shift to state 63
+-- On GE shift to state 65
+-- On DIV shift to state 51
+-- On SEMI reduce production expression -> localised_expression NEQ localised_expression 
+-- On RP reduce production expression -> localised_expression NEQ localised_expression 
+-- On RB reduce production expression -> localised_expression NEQ localised_expression 
+-- On OR reduce production expression -> localised_expression NEQ localised_expression 
+-- On NEQ reduce production expression -> localised_expression NEQ localised_expression 
+-- On EQUAL reduce production expression -> localised_expression NEQ localised_expression 
+-- On END reduce production expression -> localised_expression NEQ localised_expression 
+-- On DOT reduce production expression -> localised_expression NEQ localised_expression 
+-- On COMMA reduce production expression -> localised_expression NEQ localised_expression 
+-- On AND reduce production expression -> localised_expression NEQ localised_expression 
+
+State 57:
+expression -> localised_expression MINUS . localised_expression [ STAR SEMI RP RB PLUS OR NEQ MOD MINUS LT LE LB GT GE EQUAL END DOT DIV COMMA AND ]
+-- On NOT shift to state 31
+-- On NEW shift to state 32
+-- On MINUS shift to state 35
+-- On LP shift to state 36
+-- On IDENT shift to state 37
+-- On CONST_INT shift to state 38
+-- On CONST_BOOL shift to state 39
+-- On localised_expression shift to state 58
+-- On expression shift to state 50
+
+State 58:
+expression -> localised_expression . LB localised_expression RB [ STAR SEMI RP RB PLUS OR NEQ MOD MINUS LT LE LB GT GE EQUAL END DOT DIV COMMA AND ]
+expression -> localised_expression . PLUS localised_expression [ STAR SEMI RP RB PLUS OR NEQ MOD MINUS LT LE LB GT GE EQUAL END DOT DIV COMMA AND ]
+expression -> localised_expression . MINUS localised_expression [ STAR SEMI RP RB PLUS OR NEQ MOD MINUS LT LE LB GT GE EQUAL END DOT DIV COMMA AND ]
+expression -> localised_expression MINUS localised_expression . [ STAR SEMI RP RB PLUS OR NEQ MOD MINUS LT LE LB GT GE EQUAL END DOT DIV COMMA AND ]
+expression -> localised_expression . STAR localised_expression [ STAR SEMI RP RB PLUS OR NEQ MOD MINUS LT LE LB GT GE EQUAL END DOT DIV COMMA AND ]
+expression -> localised_expression . DIV localised_expression [ STAR SEMI RP RB PLUS OR NEQ MOD MINUS LT LE LB GT GE EQUAL END DOT DIV COMMA AND ]
+expression -> localised_expression . MOD localised_expression [ STAR SEMI RP RB PLUS OR NEQ MOD MINUS LT LE LB GT GE EQUAL END DOT DIV COMMA AND ]
+expression -> localised_expression . EQUAL localised_expression [ STAR SEMI RP RB PLUS OR NEQ MOD MINUS LT LE LB GT GE EQUAL END DOT DIV COMMA AND ]
+expression -> localised_expression . NEQ localised_expression [ STAR SEMI RP RB PLUS OR NEQ MOD MINUS LT LE LB GT GE EQUAL END DOT DIV COMMA AND ]
+expression -> localised_expression . LT localised_expression [ STAR SEMI RP RB PLUS OR NEQ MOD MINUS LT LE LB GT GE EQUAL END DOT DIV COMMA AND ]
+expression -> localised_expression . LE localised_expression [ STAR SEMI RP RB PLUS OR NEQ MOD MINUS LT LE LB GT GE EQUAL END DOT DIV COMMA AND ]
+expression -> localised_expression . GT localised_expression [ STAR SEMI RP RB PLUS OR NEQ MOD MINUS LT LE LB GT GE EQUAL END DOT DIV COMMA AND ]
+expression -> localised_expression . GE localised_expression [ STAR SEMI RP RB PLUS OR NEQ MOD MINUS LT LE LB GT GE EQUAL END DOT DIV COMMA AND ]
+expression -> localised_expression . AND localised_expression [ STAR SEMI RP RB PLUS OR NEQ MOD MINUS LT LE LB GT GE EQUAL END DOT DIV COMMA AND ]
+expression -> localised_expression . OR localised_expression [ STAR SEMI RP RB PLUS OR NEQ MOD MINUS LT LE LB GT GE EQUAL END DOT DIV COMMA AND ]
+-- On STAR shift to state 41
+-- On MOD shift to state 48
+-- On LB shift to state 43
+-- On DIV shift to state 51
+-- On SEMI reduce production expression -> localised_expression MINUS localised_expression 
+-- On RP reduce production expression -> localised_expression MINUS localised_expression 
+-- On RB reduce production expression -> localised_expression MINUS localised_expression 
+-- On PLUS reduce production expression -> localised_expression MINUS localised_expression 
+-- On OR reduce production expression -> localised_expression MINUS localised_expression 
+-- On NEQ reduce production expression -> localised_expression MINUS localised_expression 
+-- On MINUS reduce production expression -> localised_expression MINUS localised_expression 
+-- On LT reduce production expression -> localised_expression MINUS localised_expression 
+-- On LE reduce production expression -> localised_expression MINUS localised_expression 
+-- On GT reduce production expression -> localised_expression MINUS localised_expression 
+-- On GE reduce production expression -> localised_expression MINUS localised_expression 
+-- On EQUAL reduce production expression -> localised_expression MINUS localised_expression 
+-- On END reduce production expression -> localised_expression MINUS localised_expression 
+-- On DOT reduce production expression -> localised_expression MINUS localised_expression 
+-- On COMMA reduce production expression -> localised_expression MINUS localised_expression 
+-- On AND reduce production expression -> localised_expression MINUS localised_expression 
+
+State 59:
+expression -> localised_expression LT . localised_expression [ STAR SEMI RP RB PLUS OR NEQ MOD MINUS LT LE LB GT GE EQUAL END DOT DIV COMMA AND ]
+-- On NOT shift to state 31
+-- On NEW shift to state 32
+-- On MINUS shift to state 35
+-- On LP shift to state 36
+-- On IDENT shift to state 37
+-- On CONST_INT shift to state 38
+-- On CONST_BOOL shift to state 39
+-- On localised_expression shift to state 60
+-- On expression shift to state 50
+
+State 60:
+expression -> localised_expression . LB localised_expression RB [ STAR SEMI RP RB PLUS OR NEQ MOD MINUS LT LE LB GT GE EQUAL END DOT DIV COMMA AND ]
+expression -> localised_expression . PLUS localised_expression [ STAR SEMI RP RB PLUS OR NEQ MOD MINUS LT LE LB GT GE EQUAL END DOT DIV COMMA AND ]
+expression -> localised_expression . MINUS localised_expression [ STAR SEMI RP RB PLUS OR NEQ MOD MINUS LT LE LB GT GE EQUAL END DOT DIV COMMA AND ]
+expression -> localised_expression . STAR localised_expression [ STAR SEMI RP RB PLUS OR NEQ MOD MINUS LT LE LB GT GE EQUAL END DOT DIV COMMA AND ]
+expression -> localised_expression . DIV localised_expression [ STAR SEMI RP RB PLUS OR NEQ MOD MINUS LT LE LB GT GE EQUAL END DOT DIV COMMA AND ]
+expression -> localised_expression . MOD localised_expression [ STAR SEMI RP RB PLUS OR NEQ MOD MINUS LT LE LB GT GE EQUAL END DOT DIV COMMA AND ]
+expression -> localised_expression . EQUAL localised_expression [ STAR SEMI RP RB PLUS OR NEQ MOD MINUS LT LE LB GT GE EQUAL END DOT DIV COMMA AND ]
+expression -> localised_expression . NEQ localised_expression [ STAR SEMI RP RB PLUS OR NEQ MOD MINUS LT LE LB GT GE EQUAL END DOT DIV COMMA AND ]
+expression -> localised_expression . LT localised_expression [ STAR SEMI RP RB PLUS OR NEQ MOD MINUS LT LE LB GT GE EQUAL END DOT DIV COMMA AND ]
+expression -> localised_expression LT localised_expression . [ STAR SEMI RP RB PLUS OR NEQ MOD MINUS LT LE LB GT GE EQUAL END DOT DIV COMMA AND ]
+expression -> localised_expression . LE localised_expression [ STAR SEMI RP RB PLUS OR NEQ MOD MINUS LT LE LB GT GE EQUAL END DOT DIV COMMA AND ]
+expression -> localised_expression . GT localised_expression [ STAR SEMI RP RB PLUS OR NEQ MOD MINUS LT LE LB GT GE EQUAL END DOT DIV COMMA AND ]
+expression -> localised_expression . GE localised_expression [ STAR SEMI RP RB PLUS OR NEQ MOD MINUS LT LE LB GT GE EQUAL END DOT DIV COMMA AND ]
+expression -> localised_expression . AND localised_expression [ STAR SEMI RP RB PLUS OR NEQ MOD MINUS LT LE LB GT GE EQUAL END DOT DIV COMMA AND ]
+expression -> localised_expression . OR localised_expression [ STAR SEMI RP RB PLUS OR NEQ MOD MINUS LT LE LB GT GE EQUAL END DOT DIV COMMA AND ]
+-- On STAR shift to state 41
+-- On PLUS shift to state 46
+-- On MOD shift to state 48
+-- On MINUS shift to state 57
+-- On LB shift to state 43
+-- On DIV shift to state 51
+-- On SEMI reduce production expression -> localised_expression LT localised_expression 
+-- On RP reduce production expression -> localised_expression LT localised_expression 
+-- On RB reduce production expression -> localised_expression LT localised_expression 
+-- On OR reduce production expression -> localised_expression LT localised_expression 
+-- On NEQ reduce production expression -> localised_expression LT localised_expression 
+-- On LT reduce production expression -> localised_expression LT localised_expression 
+-- On LE reduce production expression -> localised_expression LT localised_expression 
+-- On GT reduce production expression -> localised_expression LT localised_expression 
+-- On GE reduce production expression -> localised_expression LT localised_expression 
+-- On EQUAL reduce production expression -> localised_expression LT localised_expression 
+-- On END reduce production expression -> localised_expression LT localised_expression 
+-- On DOT reduce production expression -> localised_expression LT localised_expression 
+-- On COMMA reduce production expression -> localised_expression LT localised_expression 
+-- On AND reduce production expression -> localised_expression LT localised_expression 
+
+State 61:
+expression -> localised_expression LE . localised_expression [ STAR SEMI RP RB PLUS OR NEQ MOD MINUS LT LE LB GT GE EQUAL END DOT DIV COMMA AND ]
+-- On NOT shift to state 31
+-- On NEW shift to state 32
+-- On MINUS shift to state 35
+-- On LP shift to state 36
+-- On IDENT shift to state 37
+-- On CONST_INT shift to state 38
+-- On CONST_BOOL shift to state 39
+-- On localised_expression shift to state 62
+-- On expression shift to state 50
+
+State 62:
+expression -> localised_expression . LB localised_expression RB [ STAR SEMI RP RB PLUS OR NEQ MOD MINUS LT LE LB GT GE EQUAL END DOT DIV COMMA AND ]
+expression -> localised_expression . PLUS localised_expression [ STAR SEMI RP RB PLUS OR NEQ MOD MINUS LT LE LB GT GE EQUAL END DOT DIV COMMA AND ]
+expression -> localised_expression . MINUS localised_expression [ STAR SEMI RP RB PLUS OR NEQ MOD MINUS LT LE LB GT GE EQUAL END DOT DIV COMMA AND ]
+expression -> localised_expression . STAR localised_expression [ STAR SEMI RP RB PLUS OR NEQ MOD MINUS LT LE LB GT GE EQUAL END DOT DIV COMMA AND ]
+expression -> localised_expression . DIV localised_expression [ STAR SEMI RP RB PLUS OR NEQ MOD MINUS LT LE LB GT GE EQUAL END DOT DIV COMMA AND ]
+expression -> localised_expression . MOD localised_expression [ STAR SEMI RP RB PLUS OR NEQ MOD MINUS LT LE LB GT GE EQUAL END DOT DIV COMMA AND ]
+expression -> localised_expression . EQUAL localised_expression [ STAR SEMI RP RB PLUS OR NEQ MOD MINUS LT LE LB GT GE EQUAL END DOT DIV COMMA AND ]
+expression -> localised_expression . NEQ localised_expression [ STAR SEMI RP RB PLUS OR NEQ MOD MINUS LT LE LB GT GE EQUAL END DOT DIV COMMA AND ]
+expression -> localised_expression . LT localised_expression [ STAR SEMI RP RB PLUS OR NEQ MOD MINUS LT LE LB GT GE EQUAL END DOT DIV COMMA AND ]
+expression -> localised_expression . LE localised_expression [ STAR SEMI RP RB PLUS OR NEQ MOD MINUS LT LE LB GT GE EQUAL END DOT DIV COMMA AND ]
+expression -> localised_expression LE localised_expression . [ STAR SEMI RP RB PLUS OR NEQ MOD MINUS LT LE LB GT GE EQUAL END DOT DIV COMMA AND ]
+expression -> localised_expression . GT localised_expression [ STAR SEMI RP RB PLUS OR NEQ MOD MINUS LT LE LB GT GE EQUAL END DOT DIV COMMA AND ]
+expression -> localised_expression . GE localised_expression [ STAR SEMI RP RB PLUS OR NEQ MOD MINUS LT LE LB GT GE EQUAL END DOT DIV COMMA AND ]
+expression -> localised_expression . AND localised_expression [ STAR SEMI RP RB PLUS OR NEQ MOD MINUS LT LE LB GT GE EQUAL END DOT DIV COMMA AND ]
+expression -> localised_expression . OR localised_expression [ STAR SEMI RP RB PLUS OR NEQ MOD MINUS LT LE LB GT GE EQUAL END DOT DIV COMMA AND ]
+-- On STAR shift to state 41
+-- On PLUS shift to state 46
+-- On MOD shift to state 48
+-- On MINUS shift to state 57
+-- On LB shift to state 43
+-- On DIV shift to state 51
+-- On SEMI reduce production expression -> localised_expression LE localised_expression 
+-- On RP reduce production expression -> localised_expression LE localised_expression 
+-- On RB reduce production expression -> localised_expression LE localised_expression 
+-- On OR reduce production expression -> localised_expression LE localised_expression 
+-- On NEQ reduce production expression -> localised_expression LE localised_expression 
+-- On LT reduce production expression -> localised_expression LE localised_expression 
+-- On LE reduce production expression -> localised_expression LE localised_expression 
+-- On GT reduce production expression -> localised_expression LE localised_expression 
+-- On GE reduce production expression -> localised_expression LE localised_expression 
+-- On EQUAL reduce production expression -> localised_expression LE localised_expression 
+-- On END reduce production expression -> localised_expression LE localised_expression 
+-- On DOT reduce production expression -> localised_expression LE localised_expression 
+-- On COMMA reduce production expression -> localised_expression LE localised_expression 
+-- On AND reduce production expression -> localised_expression LE localised_expression 
+
+State 63:
+expression -> localised_expression GT . localised_expression [ STAR SEMI RP RB PLUS OR NEQ MOD MINUS LT LE LB GT GE EQUAL END DOT DIV COMMA AND ]
+-- On NOT shift to state 31
+-- On NEW shift to state 32
+-- On MINUS shift to state 35
+-- On LP shift to state 36
+-- On IDENT shift to state 37
+-- On CONST_INT shift to state 38
+-- On CONST_BOOL shift to state 39
+-- On localised_expression shift to state 64
+-- On expression shift to state 50
+
+State 64:
+expression -> localised_expression . LB localised_expression RB [ STAR SEMI RP RB PLUS OR NEQ MOD MINUS LT LE LB GT GE EQUAL END DOT DIV COMMA AND ]
+expression -> localised_expression . PLUS localised_expression [ STAR SEMI RP RB PLUS OR NEQ MOD MINUS LT LE LB GT GE EQUAL END DOT DIV COMMA AND ]
+expression -> localised_expression . MINUS localised_expression [ STAR SEMI RP RB PLUS OR NEQ MOD MINUS LT LE LB GT GE EQUAL END DOT DIV COMMA AND ]
+expression -> localised_expression . STAR localised_expression [ STAR SEMI RP RB PLUS OR NEQ MOD MINUS LT LE LB GT GE EQUAL END DOT DIV COMMA AND ]
+expression -> localised_expression . DIV localised_expression [ STAR SEMI RP RB PLUS OR NEQ MOD MINUS LT LE LB GT GE EQUAL END DOT DIV COMMA AND ]
+expression -> localised_expression . MOD localised_expression [ STAR SEMI RP RB PLUS OR NEQ MOD MINUS LT LE LB GT GE EQUAL END DOT DIV COMMA AND ]
+expression -> localised_expression . EQUAL localised_expression [ STAR SEMI RP RB PLUS OR NEQ MOD MINUS LT LE LB GT GE EQUAL END DOT DIV COMMA AND ]
+expression -> localised_expression . NEQ localised_expression [ STAR SEMI RP RB PLUS OR NEQ MOD MINUS LT LE LB GT GE EQUAL END DOT DIV COMMA AND ]
+expression -> localised_expression . LT localised_expression [ STAR SEMI RP RB PLUS OR NEQ MOD MINUS LT LE LB GT GE EQUAL END DOT DIV COMMA AND ]
+expression -> localised_expression . LE localised_expression [ STAR SEMI RP RB PLUS OR NEQ MOD MINUS LT LE LB GT GE EQUAL END DOT DIV COMMA AND ]
+expression -> localised_expression . GT localised_expression [ STAR SEMI RP RB PLUS OR NEQ MOD MINUS LT LE LB GT GE EQUAL END DOT DIV COMMA AND ]
+expression -> localised_expression GT localised_expression . [ STAR SEMI RP RB PLUS OR NEQ MOD MINUS LT LE LB GT GE EQUAL END DOT DIV COMMA AND ]
+expression -> localised_expression . GE localised_expression [ STAR SEMI RP RB PLUS OR NEQ MOD MINUS LT LE LB GT GE EQUAL END DOT DIV COMMA AND ]
+expression -> localised_expression . AND localised_expression [ STAR SEMI RP RB PLUS OR NEQ MOD MINUS LT LE LB GT GE EQUAL END DOT DIV COMMA AND ]
+expression -> localised_expression . OR localised_expression [ STAR SEMI RP RB PLUS OR NEQ MOD MINUS LT LE LB GT GE EQUAL END DOT DIV COMMA AND ]
+-- On STAR shift to state 41
+-- On PLUS shift to state 46
+-- On MOD shift to state 48
+-- On MINUS shift to state 57
+-- On LB shift to state 43
+-- On DIV shift to state 51
+-- On SEMI reduce production expression -> localised_expression GT localised_expression 
+-- On RP reduce production expression -> localised_expression GT localised_expression 
+-- On RB reduce production expression -> localised_expression GT localised_expression 
+-- On OR reduce production expression -> localised_expression GT localised_expression 
+-- On NEQ reduce production expression -> localised_expression GT localised_expression 
+-- On LT reduce production expression -> localised_expression GT localised_expression 
+-- On LE reduce production expression -> localised_expression GT localised_expression 
+-- On GT reduce production expression -> localised_expression GT localised_expression 
+-- On GE reduce production expression -> localised_expression GT localised_expression 
+-- On EQUAL reduce production expression -> localised_expression GT localised_expression 
+-- On END reduce production expression -> localised_expression GT localised_expression 
+-- On DOT reduce production expression -> localised_expression GT localised_expression 
+-- On COMMA reduce production expression -> localised_expression GT localised_expression 
+-- On AND reduce production expression -> localised_expression GT localised_expression 
+
+State 65:
+expression -> localised_expression GE . localised_expression [ STAR SEMI RP RB PLUS OR NEQ MOD MINUS LT LE LB GT GE EQUAL END DOT DIV COMMA AND ]
+-- On NOT shift to state 31
+-- On NEW shift to state 32
+-- On MINUS shift to state 35
+-- On LP shift to state 36
+-- On IDENT shift to state 37
+-- On CONST_INT shift to state 38
+-- On CONST_BOOL shift to state 39
+-- On localised_expression shift to state 66
+-- On expression shift to state 50
+
+State 66:
+expression -> localised_expression . LB localised_expression RB [ STAR SEMI RP RB PLUS OR NEQ MOD MINUS LT LE LB GT GE EQUAL END DOT DIV COMMA AND ]
+expression -> localised_expression . PLUS localised_expression [ STAR SEMI RP RB PLUS OR NEQ MOD MINUS LT LE LB GT GE EQUAL END DOT DIV COMMA AND ]
+expression -> localised_expression . MINUS localised_expression [ STAR SEMI RP RB PLUS OR NEQ MOD MINUS LT LE LB GT GE EQUAL END DOT DIV COMMA AND ]
+expression -> localised_expression . STAR localised_expression [ STAR SEMI RP RB PLUS OR NEQ MOD MINUS LT LE LB GT GE EQUAL END DOT DIV COMMA AND ]
+expression -> localised_expression . DIV localised_expression [ STAR SEMI RP RB PLUS OR NEQ MOD MINUS LT LE LB GT GE EQUAL END DOT DIV COMMA AND ]
+expression -> localised_expression . MOD localised_expression [ STAR SEMI RP RB PLUS OR NEQ MOD MINUS LT LE LB GT GE EQUAL END DOT DIV COMMA AND ]
+expression -> localised_expression . EQUAL localised_expression [ STAR SEMI RP RB PLUS OR NEQ MOD MINUS LT LE LB GT GE EQUAL END DOT DIV COMMA AND ]
+expression -> localised_expression . NEQ localised_expression [ STAR SEMI RP RB PLUS OR NEQ MOD MINUS LT LE LB GT GE EQUAL END DOT DIV COMMA AND ]
+expression -> localised_expression . LT localised_expression [ STAR SEMI RP RB PLUS OR NEQ MOD MINUS LT LE LB GT GE EQUAL END DOT DIV COMMA AND ]
+expression -> localised_expression . LE localised_expression [ STAR SEMI RP RB PLUS OR NEQ MOD MINUS LT LE LB GT GE EQUAL END DOT DIV COMMA AND ]
+expression -> localised_expression . GT localised_expression [ STAR SEMI RP RB PLUS OR NEQ MOD MINUS LT LE LB GT GE EQUAL END DOT DIV COMMA AND ]
+expression -> localised_expression . GE localised_expression [ STAR SEMI RP RB PLUS OR NEQ MOD MINUS LT LE LB GT GE EQUAL END DOT DIV COMMA AND ]
+expression -> localised_expression GE localised_expression . [ STAR SEMI RP RB PLUS OR NEQ MOD MINUS LT LE LB GT GE EQUAL END DOT DIV COMMA AND ]
+expression -> localised_expression . AND localised_expression [ STAR SEMI RP RB PLUS OR NEQ MOD MINUS LT LE LB GT GE EQUAL END DOT DIV COMMA AND ]
+expression -> localised_expression . OR localised_expression [ STAR SEMI RP RB PLUS OR NEQ MOD MINUS LT LE LB GT GE EQUAL END DOT DIV COMMA AND ]
+-- On STAR shift to state 41
+-- On PLUS shift to state 46
+-- On MOD shift to state 48
+-- On MINUS shift to state 57
+-- On LB shift to state 43
+-- On DIV shift to state 51
+-- On SEMI reduce production expression -> localised_expression GE localised_expression 
+-- On RP reduce production expression -> localised_expression GE localised_expression 
+-- On RB reduce production expression -> localised_expression GE localised_expression 
+-- On OR reduce production expression -> localised_expression GE localised_expression 
+-- On NEQ reduce production expression -> localised_expression GE localised_expression 
+-- On LT reduce production expression -> localised_expression GE localised_expression 
+-- On LE reduce production expression -> localised_expression GE localised_expression 
+-- On GT reduce production expression -> localised_expression GE localised_expression 
+-- On GE reduce production expression -> localised_expression GE localised_expression 
+-- On EQUAL reduce production expression -> localised_expression GE localised_expression 
+-- On END reduce production expression -> localised_expression GE localised_expression 
+-- On DOT reduce production expression -> localised_expression GE localised_expression 
+-- On COMMA reduce production expression -> localised_expression GE localised_expression 
+-- On AND reduce production expression -> localised_expression GE localised_expression 
+
+State 67:
+expression -> localised_expression EQUAL . localised_expression [ STAR SEMI RP RB PLUS OR NEQ MOD MINUS LT LE LB GT GE EQUAL END DOT DIV COMMA AND ]
+-- On NOT shift to state 31
+-- On NEW shift to state 32
+-- On MINUS shift to state 35
+-- On LP shift to state 36
+-- On IDENT shift to state 37
+-- On CONST_INT shift to state 38
+-- On CONST_BOOL shift to state 39
+-- On localised_expression shift to state 68
+-- On expression shift to state 50
+
+State 68:
+expression -> localised_expression . LB localised_expression RB [ STAR SEMI RP RB PLUS OR NEQ MOD MINUS LT LE LB GT GE EQUAL END DOT DIV COMMA AND ]
+expression -> localised_expression . PLUS localised_expression [ STAR SEMI RP RB PLUS OR NEQ MOD MINUS LT LE LB GT GE EQUAL END DOT DIV COMMA AND ]
+expression -> localised_expression . MINUS localised_expression [ STAR SEMI RP RB PLUS OR NEQ MOD MINUS LT LE LB GT GE EQUAL END DOT DIV COMMA AND ]
+expression -> localised_expression . STAR localised_expression [ STAR SEMI RP RB PLUS OR NEQ MOD MINUS LT LE LB GT GE EQUAL END DOT DIV COMMA AND ]
+expression -> localised_expression . DIV localised_expression [ STAR SEMI RP RB PLUS OR NEQ MOD MINUS LT LE LB GT GE EQUAL END DOT DIV COMMA AND ]
+expression -> localised_expression . MOD localised_expression [ STAR SEMI RP RB PLUS OR NEQ MOD MINUS LT LE LB GT GE EQUAL END DOT DIV COMMA AND ]
+expression -> localised_expression . EQUAL localised_expression [ STAR SEMI RP RB PLUS OR NEQ MOD MINUS LT LE LB GT GE EQUAL END DOT DIV COMMA AND ]
+expression -> localised_expression EQUAL localised_expression . [ STAR SEMI RP RB PLUS OR NEQ MOD MINUS LT LE LB GT GE EQUAL END DOT DIV COMMA AND ]
+expression -> localised_expression . NEQ localised_expression [ STAR SEMI RP RB PLUS OR NEQ MOD MINUS LT LE LB GT GE EQUAL END DOT DIV COMMA AND ]
+expression -> localised_expression . LT localised_expression [ STAR SEMI RP RB PLUS OR NEQ MOD MINUS LT LE LB GT GE EQUAL END DOT DIV COMMA AND ]
+expression -> localised_expression . LE localised_expression [ STAR SEMI RP RB PLUS OR NEQ MOD MINUS LT LE LB GT GE EQUAL END DOT DIV COMMA AND ]
+expression -> localised_expression . GT localised_expression [ STAR SEMI RP RB PLUS OR NEQ MOD MINUS LT LE LB GT GE EQUAL END DOT DIV COMMA AND ]
+expression -> localised_expression . GE localised_expression [ STAR SEMI RP RB PLUS OR NEQ MOD MINUS LT LE LB GT GE EQUAL END DOT DIV COMMA AND ]
+expression -> localised_expression . AND localised_expression [ STAR SEMI RP RB PLUS OR NEQ MOD MINUS LT LE LB GT GE EQUAL END DOT DIV COMMA AND ]
+expression -> localised_expression . OR localised_expression [ STAR SEMI RP RB PLUS OR NEQ MOD MINUS LT LE LB GT GE EQUAL END DOT DIV COMMA AND ]
+-- On STAR shift to state 41
+-- On PLUS shift to state 46
+-- On MOD shift to state 48
+-- On MINUS shift to state 57
+-- On LT shift to state 59
+-- On LE shift to state 61
+-- On LB shift to state 43
+-- On GT shift to state 63
+-- On GE shift to state 65
+-- On DIV shift to state 51
+-- On SEMI reduce production expression -> localised_expression EQUAL localised_expression 
+-- On RP reduce production expression -> localised_expression EQUAL localised_expression 
+-- On RB reduce production expression -> localised_expression EQUAL localised_expression 
+-- On OR reduce production expression -> localised_expression EQUAL localised_expression 
+-- On NEQ reduce production expression -> localised_expression EQUAL localised_expression 
+-- On EQUAL reduce production expression -> localised_expression EQUAL localised_expression 
+-- On END reduce production expression -> localised_expression EQUAL localised_expression 
+-- On DOT reduce production expression -> localised_expression EQUAL localised_expression 
+-- On COMMA reduce production expression -> localised_expression EQUAL localised_expression 
+-- On AND reduce production expression -> localised_expression EQUAL localised_expression 
+
+State 69:
+expression -> localised_expression AND . localised_expression [ STAR SEMI RP RB PLUS OR NEQ MOD MINUS LT LE LB GT GE EQUAL END DOT DIV COMMA AND ]
+-- On NOT shift to state 31
+-- On NEW shift to state 32
+-- On MINUS shift to state 35
+-- On LP shift to state 36
+-- On IDENT shift to state 37
+-- On CONST_INT shift to state 38
+-- On CONST_BOOL shift to state 39
+-- On localised_expression shift to state 70
+-- On expression shift to state 50
+
+State 70:
+expression -> localised_expression . LB localised_expression RB [ STAR SEMI RP RB PLUS OR NEQ MOD MINUS LT LE LB GT GE EQUAL END DOT DIV COMMA AND ]
+expression -> localised_expression . PLUS localised_expression [ STAR SEMI RP RB PLUS OR NEQ MOD MINUS LT LE LB GT GE EQUAL END DOT DIV COMMA AND ]
+expression -> localised_expression . MINUS localised_expression [ STAR SEMI RP RB PLUS OR NEQ MOD MINUS LT LE LB GT GE EQUAL END DOT DIV COMMA AND ]
+expression -> localised_expression . STAR localised_expression [ STAR SEMI RP RB PLUS OR NEQ MOD MINUS LT LE LB GT GE EQUAL END DOT DIV COMMA AND ]
+expression -> localised_expression . DIV localised_expression [ STAR SEMI RP RB PLUS OR NEQ MOD MINUS LT LE LB GT GE EQUAL END DOT DIV COMMA AND ]
+expression -> localised_expression . MOD localised_expression [ STAR SEMI RP RB PLUS OR NEQ MOD MINUS LT LE LB GT GE EQUAL END DOT DIV COMMA AND ]
+expression -> localised_expression . EQUAL localised_expression [ STAR SEMI RP RB PLUS OR NEQ MOD MINUS LT LE LB GT GE EQUAL END DOT DIV COMMA AND ]
+expression -> localised_expression . NEQ localised_expression [ STAR SEMI RP RB PLUS OR NEQ MOD MINUS LT LE LB GT GE EQUAL END DOT DIV COMMA AND ]
+expression -> localised_expression . LT localised_expression [ STAR SEMI RP RB PLUS OR NEQ MOD MINUS LT LE LB GT GE EQUAL END DOT DIV COMMA AND ]
+expression -> localised_expression . LE localised_expression [ STAR SEMI RP RB PLUS OR NEQ MOD MINUS LT LE LB GT GE EQUAL END DOT DIV COMMA AND ]
+expression -> localised_expression . GT localised_expression [ STAR SEMI RP RB PLUS OR NEQ MOD MINUS LT LE LB GT GE EQUAL END DOT DIV COMMA AND ]
+expression -> localised_expression . GE localised_expression [ STAR SEMI RP RB PLUS OR NEQ MOD MINUS LT LE LB GT GE EQUAL END DOT DIV COMMA AND ]
+expression -> localised_expression . AND localised_expression [ STAR SEMI RP RB PLUS OR NEQ MOD MINUS LT LE LB GT GE EQUAL END DOT DIV COMMA AND ]
+expression -> localised_expression AND localised_expression . [ STAR SEMI RP RB PLUS OR NEQ MOD MINUS LT LE LB GT GE EQUAL END DOT DIV COMMA AND ]
+expression -> localised_expression . OR localised_expression [ STAR SEMI RP RB PLUS OR NEQ MOD MINUS LT LE LB GT GE EQUAL END DOT DIV COMMA AND ]
+-- On STAR shift to state 41
+-- On PLUS shift to state 46
+-- On NEQ shift to state 55
+-- On MOD shift to state 48
+-- On MINUS shift to state 57
+-- On LT shift to state 59
+-- On LE shift to state 61
+-- On LB shift to state 43
+-- On GT shift to state 63
+-- On GE shift to state 65
+-- On EQUAL shift to state 67
+-- On DIV shift to state 51
+-- On SEMI reduce production expression -> localised_expression AND localised_expression 
+-- On RP reduce production expression -> localised_expression AND localised_expression 
+-- On RB reduce production expression -> localised_expression AND localised_expression 
+-- On OR reduce production expression -> localised_expression AND localised_expression 
+-- On END reduce production expression -> localised_expression AND localised_expression 
+-- On DOT reduce production expression -> localised_expression AND localised_expression 
+-- On COMMA reduce production expression -> localised_expression AND localised_expression 
+-- On AND reduce production expression -> localised_expression AND localised_expression 
+
+State 71:
+expression -> LP localised_expression RP . [ STAR SEMI RP RB PLUS OR NEQ MOD MINUS LT LE LB GT GE EQUAL END DOT DIV COMMA AND ]
+-- On STAR reduce production expression -> LP localised_expression RP 
+-- On SEMI reduce production expression -> LP localised_expression RP 
+-- On RP reduce production expression -> LP localised_expression RP 
+-- On RB reduce production expression -> LP localised_expression RP 
+-- On PLUS reduce production expression -> LP localised_expression RP 
+-- On OR reduce production expression -> LP localised_expression RP 
+-- On NEQ reduce production expression -> LP localised_expression RP 
+-- On MOD reduce production expression -> LP localised_expression RP 
+-- On MINUS reduce production expression -> LP localised_expression RP 
+-- On LT reduce production expression -> LP localised_expression RP 
+-- On LE reduce production expression -> LP localised_expression RP 
+-- On LB reduce production expression -> LP localised_expression RP 
+-- On GT reduce production expression -> LP localised_expression RP 
+-- On GE reduce production expression -> LP localised_expression RP 
+-- On EQUAL reduce production expression -> LP localised_expression RP 
+-- On END reduce production expression -> LP localised_expression RP 
+-- On DOT reduce production expression -> LP localised_expression RP 
+-- On DIV reduce production expression -> LP localised_expression RP 
+-- On COMMA reduce production expression -> LP localised_expression RP 
+-- On AND reduce production expression -> LP localised_expression RP 
+
+State 72:
+expression -> localised_expression . LB localised_expression RB [ STAR SEMI RP RB PLUS OR NEQ MOD MINUS LT LE LB GT GE EQUAL END DOT DIV COMMA AND ]
+expression -> MINUS localised_expression . [ STAR SEMI RP RB PLUS OR NEQ MOD MINUS LT LE LB GT GE EQUAL END DOT DIV COMMA AND ]
+expression -> localised_expression . PLUS localised_expression [ STAR SEMI RP RB PLUS OR NEQ MOD MINUS LT LE LB GT GE EQUAL END DOT DIV COMMA AND ]
+expression -> localised_expression . MINUS localised_expression [ STAR SEMI RP RB PLUS OR NEQ MOD MINUS LT LE LB GT GE EQUAL END DOT DIV COMMA AND ]
+expression -> localised_expression . STAR localised_expression [ STAR SEMI RP RB PLUS OR NEQ MOD MINUS LT LE LB GT GE EQUAL END DOT DIV COMMA AND ]
+expression -> localised_expression . DIV localised_expression [ STAR SEMI RP RB PLUS OR NEQ MOD MINUS LT LE LB GT GE EQUAL END DOT DIV COMMA AND ]
+expression -> localised_expression . MOD localised_expression [ STAR SEMI RP RB PLUS OR NEQ MOD MINUS LT LE LB GT GE EQUAL END DOT DIV COMMA AND ]
+expression -> localised_expression . EQUAL localised_expression [ STAR SEMI RP RB PLUS OR NEQ MOD MINUS LT LE LB GT GE EQUAL END DOT DIV COMMA AND ]
+expression -> localised_expression . NEQ localised_expression [ STAR SEMI RP RB PLUS OR NEQ MOD MINUS LT LE LB GT GE EQUAL END DOT DIV COMMA AND ]
+expression -> localised_expression . LT localised_expression [ STAR SEMI RP RB PLUS OR NEQ MOD MINUS LT LE LB GT GE EQUAL END DOT DIV COMMA AND ]
+expression -> localised_expression . LE localised_expression [ STAR SEMI RP RB PLUS OR NEQ MOD MINUS LT LE LB GT GE EQUAL END DOT DIV COMMA AND ]
+expression -> localised_expression . GT localised_expression [ STAR SEMI RP RB PLUS OR NEQ MOD MINUS LT LE LB GT GE EQUAL END DOT DIV COMMA AND ]
+expression -> localised_expression . GE localised_expression [ STAR SEMI RP RB PLUS OR NEQ MOD MINUS LT LE LB GT GE EQUAL END DOT DIV COMMA AND ]
+expression -> localised_expression . AND localised_expression [ STAR SEMI RP RB PLUS OR NEQ MOD MINUS LT LE LB GT GE EQUAL END DOT DIV COMMA AND ]
+expression -> localised_expression . OR localised_expression [ STAR SEMI RP RB PLUS OR NEQ MOD MINUS LT LE LB GT GE EQUAL END DOT DIV COMMA AND ]
+-- On LB shift to state 43
+-- On STAR reduce production expression -> MINUS localised_expression 
+-- On SEMI reduce production expression -> MINUS localised_expression 
+-- On RP reduce production expression -> MINUS localised_expression 
+-- On RB reduce production expression -> MINUS localised_expression 
+-- On PLUS reduce production expression -> MINUS localised_expression 
+-- On OR reduce production expression -> MINUS localised_expression 
+-- On NEQ reduce production expression -> MINUS localised_expression 
+-- On MOD reduce production expression -> MINUS localised_expression 
+-- On MINUS reduce production expression -> MINUS localised_expression 
+-- On LT reduce production expression -> MINUS localised_expression 
+-- On LE reduce production expression -> MINUS localised_expression 
+-- On GT reduce production expression -> MINUS localised_expression 
+-- On GE reduce production expression -> MINUS localised_expression 
+-- On EQUAL reduce production expression -> MINUS localised_expression 
+-- On END reduce production expression -> MINUS localised_expression 
+-- On DOT reduce production expression -> MINUS localised_expression 
+-- On DIV reduce production expression -> MINUS localised_expression 
+-- On COMMA reduce production expression -> MINUS localised_expression 
+-- On AND reduce production expression -> MINUS localised_expression 
+
+State 73:
+expression -> localised_expression . LB localised_expression RB [ STAR RB PLUS OR NEQ MOD MINUS LT LE LB GT GE EQUAL DIV AND ]
+expression -> NEW typ LB localised_expression . RB [ STAR SEMI RP RB PLUS OR NEQ MOD MINUS LT LE LB GT GE EQUAL END DOT DIV COMMA AND ]
+expression -> localised_expression . PLUS localised_expression [ STAR RB PLUS OR NEQ MOD MINUS LT LE LB GT GE EQUAL DIV AND ]
+expression -> localised_expression . MINUS localised_expression [ STAR RB PLUS OR NEQ MOD MINUS LT LE LB GT GE EQUAL DIV AND ]
+expression -> localised_expression . STAR localised_expression [ STAR RB PLUS OR NEQ MOD MINUS LT LE LB GT GE EQUAL DIV AND ]
+expression -> localised_expression . DIV localised_expression [ STAR RB PLUS OR NEQ MOD MINUS LT LE LB GT GE EQUAL DIV AND ]
+expression -> localised_expression . MOD localised_expression [ STAR RB PLUS OR NEQ MOD MINUS LT LE LB GT GE EQUAL DIV AND ]
+expression -> localised_expression . EQUAL localised_expression [ STAR RB PLUS OR NEQ MOD MINUS LT LE LB GT GE EQUAL DIV AND ]
+expression -> localised_expression . NEQ localised_expression [ STAR RB PLUS OR NEQ MOD MINUS LT LE LB GT GE EQUAL DIV AND ]
+expression -> localised_expression . LT localised_expression [ STAR RB PLUS OR NEQ MOD MINUS LT LE LB GT GE EQUAL DIV AND ]
+expression -> localised_expression . LE localised_expression [ STAR RB PLUS OR NEQ MOD MINUS LT LE LB GT GE EQUAL DIV AND ]
+expression -> localised_expression . GT localised_expression [ STAR RB PLUS OR NEQ MOD MINUS LT LE LB GT GE EQUAL DIV AND ]
+expression -> localised_expression . GE localised_expression [ STAR RB PLUS OR NEQ MOD MINUS LT LE LB GT GE EQUAL DIV AND ]
+expression -> localised_expression . AND localised_expression [ STAR RB PLUS OR NEQ MOD MINUS LT LE LB GT GE EQUAL DIV AND ]
+expression -> localised_expression . OR localised_expression [ STAR RB PLUS OR NEQ MOD MINUS LT LE LB GT GE EQUAL DIV AND ]
+-- On STAR shift to state 41
+-- On RB shift to state 74
+-- On PLUS shift to state 46
+-- On OR shift to state 53
+-- On NEQ shift to state 55
+-- On MOD shift to state 48
+-- On MINUS shift to state 57
+-- On LT shift to state 59
+-- On LE shift to state 61
+-- On LB shift to state 43
+-- On GT shift to state 63
+-- On GE shift to state 65
+-- On EQUAL shift to state 67
+-- On DIV shift to state 51
+-- On AND shift to state 69
+
+State 74:
+expression -> NEW typ LB localised_expression RB . [ STAR SEMI RP RB PLUS OR NEQ MOD MINUS LT LE LB GT GE EQUAL END DOT DIV COMMA AND ]
+-- On STAR reduce production expression -> NEW typ LB localised_expression RB 
+-- On SEMI reduce production expression -> NEW typ LB localised_expression RB 
+-- On RP reduce production expression -> NEW typ LB localised_expression RB 
+-- On RB reduce production expression -> NEW typ LB localised_expression RB 
+-- On PLUS reduce production expression -> NEW typ LB localised_expression RB 
+-- On OR reduce production expression -> NEW typ LB localised_expression RB 
+-- On NEQ reduce production expression -> NEW typ LB localised_expression RB 
+-- On MOD reduce production expression -> NEW typ LB localised_expression RB 
+-- On MINUS reduce production expression -> NEW typ LB localised_expression RB 
+-- On LT reduce production expression -> NEW typ LB localised_expression RB 
+-- On LE reduce production expression -> NEW typ LB localised_expression RB 
+-- On LB reduce production expression -> NEW typ LB localised_expression RB 
+-- On GT reduce production expression -> NEW typ LB localised_expression RB 
+-- On GE reduce production expression -> NEW typ LB localised_expression RB 
+-- On EQUAL reduce production expression -> NEW typ LB localised_expression RB 
+-- On END reduce production expression -> NEW typ LB localised_expression RB 
+-- On DOT reduce production expression -> NEW typ LB localised_expression RB 
+-- On DIV reduce production expression -> NEW typ LB localised_expression RB 
+-- On COMMA reduce production expression -> NEW typ LB localised_expression RB 
+-- On AND reduce production expression -> NEW typ LB localised_expression RB 
+
+State 75:
+expression -> localised_expression . LB localised_expression RB [ STAR SEMI RP RB PLUS OR NEQ MOD MINUS LT LE LB GT GE EQUAL END DOT DIV COMMA AND ]
+expression -> NOT localised_expression . [ STAR SEMI RP RB PLUS OR NEQ MOD MINUS LT LE LB GT GE EQUAL END DOT DIV COMMA AND ]
+expression -> localised_expression . PLUS localised_expression [ STAR SEMI RP RB PLUS OR NEQ MOD MINUS LT LE LB GT GE EQUAL END DOT DIV COMMA AND ]
+expression -> localised_expression . MINUS localised_expression [ STAR SEMI RP RB PLUS OR NEQ MOD MINUS LT LE LB GT GE EQUAL END DOT DIV COMMA AND ]
+expression -> localised_expression . STAR localised_expression [ STAR SEMI RP RB PLUS OR NEQ MOD MINUS LT LE LB GT GE EQUAL END DOT DIV COMMA AND ]
+expression -> localised_expression . DIV localised_expression [ STAR SEMI RP RB PLUS OR NEQ MOD MINUS LT LE LB GT GE EQUAL END DOT DIV COMMA AND ]
+expression -> localised_expression . MOD localised_expression [ STAR SEMI RP RB PLUS OR NEQ MOD MINUS LT LE LB GT GE EQUAL END DOT DIV COMMA AND ]
+expression -> localised_expression . EQUAL localised_expression [ STAR SEMI RP RB PLUS OR NEQ MOD MINUS LT LE LB GT GE EQUAL END DOT DIV COMMA AND ]
+expression -> localised_expression . NEQ localised_expression [ STAR SEMI RP RB PLUS OR NEQ MOD MINUS LT LE LB GT GE EQUAL END DOT DIV COMMA AND ]
+expression -> localised_expression . LT localised_expression [ STAR SEMI RP RB PLUS OR NEQ MOD MINUS LT LE LB GT GE EQUAL END DOT DIV COMMA AND ]
+expression -> localised_expression . LE localised_expression [ STAR SEMI RP RB PLUS OR NEQ MOD MINUS LT LE LB GT GE EQUAL END DOT DIV COMMA AND ]
+expression -> localised_expression . GT localised_expression [ STAR SEMI RP RB PLUS OR NEQ MOD MINUS LT LE LB GT GE EQUAL END DOT DIV COMMA AND ]
+expression -> localised_expression . GE localised_expression [ STAR SEMI RP RB PLUS OR NEQ MOD MINUS LT LE LB GT GE EQUAL END DOT DIV COMMA AND ]
+expression -> localised_expression . AND localised_expression [ STAR SEMI RP RB PLUS OR NEQ MOD MINUS LT LE LB GT GE EQUAL END DOT DIV COMMA AND ]
+expression -> localised_expression . OR localised_expression [ STAR SEMI RP RB PLUS OR NEQ MOD MINUS LT LE LB GT GE EQUAL END DOT DIV COMMA AND ]
+-- On LB shift to state 43
+-- On STAR reduce production expression -> NOT localised_expression 
+-- On SEMI reduce production expression -> NOT localised_expression 
+-- On RP reduce production expression -> NOT localised_expression 
+-- On RB reduce production expression -> NOT localised_expression 
+-- On PLUS reduce production expression -> NOT localised_expression 
+-- On OR reduce production expression -> NOT localised_expression 
+-- On NEQ reduce production expression -> NOT localised_expression 
+-- On MOD reduce production expression -> NOT localised_expression 
+-- On MINUS reduce production expression -> NOT localised_expression 
+-- On LT reduce production expression -> NOT localised_expression 
+-- On LE reduce production expression -> NOT localised_expression 
+-- On GT reduce production expression -> NOT localised_expression 
+-- On GE reduce production expression -> NOT localised_expression 
+-- On EQUAL reduce production expression -> NOT localised_expression 
+-- On END reduce production expression -> NOT localised_expression 
+-- On DOT reduce production expression -> NOT localised_expression 
+-- On DIV reduce production expression -> NOT localised_expression 
+-- On COMMA reduce production expression -> NOT localised_expression 
+-- On AND reduce production expression -> NOT localised_expression 
+
+State 76:
+expression -> localised_expression . LB localised_expression RB [ STAR RP PLUS OR NEQ MOD MINUS LT LE LB GT GE EQUAL DIV AND ]
+expression -> localised_expression . PLUS localised_expression [ STAR RP PLUS OR NEQ MOD MINUS LT LE LB GT GE EQUAL DIV AND ]
+expression -> localised_expression . MINUS localised_expression [ STAR RP PLUS OR NEQ MOD MINUS LT LE LB GT GE EQUAL DIV AND ]
+expression -> localised_expression . STAR localised_expression [ STAR RP PLUS OR NEQ MOD MINUS LT LE LB GT GE EQUAL DIV AND ]
+expression -> localised_expression . DIV localised_expression [ STAR RP PLUS OR NEQ MOD MINUS LT LE LB GT GE EQUAL DIV AND ]
+expression -> localised_expression . MOD localised_expression [ STAR RP PLUS OR NEQ MOD MINUS LT LE LB GT GE EQUAL DIV AND ]
+expression -> localised_expression . EQUAL localised_expression [ STAR RP PLUS OR NEQ MOD MINUS LT LE LB GT GE EQUAL DIV AND ]
+expression -> localised_expression . NEQ localised_expression [ STAR RP PLUS OR NEQ MOD MINUS LT LE LB GT GE EQUAL DIV AND ]
+expression -> localised_expression . LT localised_expression [ STAR RP PLUS OR NEQ MOD MINUS LT LE LB GT GE EQUAL DIV AND ]
+expression -> localised_expression . LE localised_expression [ STAR RP PLUS OR NEQ MOD MINUS LT LE LB GT GE EQUAL DIV AND ]
+expression -> localised_expression . GT localised_expression [ STAR RP PLUS OR NEQ MOD MINUS LT LE LB GT GE EQUAL DIV AND ]
+expression -> localised_expression . GE localised_expression [ STAR RP PLUS OR NEQ MOD MINUS LT LE LB GT GE EQUAL DIV AND ]
+expression -> localised_expression . AND localised_expression [ STAR RP PLUS OR NEQ MOD MINUS LT LE LB GT GE EQUAL DIV AND ]
+expression -> localised_expression . OR localised_expression [ STAR RP PLUS OR NEQ MOD MINUS LT LE LB GT GE EQUAL DIV AND ]
+instruction -> WHILE LP localised_expression . RP block [ SEMI RP END COMMA ]
+-- On STAR shift to state 41
+-- On RP shift to state 77
+-- On PLUS shift to state 46
+-- On OR shift to state 53
+-- On NEQ shift to state 55
+-- On MOD shift to state 48
+-- On MINUS shift to state 57
+-- On LT shift to state 59
+-- On LE shift to state 61
+-- On LB shift to state 43
+-- On GT shift to state 63
+-- On GE shift to state 65
+-- On EQUAL shift to state 67
+-- On DIV shift to state 51
+-- On AND shift to state 69
+
+State 77:
+instruction -> WHILE LP localised_expression RP . block [ SEMI RP END COMMA ]
+-- On BEGIN shift to state 28
+-- On block shift to state 78
+
+State 78:
+instruction -> WHILE LP localised_expression RP block . [ SEMI RP END COMMA ]
+-- On SEMI reduce production instruction -> WHILE LP localised_expression RP block 
+-- On RP reduce production instruction -> WHILE LP localised_expression RP block 
+-- On END reduce production instruction -> WHILE LP localised_expression RP block 
+-- On COMMA reduce production instruction -> WHILE LP localised_expression RP block 
+
+State 79:
+instruction -> PRINT . LP localised_expression RP [ SEMI RP END COMMA ]
+-- On LP shift to state 80
+
+State 80:
+instruction -> PRINT LP . localised_expression RP [ SEMI RP END COMMA ]
+-- On NOT shift to state 31
+-- On NEW shift to state 32
+-- On MINUS shift to state 35
+-- On LP shift to state 36
+-- On IDENT shift to state 37
+-- On CONST_INT shift to state 38
+-- On CONST_BOOL shift to state 39
+-- On localised_expression shift to state 81
+-- On expression shift to state 50
+
+State 81:
+expression -> localised_expression . LB localised_expression RB [ STAR RP PLUS OR NEQ MOD MINUS LT LE LB GT GE EQUAL DIV AND ]
+expression -> localised_expression . PLUS localised_expression [ STAR RP PLUS OR NEQ MOD MINUS LT LE LB GT GE EQUAL DIV AND ]
+expression -> localised_expression . MINUS localised_expression [ STAR RP PLUS OR NEQ MOD MINUS LT LE LB GT GE EQUAL DIV AND ]
+expression -> localised_expression . STAR localised_expression [ STAR RP PLUS OR NEQ MOD MINUS LT LE LB GT GE EQUAL DIV AND ]
+expression -> localised_expression . DIV localised_expression [ STAR RP PLUS OR NEQ MOD MINUS LT LE LB GT GE EQUAL DIV AND ]
+expression -> localised_expression . MOD localised_expression [ STAR RP PLUS OR NEQ MOD MINUS LT LE LB GT GE EQUAL DIV AND ]
+expression -> localised_expression . EQUAL localised_expression [ STAR RP PLUS OR NEQ MOD MINUS LT LE LB GT GE EQUAL DIV AND ]
+expression -> localised_expression . NEQ localised_expression [ STAR RP PLUS OR NEQ MOD MINUS LT LE LB GT GE EQUAL DIV AND ]
+expression -> localised_expression . LT localised_expression [ STAR RP PLUS OR NEQ MOD MINUS LT LE LB GT GE EQUAL DIV AND ]
+expression -> localised_expression . LE localised_expression [ STAR RP PLUS OR NEQ MOD MINUS LT LE LB GT GE EQUAL DIV AND ]
+expression -> localised_expression . GT localised_expression [ STAR RP PLUS OR NEQ MOD MINUS LT LE LB GT GE EQUAL DIV AND ]
+expression -> localised_expression . GE localised_expression [ STAR RP PLUS OR NEQ MOD MINUS LT LE LB GT GE EQUAL DIV AND ]
+expression -> localised_expression . AND localised_expression [ STAR RP PLUS OR NEQ MOD MINUS LT LE LB GT GE EQUAL DIV AND ]
+expression -> localised_expression . OR localised_expression [ STAR RP PLUS OR NEQ MOD MINUS LT LE LB GT GE EQUAL DIV AND ]
+instruction -> PRINT LP localised_expression . RP [ SEMI RP END COMMA ]
+-- On STAR shift to state 41
+-- On RP shift to state 82
+-- On PLUS shift to state 46
+-- On OR shift to state 53
+-- On NEQ shift to state 55
+-- On MOD shift to state 48
+-- On MINUS shift to state 57
+-- On LT shift to state 59
+-- On LE shift to state 61
+-- On LB shift to state 43
+-- On GT shift to state 63
+-- On GE shift to state 65
+-- On EQUAL shift to state 67
+-- On DIV shift to state 51
+-- On AND shift to state 69
+
+State 82:
+instruction -> PRINT LP localised_expression RP . [ SEMI RP END COMMA ]
+-- On SEMI reduce production instruction -> PRINT LP localised_expression RP 
+-- On RP reduce production instruction -> PRINT LP localised_expression RP 
+-- On END reduce production instruction -> PRINT LP localised_expression RP 
+-- On COMMA reduce production instruction -> PRINT LP localised_expression RP 
+
+State 83:
+instruction -> IF . LP localised_expression RP block ELSE block [ SEMI RP END COMMA ]
+instruction -> IF . LP localised_expression RP block [ SEMI RP END COMMA ]
+instruction -> IF . LP localised_expression RP block ELIF elif_instruction [ SEMI RP END COMMA ]
+-- On LP shift to state 84
+
+State 84:
+instruction -> IF LP . localised_expression RP block ELSE block [ SEMI RP END COMMA ]
+instruction -> IF LP . localised_expression RP block [ SEMI RP END COMMA ]
+instruction -> IF LP . localised_expression RP block ELIF elif_instruction [ SEMI RP END COMMA ]
+-- On NOT shift to state 31
+-- On NEW shift to state 32
+-- On MINUS shift to state 35
+-- On LP shift to state 36
+-- On IDENT shift to state 37
+-- On CONST_INT shift to state 38
+-- On CONST_BOOL shift to state 39
+-- On localised_expression shift to state 85
+-- On expression shift to state 50
+
+State 85:
+expression -> localised_expression . LB localised_expression RB [ STAR RP PLUS OR NEQ MOD MINUS LT LE LB GT GE EQUAL DIV AND ]
+expression -> localised_expression . PLUS localised_expression [ STAR RP PLUS OR NEQ MOD MINUS LT LE LB GT GE EQUAL DIV AND ]
+expression -> localised_expression . MINUS localised_expression [ STAR RP PLUS OR NEQ MOD MINUS LT LE LB GT GE EQUAL DIV AND ]
+expression -> localised_expression . STAR localised_expression [ STAR RP PLUS OR NEQ MOD MINUS LT LE LB GT GE EQUAL DIV AND ]
+expression -> localised_expression . DIV localised_expression [ STAR RP PLUS OR NEQ MOD MINUS LT LE LB GT GE EQUAL DIV AND ]
+expression -> localised_expression . MOD localised_expression [ STAR RP PLUS OR NEQ MOD MINUS LT LE LB GT GE EQUAL DIV AND ]
+expression -> localised_expression . EQUAL localised_expression [ STAR RP PLUS OR NEQ MOD MINUS LT LE LB GT GE EQUAL DIV AND ]
+expression -> localised_expression . NEQ localised_expression [ STAR RP PLUS OR NEQ MOD MINUS LT LE LB GT GE EQUAL DIV AND ]
+expression -> localised_expression . LT localised_expression [ STAR RP PLUS OR NEQ MOD MINUS LT LE LB GT GE EQUAL DIV AND ]
+expression -> localised_expression . LE localised_expression [ STAR RP PLUS OR NEQ MOD MINUS LT LE LB GT GE EQUAL DIV AND ]
+expression -> localised_expression . GT localised_expression [ STAR RP PLUS OR NEQ MOD MINUS LT LE LB GT GE EQUAL DIV AND ]
+expression -> localised_expression . GE localised_expression [ STAR RP PLUS OR NEQ MOD MINUS LT LE LB GT GE EQUAL DIV AND ]
+expression -> localised_expression . AND localised_expression [ STAR RP PLUS OR NEQ MOD MINUS LT LE LB GT GE EQUAL DIV AND ]
+expression -> localised_expression . OR localised_expression [ STAR RP PLUS OR NEQ MOD MINUS LT LE LB GT GE EQUAL DIV AND ]
+instruction -> IF LP localised_expression . RP block ELSE block [ SEMI RP END COMMA ]
+instruction -> IF LP localised_expression . RP block [ SEMI RP END COMMA ]
+instruction -> IF LP localised_expression . RP block ELIF elif_instruction [ SEMI RP END COMMA ]
+-- On STAR shift to state 41
+-- On RP shift to state 86
+-- On PLUS shift to state 46
+-- On OR shift to state 53
+-- On NEQ shift to state 55
+-- On MOD shift to state 48
+-- On MINUS shift to state 57
+-- On LT shift to state 59
+-- On LE shift to state 61
+-- On LB shift to state 43
+-- On GT shift to state 63
+-- On GE shift to state 65
+-- On EQUAL shift to state 67
+-- On DIV shift to state 51
+-- On AND shift to state 69
+
+State 86:
+instruction -> IF LP localised_expression RP . block ELSE block [ SEMI RP END COMMA ]
+instruction -> IF LP localised_expression RP . block [ SEMI RP END COMMA ]
+instruction -> IF LP localised_expression RP . block ELIF elif_instruction [ SEMI RP END COMMA ]
+-- On BEGIN shift to state 28
+-- On block shift to state 87
+
+State 87:
+instruction -> IF LP localised_expression RP block . ELSE block [ SEMI RP END COMMA ]
+instruction -> IF LP localised_expression RP block . [ SEMI RP END COMMA ]
+instruction -> IF LP localised_expression RP block . ELIF elif_instruction [ SEMI RP END COMMA ]
+-- On ELSE shift to state 88
+-- On ELIF shift to state 90
+-- On SEMI reduce production instruction -> IF LP localised_expression RP block 
+-- On RP reduce production instruction -> IF LP localised_expression RP block 
+-- On END reduce production instruction -> IF LP localised_expression RP block 
+-- On COMMA reduce production instruction -> IF LP localised_expression RP block 
+
+State 88:
+instruction -> IF LP localised_expression RP block ELSE . block [ SEMI RP END COMMA ]
+-- On BEGIN shift to state 28
+-- On block shift to state 89
+
+State 89:
+instruction -> IF LP localised_expression RP block ELSE block . [ SEMI RP END COMMA ]
+-- On SEMI reduce production instruction -> IF LP localised_expression RP block ELSE block 
+-- On RP reduce production instruction -> IF LP localised_expression RP block ELSE block 
+-- On END reduce production instruction -> IF LP localised_expression RP block ELSE block 
+-- On COMMA reduce production instruction -> IF LP localised_expression RP block ELSE block 
+
+State 90:
+instruction -> IF LP localised_expression RP block ELIF . elif_instruction [ SEMI RP END COMMA ]
+-- On LP shift to state 91
+-- On elif_instruction shift to state 98
+
+State 91:
+elif_instruction -> LP . localised_expression RP block elif_instruction [ SEMI RP END COMMA ]
+elif_instruction -> LP . localised_expression RP block ELSE block [ SEMI RP END COMMA ]
+-- On NOT shift to state 31
+-- On NEW shift to state 32
+-- On MINUS shift to state 35
+-- On LP shift to state 36
+-- On IDENT shift to state 37
+-- On CONST_INT shift to state 38
+-- On CONST_BOOL shift to state 39
+-- On localised_expression shift to state 92
+-- On expression shift to state 50
+
+State 92:
+elif_instruction -> LP localised_expression . RP block elif_instruction [ SEMI RP END COMMA ]
+elif_instruction -> LP localised_expression . RP block ELSE block [ SEMI RP END COMMA ]
+expression -> localised_expression . LB localised_expression RB [ STAR RP PLUS OR NEQ MOD MINUS LT LE LB GT GE EQUAL DIV AND ]
+expression -> localised_expression . PLUS localised_expression [ STAR RP PLUS OR NEQ MOD MINUS LT LE LB GT GE EQUAL DIV AND ]
+expression -> localised_expression . MINUS localised_expression [ STAR RP PLUS OR NEQ MOD MINUS LT LE LB GT GE EQUAL DIV AND ]
+expression -> localised_expression . STAR localised_expression [ STAR RP PLUS OR NEQ MOD MINUS LT LE LB GT GE EQUAL DIV AND ]
+expression -> localised_expression . DIV localised_expression [ STAR RP PLUS OR NEQ MOD MINUS LT LE LB GT GE EQUAL DIV AND ]
+expression -> localised_expression . MOD localised_expression [ STAR RP PLUS OR NEQ MOD MINUS LT LE LB GT GE EQUAL DIV AND ]
+expression -> localised_expression . EQUAL localised_expression [ STAR RP PLUS OR NEQ MOD MINUS LT LE LB GT GE EQUAL DIV AND ]
+expression -> localised_expression . NEQ localised_expression [ STAR RP PLUS OR NEQ MOD MINUS LT LE LB GT GE EQUAL DIV AND ]
+expression -> localised_expression . LT localised_expression [ STAR RP PLUS OR NEQ MOD MINUS LT LE LB GT GE EQUAL DIV AND ]
+expression -> localised_expression . LE localised_expression [ STAR RP PLUS OR NEQ MOD MINUS LT LE LB GT GE EQUAL DIV AND ]
+expression -> localised_expression . GT localised_expression [ STAR RP PLUS OR NEQ MOD MINUS LT LE LB GT GE EQUAL DIV AND ]
+expression -> localised_expression . GE localised_expression [ STAR RP PLUS OR NEQ MOD MINUS LT LE LB GT GE EQUAL DIV AND ]
+expression -> localised_expression . AND localised_expression [ STAR RP PLUS OR NEQ MOD MINUS LT LE LB GT GE EQUAL DIV AND ]
+expression -> localised_expression . OR localised_expression [ STAR RP PLUS OR NEQ MOD MINUS LT LE LB GT GE EQUAL DIV AND ]
+-- On STAR shift to state 41
+-- On RP shift to state 93
+-- On PLUS shift to state 46
+-- On OR shift to state 53
+-- On NEQ shift to state 55
+-- On MOD shift to state 48
+-- On MINUS shift to state 57
+-- On LT shift to state 59
+-- On LE shift to state 61
+-- On LB shift to state 43
+-- On GT shift to state 63
+-- On GE shift to state 65
+-- On EQUAL shift to state 67
+-- On DIV shift to state 51
+-- On AND shift to state 69
+
+State 93:
+elif_instruction -> LP localised_expression RP . block elif_instruction [ SEMI RP END COMMA ]
+elif_instruction -> LP localised_expression RP . block ELSE block [ SEMI RP END COMMA ]
+-- On BEGIN shift to state 28
+-- On block shift to state 94
+
+State 94:
+elif_instruction -> LP localised_expression RP block . elif_instruction [ SEMI RP END COMMA ]
+elif_instruction -> LP localised_expression RP block . ELSE block [ SEMI RP END COMMA ]
+-- On LP shift to state 91
+-- On ELSE shift to state 95
+-- On elif_instruction shift to state 97
+
+State 95:
+elif_instruction -> LP localised_expression RP block ELSE . block [ SEMI RP END COMMA ]
+-- On BEGIN shift to state 28
+-- On block shift to state 96
+
+State 96:
+elif_instruction -> LP localised_expression RP block ELSE block . [ SEMI RP END COMMA ]
+-- On SEMI reduce production elif_instruction -> LP localised_expression RP block ELSE block 
+-- On RP reduce production elif_instruction -> LP localised_expression RP block ELSE block 
+-- On END reduce production elif_instruction -> LP localised_expression RP block ELSE block 
+-- On COMMA reduce production elif_instruction -> LP localised_expression RP block ELSE block 
+
+State 97:
+elif_instruction -> LP localised_expression RP block elif_instruction . [ SEMI RP END COMMA ]
+-- On SEMI reduce production elif_instruction -> LP localised_expression RP block elif_instruction 
+-- On RP reduce production elif_instruction -> LP localised_expression RP block elif_instruction 
+-- On END reduce production elif_instruction -> LP localised_expression RP block elif_instruction 
+-- On COMMA reduce production elif_instruction -> LP localised_expression RP block elif_instruction 
+
+State 98:
+instruction -> IF LP localised_expression RP block ELIF elif_instruction . [ SEMI RP END COMMA ]
+-- On SEMI reduce production instruction -> IF LP localised_expression RP block ELIF elif_instruction 
+-- On RP reduce production instruction -> IF LP localised_expression RP block ELIF elif_instruction 
+-- On END reduce production instruction -> IF LP localised_expression RP block ELIF elif_instruction 
+-- On COMMA reduce production instruction -> IF LP localised_expression RP block ELIF elif_instruction 
+
+State 99:
+expression -> IDENT . [ STAR PLUS OR NEQ MOD MINUS LT LE LB GT GE EQUAL DOT DIV AND ]
+location -> IDENT . [ SET ]
+-- On STAR reduce production expression -> IDENT 
+-- On SET reduce production location -> IDENT 
+-- On PLUS reduce production expression -> IDENT 
+-- On OR reduce production expression -> IDENT 
+-- On NEQ reduce production expression -> IDENT 
+-- On MOD reduce production expression -> IDENT 
+-- On MINUS reduce production expression -> IDENT 
+-- On LT reduce production expression -> IDENT 
+-- On LE reduce production expression -> IDENT 
+-- On LB reduce production expression -> IDENT 
+-- On GT reduce production expression -> IDENT 
+-- On GE reduce production expression -> IDENT 
+-- On EQUAL reduce production expression -> IDENT 
+-- On DOT reduce production expression -> IDENT 
+-- On DIV reduce production expression -> IDENT 
+-- On AND reduce production expression -> IDENT 
+
+State 100:
+instruction -> FOR . LP localised_instruction COMMA localised_expression COMMA localised_instruction RP block [ SEMI RP END COMMA ]
+-- On LP shift to state 101
+
+State 101:
+instruction -> FOR LP . localised_instruction COMMA localised_expression COMMA localised_instruction RP block [ SEMI RP END COMMA ]
+-- On WHILE shift to state 29
+-- On PRINT shift to state 79
+-- On NOT shift to state 31
+-- On NEW shift to state 32
+-- On MINUS shift to state 35
+-- On LP shift to state 36
+-- On IF shift to state 83
+-- On IDENT shift to state 99
+-- On FOR shift to state 100
+-- On CONTINUE shift to state 102
+-- On CONST_INT shift to state 38
+-- On CONST_BOOL shift to state 39
+-- On BREAK shift to state 103
+-- On location shift to state 104
+-- On localised_instruction shift to state 107
+-- On localised_expression shift to state 110
+-- On instruction shift to state 116
+-- On expression shift to state 50
+-- On SEMI reduce production instruction -> 
+-- On COMMA reduce production instruction -> 
+
+State 102:
+instruction -> CONTINUE . [ SEMI RP END COMMA ]
+-- On SEMI reduce production instruction -> CONTINUE 
+-- On RP reduce production instruction -> CONTINUE 
+-- On END reduce production instruction -> CONTINUE 
+-- On COMMA reduce production instruction -> CONTINUE 
+
+State 103:
+instruction -> BREAK . [ SEMI RP END COMMA ]
+-- On SEMI reduce production instruction -> BREAK 
+-- On RP reduce production instruction -> BREAK 
+-- On END reduce production instruction -> BREAK 
+-- On COMMA reduce production instruction -> BREAK 
+
+State 104:
+instruction -> location . SET localised_expression [ SEMI RP END COMMA ]
+-- On SET shift to state 105
+
+State 105:
+instruction -> location SET . localised_expression [ SEMI RP END COMMA ]
+-- On NOT shift to state 31
+-- On NEW shift to state 32
+-- On MINUS shift to state 35
+-- On LP shift to state 36
+-- On IDENT shift to state 37
+-- On CONST_INT shift to state 38
+-- On CONST_BOOL shift to state 39
+-- On localised_expression shift to state 106
+-- On expression shift to state 50
+
+State 106:
+expression -> localised_expression . LB localised_expression RB [ STAR SEMI RP PLUS OR NEQ MOD MINUS LT LE LB GT GE EQUAL END DIV COMMA AND ]
+expression -> localised_expression . PLUS localised_expression [ STAR SEMI RP PLUS OR NEQ MOD MINUS LT LE LB GT GE EQUAL END DIV COMMA AND ]
+expression -> localised_expression . MINUS localised_expression [ STAR SEMI RP PLUS OR NEQ MOD MINUS LT LE LB GT GE EQUAL END DIV COMMA AND ]
+expression -> localised_expression . STAR localised_expression [ STAR SEMI RP PLUS OR NEQ MOD MINUS LT LE LB GT GE EQUAL END DIV COMMA AND ]
+expression -> localised_expression . DIV localised_expression [ STAR SEMI RP PLUS OR NEQ MOD MINUS LT LE LB GT GE EQUAL END DIV COMMA AND ]
+expression -> localised_expression . MOD localised_expression [ STAR SEMI RP PLUS OR NEQ MOD MINUS LT LE LB GT GE EQUAL END DIV COMMA AND ]
+expression -> localised_expression . EQUAL localised_expression [ STAR SEMI RP PLUS OR NEQ MOD MINUS LT LE LB GT GE EQUAL END DIV COMMA AND ]
+expression -> localised_expression . NEQ localised_expression [ STAR SEMI RP PLUS OR NEQ MOD MINUS LT LE LB GT GE EQUAL END DIV COMMA AND ]
+expression -> localised_expression . LT localised_expression [ STAR SEMI RP PLUS OR NEQ MOD MINUS LT LE LB GT GE EQUAL END DIV COMMA AND ]
+expression -> localised_expression . LE localised_expression [ STAR SEMI RP PLUS OR NEQ MOD MINUS LT LE LB GT GE EQUAL END DIV COMMA AND ]
+expression -> localised_expression . GT localised_expression [ STAR SEMI RP PLUS OR NEQ MOD MINUS LT LE LB GT GE EQUAL END DIV COMMA AND ]
+expression -> localised_expression . GE localised_expression [ STAR SEMI RP PLUS OR NEQ MOD MINUS LT LE LB GT GE EQUAL END DIV COMMA AND ]
+expression -> localised_expression . AND localised_expression [ STAR SEMI RP PLUS OR NEQ MOD MINUS LT LE LB GT GE EQUAL END DIV COMMA AND ]
+expression -> localised_expression . OR localised_expression [ STAR SEMI RP PLUS OR NEQ MOD MINUS LT LE LB GT GE EQUAL END DIV COMMA AND ]
+instruction -> location SET localised_expression . [ SEMI RP END COMMA ]
+-- On STAR shift to state 41
+-- On PLUS shift to state 46
+-- On OR shift to state 53
+-- On NEQ shift to state 55
+-- On MOD shift to state 48
+-- On MINUS shift to state 57
+-- On LT shift to state 59
+-- On LE shift to state 61
+-- On LB shift to state 43
+-- On GT shift to state 63
+-- On GE shift to state 65
+-- On EQUAL shift to state 67
+-- On DIV shift to state 51
+-- On AND shift to state 69
+-- On SEMI reduce production instruction -> location SET localised_expression 
+-- On RP reduce production instruction -> location SET localised_expression 
+-- On END reduce production instruction -> location SET localised_expression 
+-- On COMMA reduce production instruction -> location SET localised_expression 
+
+State 107:
+instruction -> FOR LP localised_instruction . COMMA localised_expression COMMA localised_instruction RP block [ SEMI RP END COMMA ]
+instruction -> localised_instruction . SEMI localised_instruction [ SEMI COMMA ]
+-- On SEMI shift to state 108
+-- On COMMA shift to state 117
+
+State 108:
+instruction -> localised_instruction SEMI . localised_instruction [ SEMI RP END COMMA ]
+-- On WHILE shift to state 29
+-- On PRINT shift to state 79
+-- On NOT shift to state 31
+-- On NEW shift to state 32
+-- On MINUS shift to state 35
+-- On LP shift to state 36
+-- On IF shift to state 83
+-- On IDENT shift to state 99
+-- On FOR shift to state 100
+-- On CONTINUE shift to state 102
+-- On CONST_INT shift to state 38
+-- On CONST_BOOL shift to state 39
+-- On BREAK shift to state 103
+-- On location shift to state 104
+-- On localised_instruction shift to state 109
+-- On localised_expression shift to state 110
+-- On instruction shift to state 116
+-- On expression shift to state 50
+-- On SEMI reduce production instruction -> 
+-- On RP reduce production instruction -> 
+-- On END reduce production instruction -> 
+-- On COMMA reduce production instruction -> 
+
+State 109:
+instruction -> localised_instruction . SEMI localised_instruction [ SEMI RP END COMMA ]
+instruction -> localised_instruction SEMI localised_instruction . [ SEMI RP END COMMA ]
+-- On SEMI reduce production instruction -> localised_instruction SEMI localised_instruction 
+-- On RP reduce production instruction -> localised_instruction SEMI localised_instruction 
+-- On END reduce production instruction -> localised_instruction SEMI localised_instruction 
+-- On COMMA reduce production instruction -> localised_instruction SEMI localised_instruction 
+
+State 110:
+expression -> localised_expression . LB localised_expression RB [ STAR PLUS OR NEQ MOD MINUS LT LE LB GT GE EQUAL DOT DIV AND ]
+expression -> localised_expression . PLUS localised_expression [ STAR PLUS OR NEQ MOD MINUS LT LE LB GT GE EQUAL DOT DIV AND ]
+expression -> localised_expression . MINUS localised_expression [ STAR PLUS OR NEQ MOD MINUS LT LE LB GT GE EQUAL DOT DIV AND ]
+expression -> localised_expression . STAR localised_expression [ STAR PLUS OR NEQ MOD MINUS LT LE LB GT GE EQUAL DOT DIV AND ]
+expression -> localised_expression . DIV localised_expression [ STAR PLUS OR NEQ MOD MINUS LT LE LB GT GE EQUAL DOT DIV AND ]
+expression -> localised_expression . MOD localised_expression [ STAR PLUS OR NEQ MOD MINUS LT LE LB GT GE EQUAL DOT DIV AND ]
+expression -> localised_expression . EQUAL localised_expression [ STAR PLUS OR NEQ MOD MINUS LT LE LB GT GE EQUAL DOT DIV AND ]
+expression -> localised_expression . NEQ localised_expression [ STAR PLUS OR NEQ MOD MINUS LT LE LB GT GE EQUAL DOT DIV AND ]
+expression -> localised_expression . LT localised_expression [ STAR PLUS OR NEQ MOD MINUS LT LE LB GT GE EQUAL DOT DIV AND ]
+expression -> localised_expression . LE localised_expression [ STAR PLUS OR NEQ MOD MINUS LT LE LB GT GE EQUAL DOT DIV AND ]
+expression -> localised_expression . GT localised_expression [ STAR PLUS OR NEQ MOD MINUS LT LE LB GT GE EQUAL DOT DIV AND ]
+expression -> localised_expression . GE localised_expression [ STAR PLUS OR NEQ MOD MINUS LT LE LB GT GE EQUAL DOT DIV AND ]
+expression -> localised_expression . AND localised_expression [ STAR PLUS OR NEQ MOD MINUS LT LE LB GT GE EQUAL DOT DIV AND ]
+expression -> localised_expression . OR localised_expression [ STAR PLUS OR NEQ MOD MINUS LT LE LB GT GE EQUAL DOT DIV AND ]
+location -> localised_expression . DOT IDENT [ SET ]
+location -> localised_expression . LB localised_expression RB [ SET ]
+-- On STAR shift to state 41
+-- On PLUS shift to state 46
+-- On OR shift to state 53
+-- On NEQ shift to state 55
+-- On MOD shift to state 48
+-- On MINUS shift to state 57
+-- On LT shift to state 59
+-- On LE shift to state 61
+-- On LB shift to state 111
+-- On GT shift to state 63
+-- On GE shift to state 65
+-- On EQUAL shift to state 67
+-- On DOT shift to state 114
+-- On DIV shift to state 51
+-- On AND shift to state 69
+
+State 111:
+expression -> localised_expression LB . localised_expression RB [ STAR PLUS OR NEQ MOD MINUS LT LE LB GT GE EQUAL DOT DIV AND ]
+location -> localised_expression LB . localised_expression RB [ SET ]
+-- On NOT shift to state 31
+-- On NEW shift to state 32
+-- On MINUS shift to state 35
+-- On LP shift to state 36
+-- On IDENT shift to state 37
+-- On CONST_INT shift to state 38
+-- On CONST_BOOL shift to state 39
+-- On localised_expression shift to state 112
+-- On expression shift to state 50
+
+State 112:
+expression -> localised_expression . LB localised_expression RB [ STAR RB PLUS OR NEQ MOD MINUS LT LE LB GT GE EQUAL DIV AND ]
+expression -> localised_expression LB localised_expression . RB [ STAR PLUS OR NEQ MOD MINUS LT LE LB GT GE EQUAL DOT DIV AND ]
+expression -> localised_expression . PLUS localised_expression [ STAR RB PLUS OR NEQ MOD MINUS LT LE LB GT GE EQUAL DIV AND ]
+expression -> localised_expression . MINUS localised_expression [ STAR RB PLUS OR NEQ MOD MINUS LT LE LB GT GE EQUAL DIV AND ]
+expression -> localised_expression . STAR localised_expression [ STAR RB PLUS OR NEQ MOD MINUS LT LE LB GT GE EQUAL DIV AND ]
+expression -> localised_expression . DIV localised_expression [ STAR RB PLUS OR NEQ MOD MINUS LT LE LB GT GE EQUAL DIV AND ]
+expression -> localised_expression . MOD localised_expression [ STAR RB PLUS OR NEQ MOD MINUS LT LE LB GT GE EQUAL DIV AND ]
+expression -> localised_expression . EQUAL localised_expression [ STAR RB PLUS OR NEQ MOD MINUS LT LE LB GT GE EQUAL DIV AND ]
+expression -> localised_expression . NEQ localised_expression [ STAR RB PLUS OR NEQ MOD MINUS LT LE LB GT GE EQUAL DIV AND ]
+expression -> localised_expression . LT localised_expression [ STAR RB PLUS OR NEQ MOD MINUS LT LE LB GT GE EQUAL DIV AND ]
+expression -> localised_expression . LE localised_expression [ STAR RB PLUS OR NEQ MOD MINUS LT LE LB GT GE EQUAL DIV AND ]
+expression -> localised_expression . GT localised_expression [ STAR RB PLUS OR NEQ MOD MINUS LT LE LB GT GE EQUAL DIV AND ]
+expression -> localised_expression . GE localised_expression [ STAR RB PLUS OR NEQ MOD MINUS LT LE LB GT GE EQUAL DIV AND ]
+expression -> localised_expression . AND localised_expression [ STAR RB PLUS OR NEQ MOD MINUS LT LE LB GT GE EQUAL DIV AND ]
+expression -> localised_expression . OR localised_expression [ STAR RB PLUS OR NEQ MOD MINUS LT LE LB GT GE EQUAL DIV AND ]
+location -> localised_expression LB localised_expression . RB [ SET ]
+-- On STAR shift to state 41
+-- On RB shift to state 113
+-- On PLUS shift to state 46
+-- On OR shift to state 53
+-- On NEQ shift to state 55
+-- On MOD shift to state 48
+-- On MINUS shift to state 57
+-- On LT shift to state 59
+-- On LE shift to state 61
+-- On LB shift to state 43
+-- On GT shift to state 63
+-- On GE shift to state 65
+-- On EQUAL shift to state 67
+-- On DIV shift to state 51
+-- On AND shift to state 69
+
+State 113:
+expression -> localised_expression LB localised_expression RB . [ STAR PLUS OR NEQ MOD MINUS LT LE LB GT GE EQUAL DOT DIV AND ]
+location -> localised_expression LB localised_expression RB . [ SET ]
+-- On STAR reduce production expression -> localised_expression LB localised_expression RB 
+-- On SET reduce production location -> localised_expression LB localised_expression RB 
+-- On PLUS reduce production expression -> localised_expression LB localised_expression RB 
+-- On OR reduce production expression -> localised_expression LB localised_expression RB 
+-- On NEQ reduce production expression -> localised_expression LB localised_expression RB 
+-- On MOD reduce production expression -> localised_expression LB localised_expression RB 
+-- On MINUS reduce production expression -> localised_expression LB localised_expression RB 
+-- On LT reduce production expression -> localised_expression LB localised_expression RB 
+-- On LE reduce production expression -> localised_expression LB localised_expression RB 
+-- On LB reduce production expression -> localised_expression LB localised_expression RB 
+-- On GT reduce production expression -> localised_expression LB localised_expression RB 
+-- On GE reduce production expression -> localised_expression LB localised_expression RB 
+-- On EQUAL reduce production expression -> localised_expression LB localised_expression RB 
+-- On DOT reduce production expression -> localised_expression LB localised_expression RB 
+-- On DIV reduce production expression -> localised_expression LB localised_expression RB 
+-- On AND reduce production expression -> localised_expression LB localised_expression RB 
+
+State 114:
+location -> localised_expression DOT . IDENT [ SET ]
+-- On IDENT shift to state 115
+
+State 115:
+location -> localised_expression DOT IDENT . [ SET ]
+-- On SET reduce production location -> localised_expression DOT IDENT 
+
+State 116:
+localised_instruction -> instruction . [ SEMI RP END COMMA ]
+-- On SEMI reduce production localised_instruction -> instruction 
+-- On RP reduce production localised_instruction -> instruction 
+-- On END reduce production localised_instruction -> instruction 
+-- On COMMA reduce production localised_instruction -> instruction 
+
+State 117:
+instruction -> FOR LP localised_instruction COMMA . localised_expression COMMA localised_instruction RP block [ SEMI RP END COMMA ]
+-- On NOT shift to state 31
+-- On NEW shift to state 32
+-- On MINUS shift to state 35
+-- On LP shift to state 36
+-- On IDENT shift to state 37
+-- On CONST_INT shift to state 38
+-- On CONST_BOOL shift to state 39
+-- On localised_expression shift to state 118
+-- On expression shift to state 50
+
+State 118:
+expression -> localised_expression . LB localised_expression RB [ STAR PLUS OR NEQ MOD MINUS LT LE LB GT GE EQUAL DIV COMMA AND ]
+expression -> localised_expression . PLUS localised_expression [ STAR PLUS OR NEQ MOD MINUS LT LE LB GT GE EQUAL DIV COMMA AND ]
+expression -> localised_expression . MINUS localised_expression [ STAR PLUS OR NEQ MOD MINUS LT LE LB GT GE EQUAL DIV COMMA AND ]
+expression -> localised_expression . STAR localised_expression [ STAR PLUS OR NEQ MOD MINUS LT LE LB GT GE EQUAL DIV COMMA AND ]
+expression -> localised_expression . DIV localised_expression [ STAR PLUS OR NEQ MOD MINUS LT LE LB GT GE EQUAL DIV COMMA AND ]
+expression -> localised_expression . MOD localised_expression [ STAR PLUS OR NEQ MOD MINUS LT LE LB GT GE EQUAL DIV COMMA AND ]
+expression -> localised_expression . EQUAL localised_expression [ STAR PLUS OR NEQ MOD MINUS LT LE LB GT GE EQUAL DIV COMMA AND ]
+expression -> localised_expression . NEQ localised_expression [ STAR PLUS OR NEQ MOD MINUS LT LE LB GT GE EQUAL DIV COMMA AND ]
+expression -> localised_expression . LT localised_expression [ STAR PLUS OR NEQ MOD MINUS LT LE LB GT GE EQUAL DIV COMMA AND ]
+expression -> localised_expression . LE localised_expression [ STAR PLUS OR NEQ MOD MINUS LT LE LB GT GE EQUAL DIV COMMA AND ]
+expression -> localised_expression . GT localised_expression [ STAR PLUS OR NEQ MOD MINUS LT LE LB GT GE EQUAL DIV COMMA AND ]
+expression -> localised_expression . GE localised_expression [ STAR PLUS OR NEQ MOD MINUS LT LE LB GT GE EQUAL DIV COMMA AND ]
+expression -> localised_expression . AND localised_expression [ STAR PLUS OR NEQ MOD MINUS LT LE LB GT GE EQUAL DIV COMMA AND ]
+expression -> localised_expression . OR localised_expression [ STAR PLUS OR NEQ MOD MINUS LT LE LB GT GE EQUAL DIV COMMA AND ]
+instruction -> FOR LP localised_instruction COMMA localised_expression . COMMA localised_instruction RP block [ SEMI RP END COMMA ]
+-- On STAR shift to state 41
+-- On PLUS shift to state 46
+-- On OR shift to state 53
+-- On NEQ shift to state 55
+-- On MOD shift to state 48
+-- On MINUS shift to state 57
+-- On LT shift to state 59
+-- On LE shift to state 61
+-- On LB shift to state 43
+-- On GT shift to state 63
+-- On GE shift to state 65
+-- On EQUAL shift to state 67
+-- On DIV shift to state 51
+-- On COMMA shift to state 119
+-- On AND shift to state 69
+
+State 119:
+instruction -> FOR LP localised_instruction COMMA localised_expression COMMA . localised_instruction RP block [ SEMI RP END COMMA ]
+-- On WHILE shift to state 29
+-- On PRINT shift to state 79
+-- On NOT shift to state 31
+-- On NEW shift to state 32
+-- On MINUS shift to state 35
+-- On LP shift to state 36
+-- On IF shift to state 83
+-- On IDENT shift to state 99
+-- On FOR shift to state 100
+-- On CONTINUE shift to state 102
+-- On CONST_INT shift to state 38
+-- On CONST_BOOL shift to state 39
+-- On BREAK shift to state 103
+-- On location shift to state 104
+-- On localised_instruction shift to state 120
+-- On localised_expression shift to state 110
+-- On instruction shift to state 116
+-- On expression shift to state 50
+-- On SEMI reduce production instruction -> 
+-- On RP reduce production instruction -> 
+
+State 120:
+instruction -> FOR LP localised_instruction COMMA localised_expression COMMA localised_instruction . RP block [ SEMI RP END COMMA ]
+instruction -> localised_instruction . SEMI localised_instruction [ SEMI RP ]
+-- On SEMI shift to state 108
+-- On RP shift to state 121
+
+State 121:
+instruction -> FOR LP localised_instruction COMMA localised_expression COMMA localised_instruction RP . block [ SEMI RP END COMMA ]
+-- On BEGIN shift to state 28
+-- On block shift to state 122
+
+State 122:
+instruction -> FOR LP localised_instruction COMMA localised_expression COMMA localised_instruction RP block . [ SEMI RP END COMMA ]
+-- On SEMI reduce production instruction -> FOR LP localised_instruction COMMA localised_expression COMMA localised_instruction RP block 
+-- On RP reduce production instruction -> FOR LP localised_instruction COMMA localised_expression COMMA localised_instruction RP block 
+-- On END reduce production instruction -> FOR LP localised_instruction COMMA localised_expression COMMA localised_instruction RP block 
+-- On COMMA reduce production instruction -> FOR LP localised_instruction COMMA localised_expression COMMA localised_instruction RP block 
+
+State 123:
+block -> BEGIN localised_instruction . END [ SEMI RP LP EOF END ELSE ELIF COMMA ]
+instruction -> localised_instruction . SEMI localised_instruction [ SEMI END ]
+-- On SEMI shift to state 108
+-- On END shift to state 124
+
+State 124:
+block -> BEGIN localised_instruction END . [ SEMI RP LP EOF END ELSE ELIF COMMA ]
+-- On SEMI reduce production block -> BEGIN localised_instruction END 
+-- On RP reduce production block -> BEGIN localised_instruction END 
+-- On LP reduce production block -> BEGIN localised_instruction END 
+-- On EOF reduce production block -> BEGIN localised_instruction END 
+-- On END reduce production block -> BEGIN localised_instruction END 
+-- On ELSE reduce production block -> BEGIN localised_instruction END 
+-- On ELIF reduce production block -> BEGIN localised_instruction END 
+-- On COMMA reduce production block -> BEGIN localised_instruction END 
+
+State 125:
+main -> MAIN block . [ EOF ]
+-- On EOF reduce production main -> MAIN block 
+
+State 126:
+prog -> struct_decls var_decls main . EOF [ # ]
+-- On EOF shift to state 127
+
+State 127:
+prog -> struct_decls var_decls main EOF . [ # ]
+-- On # reduce production prog -> struct_decls var_decls main EOF 
+
+State 128:
+prog' -> prog . [ # ]
+-- On # accept prog
+

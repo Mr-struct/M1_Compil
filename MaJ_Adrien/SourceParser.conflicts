@@ -1,0 +1,32 @@
+
+** Conflict (shift/reduce) in state 33.
+** Token involved: LB
+** This state is reached from prog after reading:
+
+struct_decls var_decls MAIN BEGIN NEW typ 
+
+** The derivations that appear below have the following common factor:
+** (The question mark symbol (?) represents the spot where the derivations begin to differ.)
+
+prog 
+struct_decls var_decls main EOF 
+                       MAIN block 
+                            BEGIN localised_instruction END 
+                                  instruction 
+                                  location SET localised_expression 
+                                  (?)
+
+** In state 33, looking ahead at LB, shifting is permitted
+** because of the following sub-derivation:
+
+localised_expression DOT IDENT 
+expression 
+NEW typ . LB localised_expression RB 
+
+** In state 33, looking ahead at LB, reducing production
+** expression -> NEW typ 
+** is permitted because of the following sub-derivation:
+
+localised_expression LB localised_expression RB // lookahead token appears
+expression // lookahead token is inherited
+NEW typ . 

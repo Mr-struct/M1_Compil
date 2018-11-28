@@ -1,0 +1,22 @@
+struct message { locked integer a; integer b; }
+var message t;
+struct channel { boolean lock; message m; }
+var channel c;
+
+  main {
+    t := new message;
+    t.a := 1;
+    t.b := 2;
+    print(t.a);
+    print(t.b);    
+    c := new channel;
+    c.lock := true;
+    c.m := new message;
+    c.m.a := 79;
+    c.m.b := 107;
+    c.lock := false;
+
+    while (c.lock) {};
+    print(c.m.a);
+    print(c.m.b);
+  }

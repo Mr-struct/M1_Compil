@@ -1,0 +1,18 @@
+var integer i;
+var integer j;
+var boolean continuer;
+
+main {
+  continuer := true;
+  i := 0;
+
+  while (i < 15) {
+    if (i < 10) {
+        i := i+1;
+        continue
+    } else {
+        print(i);
+        i := i+1
+      }
+  }
+}

@@ -1,0 +1,31 @@
+#DEFINE ocaml jaime les lexers            
+#DEFINE V var
+#DEFINE mult{2} #0 := #0 * #1
+
+#V integer i;
+#V integer j;
+#V boolean continuer;
+
+main {
+  continuer := true;
+  i := 0;
+  #mult{i}{3};
+  while (continuer) {
+    continuer := false;
+    j := 0;
+    #mult{j}{2};
+    while (j < arg+1) {
+      if (i*i + j*j < arg*arg) {
+        print(46);
+        #mult{j}{2};
+        continuer := true
+      } else {
+        print(35)
+      };
+      print(32);
+      j := j+1
+    };
+    print(10);
+    i := i+1
+  }
+}
