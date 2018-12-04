@@ -1,6 +1,5 @@
 open CommonAST
 module Gto = GotoAST
-module IGto = IndexedGotoAST
 
 type expression = Gto.expression
 type location = Gto.location
@@ -53,9 +52,9 @@ let rec strip_indexed_instruction = function
 
 let strip_instruction i =  
   let cpt = ref (-1) in
-  let rec index_instruction i = (incr cpt; !cpt), create_instruction
+  let rec index_instruction i = (incr cpt; !cpt), create_instruction i
   and create_instruction = function
-    | Gto.Sequence(i1, i2)      -> Sequence(create_instruction i1, create_instruction i2)
+    | Gto.Sequence(i1, i2)      -> Sequence(index_instruction i1, index_instruction i2)
     | Gto.Set(l, e)             -> Set(l, e)
     | Gto.Label(l)              -> Label(l)
     | Gto.Goto(l)               -> Goto(l)
@@ -63,6 +62,7 @@ let strip_instruction i =
     | Gto.ProCall(id, l)        -> ProCall(id, l)
     | Gto.Return(e)             -> Return(e)
     | Gto.Nop                   -> Nop
+  in index_instruction i
        
 let index_program p =
   { main = strip_instruction Gto.(p.main);
