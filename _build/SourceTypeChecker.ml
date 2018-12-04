@@ -61,7 +61,6 @@ let rec type_expression context e = match e.expr with
   | FunCall(Id id, l) ->
      let formals = List.rev (List.fold_left (fun acc arg -> (type_expression context arg)::acc) [] l) in
      let new_name = change_func_name id formals in
-     Printf.printf "Funcall = %s\n" new_name;
      let func_sig = Symb_Tbl.find new_name context.function_signatures in
      List.iter2
        (fun expr arg -> let type_e = type_expression context expr in if type_e != snd arg then raise (Type_error(type_e, snd arg, expr.e_pos)) )
@@ -143,7 +142,6 @@ let rec typecheck_instruction context i = match i.instr with
      begin
        let formals = List.rev (List.fold_left (fun acc arg -> (type_expression context arg)::acc) [] l) in
        let new_name = change_func_name id formals in
-       Printf.printf "Procall = %s\n" new_name;
        let func_sig = Symb_Tbl.find new_name context.function_signatures in
        List.iter2
 	 (fun expr arg -> let type_e = type_expression context expr in if type_e != snd arg then raise (Type_error(type_e, snd arg, expr.e_pos)) )
@@ -172,7 +170,6 @@ let typecheck_program p =
   let type_context = extract_context p in
   typecheck_instruction type_context p.main;
   Symb_Tbl.iter (fun key value ->
-    Printf.printf "SymbTbl fold = %s\n" key;
     let new_identifiers = List.fold_left (fun acc arg -> Symb_Tbl.add (fst arg) (snd arg) acc) p.globals value.signature.formals in
     let new_identifiers = Symb_Tbl.fold (fun key value acc -> Symb_Tbl.add key value acc) value.locals new_identifiers in
     typecheck_instruction {type_context with identifier_types = new_identifiers; return_type = value.signature.return} value.code)
