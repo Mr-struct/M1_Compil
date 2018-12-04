@@ -1,0 +1,11 @@
+
+     
+let () =
+  let c  = open_in file in
+  let lb = Lexing.from_channel c in
+  let prog = SourceParser.prog SourceLexer.token lb in
+  close_in c;
+  let type_context = SourceTypeChecker.typecheck_program prog in
+  let prog = SourceToImp.strip_program prog type_context in
+  let prog = ImpToGoto.translate_program prog in
+  
