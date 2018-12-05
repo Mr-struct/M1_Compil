@@ -1,1 +1,1 @@
-Compilo.ml: Arg Array Filename Format GotoToMips ImpToGoto IndexedGotoAST IndexedGotoLiveness Lexing Mips Preprocessor Printf SourceLexer SourceParser SourceToImp SourceTypeChecker Symb_Tbl
+Compilo.ml: Arg Array CommonAST Filename Format GotoToMips ImpToGoto IndexedGotoAST IndexedGotoLiveness Lexing List Mips Preprocessor Printf SourceLexer SourceParser SourceToImp SourceTypeChecker

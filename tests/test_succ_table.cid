@@ -1,0 +1,10 @@
+var integer i, j;
+
+main{
+    if (i>0){
+        j := i;
+    }
+    else {
+        j := 0;
+    }   
+}

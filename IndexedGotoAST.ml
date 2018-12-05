@@ -41,7 +41,7 @@ and let strip_location_to_Goto = function
 *)
 
 let rec strip_indexed_instruction = function
-  | _, Sequence(i1, i2)      -> Gto.Sequence(strip_instruction i1, strip_instruction i2)
+  | _, Sequence(i1, i2)      -> Gto.Sequence(strip_indexed_instruction i1, strip_indexed_instruction i2)
   | _, Set(l, e)             -> Gto.Set(l, e)
   | _, Label(l)              -> Gto.Label(l)
   | _, Goto(l)               -> Gto.Goto(l)
@@ -79,15 +79,15 @@ let index_program p =
   }
     
 let strip_program p =
-  Gto.({ main = strip_indexed_instruction IGto.(p.main);
-    globals = IGto.(p.globals);
-    functions = Symb_Tbl.fold (
+  { Gto.main = strip_indexed_instruction p.main;
+    Gto.globals = p.globals;
+    Gto.functions = Symb_Tbl.fold (
       fun key value acc ->
-	Symb_Tbl.add key {signature = IGto.(value.signature);
-			  code = strip_indexed_instruction IGto.(value.code);
-			  locals = IGto.(value.locals)}
+	Symb_Tbl.add key {Gto.signature = value.signature;
+			  Gto.code = strip_indexed_instruction value.code;
+			  Gto.locals = value.locals}
 	  acc
     )
-      IGto.(p.functions)
+      p.functions
       Symb_Tbl.empty;
-  })
+  }

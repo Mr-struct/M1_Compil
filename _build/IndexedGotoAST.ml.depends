@@ -1,1 +1,1 @@
-IndexedGotoAST.ml: CommonAST GotoAST IGto Symb_Tbl
+IndexedGotoAST.ml: CommonAST GotoAST Symb_Tbl

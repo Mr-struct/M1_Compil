@@ -97,13 +97,6 @@ main_int:
 	move $fp, $sp
 	addi $fp, $fp, 8
 	subi $sp, $sp, 0
-	li $t0, 3
-	sw $t0, 0($sp)
-	subi $sp, $sp, 4
-	la $t0, i
-	addi $sp, $sp, 4
-	lw $t1, 0($sp)
-	sw $t1, 0($t0)
 	la $t0, i
 	lw $t0, 0($t0)
 	sw $t0, 0($sp)
@@ -111,30 +104,26 @@ main_int:
 	li $t0, 0
 	addi $sp, $sp, 4
 	lw $t1, 0($sp)
-	seq $t0, $t0, $t1
+	sgt $t0, $t1, $t0
 	bne $zero, $t0, _label_1
-	jal _label_2
-_label_1:
-	la $t0, i
-	lw $t0, 0($t0)
-	sw $t0, 0($sp)
-	subi $sp, $sp, 4
-	jal print_int
-	addi $sp, $sp, 4
-_label_2:
-	li $t0, 5
+	li $t0, 0
 	sw $t0, 0($sp)
 	subi $sp, $sp, 4
 	la $t0, j
 	addi $sp, $sp, 4
 	lw $t1, 0($sp)
 	sw $t1, 0($t0)
-	la $t0, j
+	jal _label_2
+_label_1:
+	la $t0, i
 	lw $t0, 0($t0)
 	sw $t0, 0($sp)
 	subi $sp, $sp, 4
-	jal print_int
+	la $t0, j
 	addi $sp, $sp, 4
+	lw $t1, 0($sp)
+	sw $t1, 0($t0)
+_label_2:
 	addi $sp, $sp, 0
 	addi $sp, $sp, 4
 	lw $ra, 0($sp)
