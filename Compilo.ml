@@ -32,8 +32,7 @@ let () =
   (*Symb_Tbl.iter (fun key value -> Printf.printf "%s\n" key) prog.functions;*)
   let prog = ImpToGoto.translate_program prog in
   let indexed_prog = IndexedGotoAST.index_program prog in
-  let succ_table = IndexedGotoLiveness.prog indexed_prog in
-  print_tab succ_table;
+  IndexedGotoLiveness.prog indexed_prog;
   let asm = GotoToMips.translate_program prog in
   let output_file = (Filename.chop_suffix file ".cid") ^ ".asm" in
   let out = open_out output_file in

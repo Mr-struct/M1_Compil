@@ -1,1 +1,1 @@
-IndexedGotoAST.ml: CommonAST GotoAST Symb_Tbl
+IndexedGotoAST.ml: CommonAST GotoAST Printf Symb_Tbl

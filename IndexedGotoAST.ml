@@ -52,16 +52,17 @@ let rec strip_indexed_instruction = function
 
 let strip_instruction i =  
   let cpt = ref (-1) in
-  let rec index_instruction i = (incr cpt; !cpt), create_instruction i
-  and create_instruction = function
-    | Gto.Sequence(i1, i2)      -> Sequence(index_instruction i1, index_instruction i2)
-    | Gto.Set(l, e)             -> Set(l, e)
-    | Gto.Label(l)              -> Label(l)
-    | Gto.Goto(l)               -> Goto(l)
-    | Gto.ConditionalGoto(l, e) -> ConditionalGoto(l, e)
-    | Gto.ProCall(id, l)        -> ProCall(id, l)
-    | Gto.Return(e)             -> Return(e)
-    | Gto.Nop                   -> Nop
+  let rec index_instruction i = incr cpt; let newcpt = !cpt in (!cpt, create_instruction i newcpt)
+  and create_instruction i cpt =
+    match i with
+    | Gto.Sequence(i1, i2)      -> Printf.printf "Sequence %d\n" cpt;Sequence(index_instruction i1, index_instruction i2)
+    | Gto.Set(l, e)             -> Printf.printf "Set %d\n" cpt;Set(l, e)
+    | Gto.Label(l)              -> Printf.printf "Label %d\n" cpt;Label(l)
+    | Gto.Goto(l)               -> Printf.printf "Goto %d\n" cpt;Goto(l)
+    | Gto.ConditionalGoto(l, e) -> Printf.printf "CondGoto %d\n" cpt;ConditionalGoto(l, e)
+    | Gto.ProCall(id, l)        -> Printf.printf "ProCall %d\n" cpt;ProCall(id, l)
+    | Gto.Return(e)             -> Printf.printf "Return %d\n" cpt;Return(e)
+    | Gto.Nop                   -> Printf.printf "Nop %d\n" cpt;Nop
   in index_instruction i
        
 let index_program p =
