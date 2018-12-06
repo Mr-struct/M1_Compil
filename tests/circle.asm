@@ -9,7 +9,7 @@ init_end:
 	lw $t0, 0($t0)
 	sw $t0, 0($sp)
 	subi $sp, $sp, 4
-	jal main
+	jal main_int
 	addi $sp, $sp, 4
 	li $v0, 10
 	syscall
@@ -36,7 +36,7 @@ atoi_end:
 	move $v0, $t1
 	jr $ra
 #print
-print:
+print_int:
 	sw $fp, 0($sp)
 	subi $sp, $sp, 4
 	sw $ra, 0($sp)
@@ -52,7 +52,7 @@ print:
 	lw $fp, 0($sp)
 	jr $ra
 #print_int
-print_int:
+print_int_int:
 	sw $fp, 0($sp)
 	subi $sp, $sp, 4
 	sw $ra, 0($sp)
@@ -68,7 +68,7 @@ print_int:
 	lw $fp, 0($sp)
 	jr $ra
 #power
-power:
+power_int_int:
 	sw $fp, 0($sp)
 	subi $sp, $sp, 4
 	sw $ra, 0($sp)
@@ -89,7 +89,7 @@ power_loop_guard:
 	addi $sp, $sp, 4
 	lw $fp, 0($sp)
 	jr $ra
-main:
+main_int:
 	sw $fp, 0($sp)
 	subi $sp, $sp, 4
 	sw $ra, 0($sp)
@@ -183,14 +183,14 @@ _label_5:
 	li $t0, 35
 	sw $t0, 0($sp)
 	subi $sp, $sp, 4
-	jal print
+	jal print_int
 	addi $sp, $sp, 4
 	jal _label_8
 _label_7:
 	li $t0, 46
 	sw $t0, 0($sp)
 	subi $sp, $sp, 4
-	jal print
+	jal print_int
 	addi $sp, $sp, 4
 	li $t0, -1
 	sw $t0, 0($sp)
@@ -203,7 +203,7 @@ _label_8:
 	li $t0, 32
 	sw $t0, 0($sp)
 	subi $sp, $sp, 4
-	jal print
+	jal print_int
 	addi $sp, $sp, 4
 	la $t0, j
 	lw $t0, 0($t0)
@@ -219,7 +219,7 @@ _label_6:
 	li $t0, 10
 	sw $t0, 0($sp)
 	subi $sp, $sp, 4
-	jal print
+	jal print_int
 	addi $sp, $sp, 4
 	la $t0, i
 	lw $t0, 0($t0)

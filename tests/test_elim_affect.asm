@@ -97,7 +97,7 @@ main_int:
 	move $fp, $sp
 	addi $fp, $fp, 8
 	subi $sp, $sp, 0
-	li $t0, 10
+	lw $t0, 4($fp)
 	sw $t0, 0($sp)
 	subi $sp, $sp, 4
 	la $t0, i
@@ -113,7 +113,8 @@ main_int:
 	addi $sp, $sp, 4
 	lw $t1, 0($sp)
 	sw $t1, 0($t0)
-	li $t0, 0
+	la $t0, j
+	lw $t0, 0($t0)
 	sw $t0, 0($sp)
 	subi $sp, $sp, 4
 	jal print_int_int

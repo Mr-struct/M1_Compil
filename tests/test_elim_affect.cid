@@ -1,8 +1,8 @@
 var integer i, j;
 
 main {
-    i := 10;
+    i := arg;
     j := i+1;
-    print_int(0);
+    print_int(j);
 }
 

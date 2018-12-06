@@ -29,8 +29,12 @@
 /home/tp-home008/agallot/.opam/4.06.0/bin/ocamldep.opt -modules IndexedGotoAST.ml > IndexedGotoAST.ml.depends # cached
 # Target: IndexedGotoAST.cmo, tags: { byte, compile, extension:cmo, extension:ml, file:IndexedGotoAST.cmo, file:IndexedGotoAST.ml, implem, ocaml, quiet, traverse, use_menhir }
 /home/tp-home008/agallot/.opam/4.06.0/bin/ocamlc.opt -c -o IndexedGotoAST.cmo IndexedGotoAST.ml # cached
+# Target: IndexedGotoDeadCodeElim.ml.depends, tags: { extension:ml, file:IndexedGotoDeadCodeElim.ml, ocaml, ocamldep, quiet, traverse, use_menhir }
+/home/tp-home008/agallot/.opam/4.06.0/bin/ocamldep.opt -modules IndexedGotoDeadCodeElim.ml > IndexedGotoDeadCodeElim.ml.depends
 # Target: IndexedGotoLiveness.ml.depends, tags: { extension:ml, file:IndexedGotoLiveness.ml, ocaml, ocamldep, quiet, traverse, use_menhir }
-/home/tp-home008/agallot/.opam/4.06.0/bin/ocamldep.opt -modules IndexedGotoLiveness.ml > IndexedGotoLiveness.ml.depends
+/home/tp-home008/agallot/.opam/4.06.0/bin/ocamldep.opt -modules IndexedGotoLiveness.ml > IndexedGotoLiveness.ml.depends # cached
+# Target: IndexedGotoLiveness.cmo, tags: { byte, compile, extension:cmo, extension:ml, file:IndexedGotoLiveness.cmo, file:IndexedGotoLiveness.ml, implem, ocaml, quiet, traverse, use_menhir }
+/home/tp-home008/agallot/.opam/4.06.0/bin/ocamlc.opt -c -o IndexedGotoLiveness.cmo IndexedGotoLiveness.ml # cached
 # Target: preprocessor.mll, tags: { extension:mll, file:preprocessor.mll, lexer, ocaml, ocamllex, quiet, traverse, use_menhir }
 /home/tp-home008/agallot/.opam/4.06.0/bin/ocamllex.opt -q preprocessor.mll # cached
 # Target: preprocessor.ml.depends, tags: { extension:ml, file:preprocessor.ml, ocaml, ocamldep, quiet, traverse, use_menhir }
@@ -63,11 +67,8 @@ menhir --ocamlc /home/tp-home008/agallot/.opam/4.06.0/bin/ocamlc.opt --infer Sou
 /home/tp-home008/agallot/.opam/4.06.0/bin/ocamlc.opt -c -o SourceTypeChecker.cmo SourceTypeChecker.ml # cached
 # Target: SourceToImp.cmo, tags: { byte, compile, extension:cmo, extension:ml, file:SourceToImp.cmo, file:SourceToImp.ml, implem, ocaml, quiet, traverse, use_menhir }
 /home/tp-home008/agallot/.opam/4.06.0/bin/ocamlc.opt -c -o SourceToImp.cmo SourceToImp.ml # cached
-# Target: IndexedGotoLiveness.cmo, tags: { byte, compile, extension:cmo, extension:ml, file:IndexedGotoLiveness.cmo, file:IndexedGotoLiveness.ml, implem, ocaml, quiet, traverse, use_menhir }
-/home/tp-home008/agallot/.opam/4.06.0/bin/ocamlc.opt -c -o IndexedGotoLiveness.cmo IndexedGotoLiveness.ml
-+ /home/tp-home008/agallot/.opam/4.06.0/bin/ocamlc.opt -c -o IndexedGotoLiveness.cmo IndexedGotoLiveness.ml
-File "IndexedGotoLiveness.ml", line 127, characters 6-7:
-Warning 26: unused variable t.
+# Target: IndexedGotoDeadCodeElim.cmo, tags: { byte, compile, extension:cmo, extension:ml, file:IndexedGotoDeadCodeElim.cmo, file:IndexedGotoDeadCodeElim.ml, implem, ocaml, quiet, traverse, use_menhir }
+/home/tp-home008/agallot/.opam/4.06.0/bin/ocamlc.opt -c -o IndexedGotoDeadCodeElim.cmo IndexedGotoDeadCodeElim.ml
 # Target: Compilo.cmo, tags: { byte, compile, extension:cmo, extension:ml, file:Compilo.cmo, file:Compilo.ml, implem, ocaml, quiet, traverse, use_menhir }
 /home/tp-home008/agallot/.opam/4.06.0/bin/ocamlc.opt -c -o Compilo.cmo Compilo.ml
 # Target: CommonAST.cmx, tags: { compile, extension:cmx, extension:ml, file:CommonAST.cmx, file:CommonAST.ml, implem, native, ocaml, quiet, traverse, use_menhir }
@@ -84,6 +85,8 @@ Warning 26: unused variable t.
 /home/tp-home008/agallot/.opam/4.06.0/bin/ocamlopt.opt -c -o ImpToGoto.cmx ImpToGoto.ml # cached
 # Target: IndexedGotoAST.cmx, tags: { compile, extension:cmx, extension:ml, file:IndexedGotoAST.cmx, file:IndexedGotoAST.ml, implem, native, ocaml, quiet, traverse, use_menhir }
 /home/tp-home008/agallot/.opam/4.06.0/bin/ocamlopt.opt -c -o IndexedGotoAST.cmx IndexedGotoAST.ml # cached
+# Target: IndexedGotoLiveness.cmx, tags: { compile, extension:cmx, extension:ml, file:IndexedGotoLiveness.cmx, file:IndexedGotoLiveness.ml, implem, native, ocaml, quiet, traverse, use_menhir }
+/home/tp-home008/agallot/.opam/4.06.0/bin/ocamlopt.opt -c -o IndexedGotoLiveness.cmx IndexedGotoLiveness.ml # cached
 # Target: preprocessor.cmx, tags: { compile, extension:cmx, extension:ml, file:preprocessor.cmx, file:preprocessor.ml, implem, native, ocaml, quiet, traverse, use_menhir }
 /home/tp-home008/agallot/.opam/4.06.0/bin/ocamlopt.opt -c -o preprocessor.cmx preprocessor.ml # cached
 # Target: SourceParser.ml.depends, tags: { extension:ml, file:SourceParser.ml, ocaml, ocamldep, quiet, traverse, use_menhir }
@@ -98,13 +101,10 @@ Warning 26: unused variable t.
 /home/tp-home008/agallot/.opam/4.06.0/bin/ocamlopt.opt -c -o SourceTypeChecker.cmx SourceTypeChecker.ml # cached
 # Target: SourceToImp.cmx, tags: { compile, extension:cmx, extension:ml, file:SourceToImp.cmx, file:SourceToImp.ml, implem, native, ocaml, quiet, traverse, use_menhir }
 /home/tp-home008/agallot/.opam/4.06.0/bin/ocamlopt.opt -c -o SourceToImp.cmx SourceToImp.ml # cached
-# Target: IndexedGotoLiveness.cmx, tags: { compile, extension:cmx, extension:ml, file:IndexedGotoLiveness.cmx, file:IndexedGotoLiveness.ml, implem, native, ocaml, quiet, traverse, use_menhir }
-/home/tp-home008/agallot/.opam/4.06.0/bin/ocamlopt.opt -c -o IndexedGotoLiveness.cmx IndexedGotoLiveness.ml
-+ /home/tp-home008/agallot/.opam/4.06.0/bin/ocamlopt.opt -c -o IndexedGotoLiveness.cmx IndexedGotoLiveness.ml
-File "IndexedGotoLiveness.ml", line 127, characters 6-7:
-Warning 26: unused variable t.
+# Target: IndexedGotoDeadCodeElim.cmx, tags: { compile, extension:cmx, extension:ml, file:IndexedGotoDeadCodeElim.cmx, file:IndexedGotoDeadCodeElim.ml, implem, native, ocaml, quiet, traverse, use_menhir }
+/home/tp-home008/agallot/.opam/4.06.0/bin/ocamlopt.opt -c -o IndexedGotoDeadCodeElim.cmx IndexedGotoDeadCodeElim.ml
 # Target: Compilo.cmx, tags: { compile, extension:cmx, extension:ml, file:Compilo.cmx, file:Compilo.ml, implem, native, ocaml, quiet, traverse, use_menhir }
 /home/tp-home008/agallot/.opam/4.06.0/bin/ocamlopt.opt -c -o Compilo.cmx Compilo.ml
 # Target: Compilo.native, tags: { dont_link_with, extension:native, file:Compilo.native, link, native, ocaml, program, quiet, traverse, use_menhir }
-/home/tp-home008/agallot/.opam/4.06.0/bin/ocamlopt.opt CommonAST.cmx GotoAST.cmx Mips.cmx GotoToMips.cmx ImpAST.cmx ImpToGoto.cmx IndexedGotoAST.cmx IndexedGotoLiveness.cmx SourceLocalisedAST.cmx SourceParser.cmx SourceLexer.cmx SourceTypeChecker.cmx SourceToImp.cmx preprocessor.cmx Compilo.cmx -o Compilo.native
+/home/tp-home008/agallot/.opam/4.06.0/bin/ocamlopt.opt CommonAST.cmx GotoAST.cmx Mips.cmx GotoToMips.cmx ImpAST.cmx ImpToGoto.cmx IndexedGotoAST.cmx IndexedGotoLiveness.cmx IndexedGotoDeadCodeElim.cmx SourceLocalisedAST.cmx SourceParser.cmx SourceLexer.cmx SourceTypeChecker.cmx SourceToImp.cmx preprocessor.cmx Compilo.cmx -o Compilo.native
 # Compilation successful.

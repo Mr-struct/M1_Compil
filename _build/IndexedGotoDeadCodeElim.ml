@@ -11,9 +11,9 @@ let step root_instr =
     | n, Set(loc, e) ->
        (* récupérer la variable loc *)
        let var = List.hd (IndexedGotoLiveness.loc_var loc []) in
-       (* regarder si loc appartient à live_out[n] *)
+       (* regarder live_out[n] *)
        let belongs = List.mem var l.live_out.(n) in
-       (* si loc n'appartient pas à live_out[n] on renvoie Nop sinon on renvoie l'instruction telle quelle *)
+       (* si loc n'appartient pas à live_out[n] -> Nop sinon i *)
        if belongs then n, Set(loc, e) else begin b := true; n, Nop end
     | n, _ -> i
   in (!b, aux root_instr)

@@ -27,18 +27,6 @@ type program = {
   functions: function_info Symb_Tbl.t
 }
 
-(* let rec strip_expression_to_Goto = function
-  | IGto.Literal(l) -> Gto.Literal(l)
-  | IGto.Location(l) -> Gto.Location(strip_location_to_Goto l)
-  | IGto.UnaryOp(u, e) -> Gto.UnaryOp(u, strip_expression_to_Goto e)
-  | IGto.BinaryOp(b, e1, e2) -> Gto.BinaryOp(b, strip_expression_to_Goto e1, strip_expression_to_Goto e2)
-  | IGto.NewBlock(e) -> Gto.NewBlock(strip_expression_to_Goto e)
-  | IGto.FunCall(id, l) -> Gto.FunCall(id, List.map strip_expression_to_Goto l)
-     
-and let strip_location_to_Goto = function
-  | IGto.Identifier(id) -> Gto.Identifier(id)
-  | IGto.BlockAccess(e1, e2) -> Gto.BlockAccess(strip_expression_to_Goto e1, strip_expression_to_Goto e2)
-*)
 
 let rec strip_indexed_instruction = function
   | _, Sequence(i1, i2)      -> Gto.Sequence(strip_indexed_instruction i1, strip_indexed_instruction i2)
@@ -50,21 +38,37 @@ let rec strip_indexed_instruction = function
   | _, Return(e)             -> Gto.Return(e)
   | _, Nop                   -> Gto.Nop
 
-let strip_instruction i =  
+let strip_instruction i =
   let cpt = ref (-1) in
-  let rec index_instruction i = incr cpt; let newcpt = !cpt in (!cpt, create_instruction i newcpt)
-  and create_instruction i cpt =
+  let rec index_instruction i = (incr cpt; !cpt), create_instruction i
+  and create_instruction i =
     match i with
-    | Gto.Sequence(i1, i2)      -> Printf.printf "Sequence %d\n" cpt;Sequence(index_instruction i1, index_instruction i2)
-    | Gto.Set(l, e)             -> Printf.printf "Set %d\n" cpt;Set(l, e)
-    | Gto.Label(l)              -> Printf.printf "Label %d\n" cpt;Label(l)
-    | Gto.Goto(l)               -> Printf.printf "Goto %d\n" cpt;Goto(l)
-    | Gto.ConditionalGoto(l, e) -> Printf.printf "CondGoto %d\n" cpt;ConditionalGoto(l, e)
-    | Gto.ProCall(id, l)        -> Printf.printf "ProCall %d\n" cpt;ProCall(id, l)
-    | Gto.Return(e)             -> Printf.printf "Return %d\n" cpt;Return(e)
-    | Gto.Nop                   -> Printf.printf "Nop %d\n" cpt;Nop
+    | Gto.Sequence(i1, i2)      -> Sequence(index_instruction i1, index_instruction i2)
+    | Gto.Set(l, e)             -> Set(l, e)
+    | Gto.Label(l)              -> Label(l)
+    | Gto.Goto(l)               -> Goto(l)
+    | Gto.ConditionalGoto(l, e) -> ConditionalGoto(l, e)
+    | Gto.ProCall(id, l)        -> ProCall(id, l)
+    | Gto.Return(e)             -> Return(e)
+    | Gto.Nop                   -> Nop
   in index_instruction i
-       
+
+(* Fonction qui permet d'afficher une instruction avec sa numérotation *)
+let rec print_instr i =
+  match i with
+  | n, Sequence(i1, i2)      ->
+     begin
+       Printf.printf "Sequence %d\n" n;
+       print_instr i1; print_instr i2
+     end
+  | n, Set(l, e)             -> Printf.printf "Set %d\n" n
+  | n, Label(l)              -> Printf.printf "Label %d\n" n
+  | n, Goto(l)               -> Printf.printf "Goto %d\n" n
+  | n, ConditionalGoto(l, e) -> Printf.printf "CondGoto %d\n" n
+  | n, ProCall(id, l)        -> Printf.printf "ProCall %d\n" n
+  | n, Return(e)             -> Printf.printf "Return %d\n" n
+  | n, Nop                   -> Printf.printf "Nop %d\n" n
+
 let index_program p =
   { main = strip_instruction Gto.(p.main);
     globals = Gto.(p.globals);

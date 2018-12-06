@@ -1,1 +1,1 @@
-IndexedGotoLiveness.ml: Array CommonAST GotoAST IndexedGotoAST List Printf Symb_Tbl
+IndexedGotoLiveness.ml: Array CommonAST GotoAST IndexedGotoAST List Printf

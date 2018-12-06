@@ -2,9 +2,6 @@ open Format
 open CommonAST
 
 let usage = "usage: ./compilo [options] file.cid"
-
-let print_tab t =
-  Array.iter (fun l -> Printf.printf "%s\n" (List.fold_left (fun acc x -> (string_of_int x)^acc) "" l)) t
   
 let display_list l =
   Printf.printf "[";
@@ -29,10 +26,10 @@ let () =
   close_in c;
   let type_context = SourceTypeChecker.typecheck_program prog in
   let prog = SourceToImp.strip_program prog type_context in
-  (*Symb_Tbl.iter (fun key value -> Printf.printf "%s\n" key) prog.functions;*)
   let prog = ImpToGoto.translate_program prog in
   let indexed_prog = IndexedGotoAST.index_program prog in
-  IndexedGotoLiveness.prog indexed_prog;
+  let opti_code = IndexedGotoDeadCodeElim.prog indexed_prog in
+  let prog = IndexedGotoAST.strip_program opti_code in
   let asm = GotoToMips.translate_program prog in
   let output_file = (Filename.chop_suffix file ".cid") ^ ".asm" in
   let out = open_out output_file in
